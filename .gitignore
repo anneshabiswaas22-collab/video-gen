@@ -1,0 +1,43 @@
+# Private configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+service-account*.json
+secrets/
+# Python/node
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+node_modules/
+.next/
+dist/
+build/
+coverage/
+# GPU models, outputs and caches
+models/
+checkpoints/
+loras/
+model-cache/
+outputs/
+generated/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.gguf
+*.mp4
+*.mov
+*.wav
+*.flac
+*.zip
+# Keep small sample assets tracked via explicit force-add after rights review.
+# Local environments
+.DS_Store
+.vscode/
+.idea/

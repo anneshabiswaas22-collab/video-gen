@@ -1,0 +1,19 @@
+name: Documentation integrity
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  verify-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check relative Markdown links and required project files
+        run: python scripts/check_docs.py
+      - name: Check preflight Python syntax
+        run: python -m py_compile scripts/gpu_preflight.py scripts/check_docs.py
