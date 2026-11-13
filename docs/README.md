@@ -22,3 +22,14 @@
 **Status vocabulary:** IDEA = only envisioned; CANDIDATE = evaluated as possible dependency; SPECIFIED = interface/acceptance criteria documented; IMPLEMENTED = code merged and tests executed; GPU VERIFIED = genuine artifact generated on named hardware; RELEASED = end-user deployment verified. Do not upgrade a label based only on prose.
 
 Review model versions, upstream commit SHAs, licenses, hosted API pricing and GPU requirements at integration time; previous conversations included preliminary claims that require independent verification.
+
+## Additional handoff files
+- [Current status and first issues](STATUS.md)
+- [Project history](PROJECT_HISTORY.md)
+- [Codex start prompt](CODEX_START_HERE.md)
+- [Cost control](COST_PLAN.md)
+- [Test plan](TEST_PLAN.md)
+- [User experience](UI_UX.md)
+- [Data model](DATA_MODEL.md)
+- [Dependency register](DEPENDENCY_REGISTER.csv)
+- [Colab preflight notebook](../notebooks/colab/00_gpu_preflight.ipynb)

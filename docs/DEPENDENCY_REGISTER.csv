@@ -1,0 +1,10 @@
+component,role,source_url,source_version,code_license_verified,weight_license_verified,commercial_use_review,status,owner_notes
+ComfyUI,workflow backend,https://github.com/Comfy-Org/ComfyUI,UNPINNED,NO,N/A,PENDING,CANDIDATE,"Assess GPL distribution and integration"
+FreeField,studio workflows,https://github.com/neuregex/freefield,UNPINNED,NO,N/A,PENDING,REFERENCE,"Verify workflows and their third-party weights"
+Wan2.2,video engine,https://github.com/Wan-Video/Wan2.2,UNPINNED,NO,NO,PENDING,CANDIDATE,"Choose checkpoint based on actual GPU"
+FLUX,image model,https://github.com/black-forest-labs/flux,UNPINNED,NO,NO,PENDING,CANDIDATE,"Choose permitted checkpoint"
+Qwen-Image,image editing,https://github.com/QwenLM/Qwen-Image,UNPINNED,NO,NO,PENDING,CANDIDATE,"Check specific variant"
+Kokoro,speech,https://github.com/hexgrad/kokoro,UNPINNED,NO,NO,PENDING,CANDIDATE,"Verify rights and dependencies"
+ACE-Step,music,https://github.com/ace-step/ACE-Step-1.5,UNPINNED,NO,NO,PENDING,CANDIDATE,"Verify full music weight licenses"
+FFmpeg,media processing,https://github.com/FFmpeg/FFmpeg,UNPINNED,NO,N/A,PENDING,CANDIDATE,"Check build license and codecs"
+LightX2V,inference optimization,https://github.com/ModelTC/LightX2V,UNPINNED,NO,N/A,PENDING,RESEARCH,"Benchmark before adopting"
