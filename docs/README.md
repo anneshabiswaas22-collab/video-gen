@@ -33,3 +33,7 @@ Review model versions, upstream commit SHAs, licenses, hosted API pricing and GP
 - [Data model](DATA_MODEL.md)
 - [Dependency register](DEPENDENCY_REGISTER.csv)
 - [Colab preflight notebook](../notebooks/colab/00_gpu_preflight.ipynb)
+
+## Full historical source repository catalog
+
+- [ALL_RECOMMENDED_REPOSITORIES.txt](ALL_RECOMMENDED_REPOSITORIES.txt) — 54 previously discussed GitHub repositories and practical use cases, with research/compatibility cautions.
