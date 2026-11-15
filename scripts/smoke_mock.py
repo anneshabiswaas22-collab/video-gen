@@ -1,8 +1,8 @@
 """Repeatable end-to-end CPU-only API smoke test, in an isolated temporary directory."""
-from pathlib import Path
 import os
 import tempfile
 import time
+from pathlib import Path
 
 from fastapi.testclient import TestClient
 

@@ -1,7 +1,7 @@
 """VideoGen M0: localhost-only development API and CPU mock-worker integration."""
 import asyncio
-from contextlib import asynccontextmanager
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, status
 from fastapi.exceptions import RequestValidationError
@@ -83,7 +83,7 @@ def _not_found(resource: str) -> HTTPException:
 
 def _public_job(record: dict) -> dict:
     """Never serialize private worker flags or idempotency fingerprints."""
-    return {name: record.get(name) for name in GenerationJob.model_fields}
+    return {name: record[name] for name in GenerationJob.model_fields if name in record}
 
 
 @app.get("/v1/health")
