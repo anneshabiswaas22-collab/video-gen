@@ -1,6 +1,7 @@
 VIDEOGEN — PRIOR RECOMMENDED PUBLIC REPOSITORIES / STUDY CATALOG
 Destination: https://github.com/anneshabiswaas22-collab/video-gen
 Catalog prepared: 2026-11-15
+GitHub URL existence check: 53/54 repository URLs resolved on 2026-11-15; the historical Montagio URL returned 404. This checks repository availability only, NOT maintenance, license or model functionality.
 Purpose: one self-contained reference of repos previously suggested in our AI image/video/audio/movie studio discussions.
 
 IMPORTANT
@@ -43,7 +44,7 @@ A. CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES
     STUDY: Higgsfield-style ComfyUI frontend reference
 09. Montagio
     REPO: https://github.com/Jubzh-29/montagio
-    STUDY: Cinematic video effects; verify early-stage maturity
+    STUDY: Historical cinematic effects suggestion. URL returned 404 on 2026-11-15; NOT AVAILABLE / NOT APPROVED for integration.
 10. Hildegard
     REPO: https://github.com/baney75/hildegard
     STUDY: AI director, character/camera patterns; license check
