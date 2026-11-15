@@ -48,8 +48,13 @@ export default function Studio() {
   }, []);
 
   useEffect(() => {
-    void refresh(projectId).catch((e: Error) => setError(e.message));
-  }, [projectId, refresh]);
+    if (!projectId) return;
+    let live = true;
+    apiRequest<GenerationJob[]>(`/v1/projects/${projectId}/jobs`)
+      .then((items) => { if (live) setHistory(items); })
+      .catch((e: Error) => { if (live) setError(e.message); });
+    return () => { live = false; };
+  }, [projectId]);
 
   useEffect(() => {
     if (!activeId) return;
@@ -100,6 +105,7 @@ export default function Studio() {
       });
       setProjects((list) => [created, ...list]);
       setProjectId(created.id);
+      setHistory([]);
       setActiveJob(null);
       setActiveId("");
       setArtifact(null);
@@ -154,7 +160,7 @@ export default function Studio() {
           {projects.map((p) => (
             <button key={p.id} className={p.id === projectId ? "project selected" : "project"}
               onClick={() => {
-                setProjectId(p.id); setActiveId(""); setActiveJob(null);
+                setProjectId(p.id); setHistory([]); setActiveId(""); setActiveJob(null);
                 setArtifact(null); setArtifactText("");
               }}><span>▣</span>{p.name}</button>
           ))}
