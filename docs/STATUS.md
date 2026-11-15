@@ -1,5 +1,16 @@
 # Verified repository status and first tasks
 
+## M0.2 feature branch activity — 2026-11-15
+
+Branch `feat/m0-2-mock-studio` introduces original Next.js UI, FastAPI local-only
+API, durable SQLite project/job/artifact metadata, CPU worker, typed contracts,
+ComfyUI HTTP boundary and initial CI/tests. **This is a feature branch, not a merged
+release.** See [local setup](BUILD_RUN.md), [implementation checklist](M0_2_CHECKLIST.md),
+[two-repository study](TWO_REPO_DEEP_STUDY.md), and GitHub PR checks for current
+execution evidence. It runs a synthetic plain-text mock receipt, NOT AI inference.
+
+
+
 **Date:** 2026-11-13. **Branch:** main. **Scope:** architecture and developer handoff, NOT a finished AI generation service.
 
 ## Completed in this handoff

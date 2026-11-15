@@ -27,3 +27,16 @@ Decision statuses: ACCEPTED (planning constraint), PROPOSED (to verify in M0), R
 
 ## When architecture changes
 Create a new ADR in this file with alternatives, license/security impact, benchmark evidence, migration/rollback plan and acceptance tests. Never silently replace a core engine due to a new trending repository.
+
+## ADR-013 — 2026-11-15: local durable M0 mock vertical slice
+
+**ACCEPTED for development only.** Use SQLite for local project/job/event/artifact
+metadata, immutable text receipts for mock outputs, one in-process background
+worker started by the API, Next.js client HTTP requests and a typed, inactive
+ComfyUI adapter. These replace an unnecessary Redis/Celery/Postgres/GPU stack
+for the first CPU acceptance test. Explicitly NOT a production queue or multi-tenant
+security boundary. Recovery marks interrupted RUNNING jobs as WORKER_LOST; queue
+execution is at-least-restartable, not exactly-once across crashes. Upgrade after
+M0 evidence and real GPU capacity measurement. Roll back by reverting this branch;
+no existing operational code is replaced. Tests cover idempotency, lifecycle,
+API contracts, mock artifact hashes, failure and worker transport.

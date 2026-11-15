@@ -37,3 +37,9 @@ Review model versions, upstream commit SHAs, licenses, hosted API pricing and GP
 ## Full historical source repository catalog
 
 - [ALL_RECOMMENDED_REPOSITORIES.txt](ALL_RECOMMENDED_REPOSITORIES.txt) — 54 previously discussed GitHub repositories and practical use cases, with research/compatibility cautions.
+
+## Current engineering evidence
+
+- [Two primary repos and complete 54-item triage](TWO_REPO_DEEP_STUDY.md)
+- [M0.2 task checklist and acceptance gates](M0_2_CHECKLIST.md)
+- [M0.2 CPU local setup/runbook](BUILD_RUN.md)
