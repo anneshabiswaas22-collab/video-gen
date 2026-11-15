@@ -1,31 +1,81 @@
-# Build, run and verify — current state
+# M0.2 local mock studio — setup and teardown
 
-**As of 2026-11-13, this is a documentation-first repository.** There is no application or working inference backend yet. Running "npm start" or "python generate.py" in the root would be misleading. See M0 in ROADMAP.md for scaffold requirements.
+This branch introduces an executable CPU-only generation **mock**. It generates a
+plain-text receipt, **not** an AI-produced image, video or audio file. Never expose
+this unauthenticated development service on a public network.
 
-## Today
-- Read the docs in order from docs/README.md.
-- Check open issues and assign a bounded milestone task.
-- Verify candidate upstream repos at their official URLs in OPEN_SOURCE_STACK.md before integrating.
-- Do not download model weights, install many unrelated runtimes, or use GPU time until a small, reproducible job is defined.
+## Requirements
+- Python 3.11+ and Node.js 22+, npm, Git; internet for installation only.
+- No GPU, model weights, paid account, cloud service, Redis or PostgreSQL.
 
-## M0 expected development commands (not implemented)
-Future scaffold should provide:
-- one documented command to install web dependencies;
-- one documented command to create a Python venv and install the API;
-- one command to start a mock worker and API;
-- one command to run unit/static tests;
-- a separate hardware-gated Colab notebook with preflight/real generation.
+## One-time install (repository root)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+cd apps/web
+npm install
+cd ../..
+```
 
-These commands become copy/paste instructions **only after Codex creates and verifies them**, not before.
+On Windows PowerShell activate with `.venv\Scripts\Activate.ps1`.
+The shell script below assumes `python` resolves to the installed environment.
+For MSYS2/Git Bash, activate `.venv/Scripts/activate` where applicable.
 
-## Suggested environment variables (names only; do not commit values)
-DATABASE_URL, OBJECT_STORAGE_ENDPOINT, OBJECT_STORAGE_BUCKET, WORKER_BACKEND, COMFYUI_BASE_URL, MODEL_CACHE_DIR, API_SECRET_KEY, MAX_CONCURRENT_GPU_JOBS, PROVIDER_API_KEY (optional only).
+## Start locally
+```bash
+bash scripts/dev.sh
+```
+Open http://127.0.0.1:3000 in the browser. Create a project, enter a prompt,
+select the sole MOCK model, click Run mock generation, watch job progress and
+download its text receipt. API docs: http://127.0.0.1:8000/docs.
 
-## Security
-No secrets or access tokens in GitHub commits or notebook outputs. Access to deployed job endpoints must require auth; arbitrary workflow uploads forbidden by default. Avoid free Colab server tunneling against platform terms.
+If you prefer separate terminals, run:
+```bash
+python -m uvicorn services.api.main:app --host 127.0.0.1 --port 8000
+# in another terminal
+cd apps/web && npm run dev -- --hostname 127.0.0.1
+```
 
-## Test labels
-- CPU PASS: mock/local tests executed without real generation.
-- GPU PASS: real generation with file verified and hardware recorded.
-- NOT RUN: test unavailable in this environment.
-- BLOCKED: explicit reproducible error, not silently ignored.
+The API automatically starts one local mock worker for dev. Do NOT simultaneously
+launch the standalone worker against the same data directory from a second process.
+For standalone/worker-unit experiments only: `python -m services.worker.mock`.
+`VIDEOGEN_DATA_DIR` defaults to `.local/videogen` and holds a persistent
+SQLite database and mock artifact files. This directory is local and ignored by Git.
+
+## Verify CPU-only path
+```bash
+python scripts/check_docs.py
+ruff check services integrations tests scripts/smoke_mock.py
+pytest
+python -m scripts.smoke_mock
+cd apps/web
+npm run typecheck && npm run lint && npm run test && npm run build
+```
+
+## Teardown
+Press Ctrl+C to stop the launcher; the local SQLite records remain. Delete
+`.local/videogen` **only if you intentionally want to erase all local projects,
+jobs, provenance and mock receipts**. No external paid or GPU resources are started.
+
+## HTTP boundaries and known limits
+- API: `GET /v1/health`, `GET /v1/models`, `POST/GET /v1/projects`,
+  `POST /v1/jobs`, `GET /v1/jobs/{id}`, `GET /v1/projects/{id}/jobs`,
+  `GET /v1/jobs/{id}/events`, `GET /v1/artifacts/{id}`, and
+  `GET /v1/artifacts/{id}/download`.
+- POST jobs example fields: `project_id`, `model_id: mock-preview-v1`,
+  `prompt`, `idempotency_key` (8–128 safe characters). Optional
+  `simulate_failure: true` tests worker errors. Reusing a key with different
+  input returns 409. No billing or model inference.
+- One local development identity. **No authentication, role-based access,
+  quota control, production retries, cancellation or multi-tenant isolation.**
+  CORS is restricted to localhost browsers, but is NOT authentication.
+  Never bind this application or ComfyUI to an external address.
+- Failed/abandoned RUNNING jobs are marked `WORKER_LOST` when API restarts;
+  queued jobs remain queued. SQLite is the M0 persistence choice.
+- `NEXT_PUBLIC_API_URL` is a public, browser-visible config and must only
+  contain the local API URL; never place secrets in it.
+- Source-control policy: do not commit `.local/` data, model checkpoints,
+  paid API credentials or user-uploaded private media.
+- No real GPU test has been run. M1 will require engine/weight license gate
+  and hardware preflight before a genuine PNG.

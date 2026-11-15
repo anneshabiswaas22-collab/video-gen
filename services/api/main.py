@@ -75,8 +75,15 @@ async def invalid_request(_request, exc: RequestValidationError):
 
 
 def _not_found(resource: str) -> HTTPException:
-    return HTTPException(404, detail={"code": f"{resource}_NOT_FOUND",
-                                      "message": f"{resource.title()} not found"})
+    return HTTPException(
+        404,
+        detail={"code": f"{resource}_NOT_FOUND", "message": f"{resource.title()} not found"},
+    )
+
+
+def _public_job(record: dict) -> dict:
+    """Never serialize private worker flags or idempotency fingerprints."""
+    return {name: record.get(name) for name in GenerationJob.model_fields}
 
 
 @app.get("/v1/health")
@@ -113,7 +120,10 @@ def list_projects():
 
 @app.get("/v1/projects/{project_id}", response_model=Project)
 def read_project(project_id: str):
-    return storage.project(project_id) or (_ for _ in ()).throw(_not_found("PROJECT"))
+    result = storage.project(project_id)
+    if result is None:
+        raise _not_found("PROJECT")
+    return result
 
 
 @app.post("/v1/jobs", response_model=GenerationJob, status_code=status.HTTP_202_ACCEPTED)
@@ -124,7 +134,7 @@ def create_job(request: GenerationRequest):
         raise HTTPException(422, detail={"code": "INPUT_INVALID", "message": "Prompt is blank"})
     try:
         record, _created = storage.create_job(request)
-        return record
+        return _public_job(record)
     except ValueError as exc:
         if str(exc) == "IDEMPOTENCY_CONFLICT":
             raise HTTPException(
@@ -138,7 +148,7 @@ def create_job(request: GenerationRequest):
 def list_jobs(project_id: str):
     if storage.project(project_id) is None:
         raise _not_found("PROJECT")
-    return storage.jobs(project_id)
+    return [_public_job(item) for item in storage.jobs(project_id)]
 
 
 @app.get("/v1/jobs/{job_id}", response_model=GenerationJob)
@@ -146,7 +156,7 @@ def read_job(job_id: str):
     result = storage.job(job_id)
     if result is None:
         raise _not_found("JOB")
-    return result
+    return _public_job(result)
 
 
 @app.get("/v1/jobs/{job_id}/events", response_model=list[JobEvent])
