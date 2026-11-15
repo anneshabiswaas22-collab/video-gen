@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=75,<81"]
+requires = ["setuptools>=84.2,<85"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,14 +8,14 @@ version = "0.2.0"
 description = "VideoGen CPU-only local mock service (no inference)"
 requires-python = ">=3.11"
 dependencies = [
-    "fastapi==0.121.1",
+    "fastapi==0.163.0",
     "uvicorn==0.38.0",
-    "pydantic==2.12.4",
+    "pydantic==2.14.3",
     "httpx==0.28.1",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==8.4.2", "ruff==0.14.3"]
+dev = ["pytest==9.2.0", "ruff==0.14.3"]
 
 [tool.setuptools.packages.find]
 include = ["services*", "integrations*"]

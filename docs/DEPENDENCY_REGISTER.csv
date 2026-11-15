@@ -1,8 +1,8 @@
 component,role,source_url,source_version,code_license_verified,weight_license_verified,commercial_use_review,status,owner_notes
 ComfyUI,external inference engine,https://github.com/Comfy-Org/ComfyUI,258f880d0c026bfc22acab679858ab2e2c70573d,YES GPL-3.0,N/A,PENDING,VERIFIED,"Source snapshot/license verified 2026-11-15; integration and copyleft obligations unresolved; not installed"
 FreeField,studio manifests reference,https://github.com/neuregex/freefield,f0c2358a46c7008ff8503d4324b6cc8bc7657e75,YES MIT,N/A,PENDING,VERIFIED,"Source snapshot/license verified 2026-11-15; no code copied; weights/workflows/assets require independent clearance"
-FastAPI,HTTP API,https://github.com/fastapi/fastapi,0.121.1,PENDING,N/A,PENDING,PENDING,"Pinned direct runtime version in pyproject; used in M0 only"
-Next.js,web framework,https://github.com/vercel/next.js,16.0.0,PENDING,N/A,PENDING,PENDING,"Pinned direct dependency in apps/web/package.json; security audit via CI"
+FastAPI,HTTP API,https://github.com/fastapi/fastapi,0.163.0,PENDING,N/A,PENDING,PENDING,"Pinned direct runtime version in pyproject; used in M0 only"
+Next.js,web framework,https://github.com/vercel/next.js,16.4.6,PENDING,N/A,PENDING,PENDING,"Pinned direct dependency in apps/web/package.json; security audit via CI"
 Wan2.2,first future video checkpoint,https://github.com/Wan-Video/Wan2.2,UNPINNED,NO,NO,PENDING,PENDING,"Checkpoint must be selected after actual Colab GPU preflight"
 FLUX,possible image model,https://github.com/black-forest-labs/flux,UNPINNED,NO,NO,PENDING,PENDING,"Model/card variant and weight rights unknown"
 Qwen-Image,possible image model,https://github.com/QwenLM/Qwen-Image,UNPINNED,NO,NO,PENDING,PENDING,"Exact image checkpoint selection deferred to M1"

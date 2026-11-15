@@ -49,10 +49,6 @@ export default function Studio() {
 
   useEffect(() => {
     void refresh(projectId).catch((e: Error) => setError(e.message));
-    setActiveJob(null);
-    setActiveId("");
-    setArtifact(null);
-    setArtifactText("");
   }, [projectId, refresh]);
 
   useEffect(() => {
@@ -75,7 +71,7 @@ export default function Studio() {
 
   useEffect(() => {
     const id = activeJob?.artifact_id;
-    if (!id) { setArtifact(null); setArtifactText(""); return; }
+    if (!id) return;
     let live = true;
     async function load() {
       try {
@@ -104,6 +100,10 @@ export default function Studio() {
       });
       setProjects((list) => [created, ...list]);
       setProjectId(created.id);
+      setActiveJob(null);
+      setActiveId("");
+      setArtifact(null);
+      setArtifactText("");
       setProjectName("");
     } catch (e) { setError((e as Error).message); }
     finally { setBusy(false); }
@@ -122,6 +122,8 @@ export default function Studio() {
           idempotency_key: crypto.randomUUID(),
         }),
       });
+      setArtifact(null);
+      setArtifactText("");
       setActiveJob(job);
       setActiveId(job.id);
       await refresh(projectId);
@@ -129,6 +131,7 @@ export default function Studio() {
     finally { setBusy(false); }
   }
 
+  const visibleArtifact = artifact?.id === activeJob?.artifact_id ? artifact : null;
   const currentProject = projects.find((p) => p.id === projectId);
   const completed = history.filter((j) => j.state === "SUCCEEDED").length;
 
@@ -150,7 +153,10 @@ export default function Studio() {
         <div className="project-list">
           {projects.map((p) => (
             <button key={p.id} className={p.id === projectId ? "project selected" : "project"}
-              onClick={() => setProjectId(p.id)}><span>▣</span>{p.name}</button>
+              onClick={() => {
+                setProjectId(p.id); setActiveId(""); setActiveJob(null);
+                setArtifact(null); setArtifactText("");
+              }}><span>▣</span>{p.name}</button>
           ))}
           {!projects.length && <p className="sidebar-help">Create a project to begin.</p>}
         </div>
@@ -202,13 +208,13 @@ export default function Studio() {
                   <div className="progress-track"><div style={{ width: `${activeJob.progress}%` }} /></div></div>
                 {activeJob.error_code && <p role="alert" className="error-detail">Error: {activeJob.error_code}</p>}
                 <div className="preview">
-                  {artifact ? <><div className="mock-stamp">MOCK RESULT — NOT GENERATED MEDIA</div>
+                  {visibleArtifact ? <><div className="mock-stamp">MOCK RESULT — NOT GENERATED MEDIA</div>
                     <pre>{artifactText}</pre></> :
                     <div className="pending">{isTerminal(activeJob.state) ? "No artifact for this job" : "Mock worker is processing…"}</div>}
                 </div>
-                {artifact && <><div className="artifact-meta"><span>text/plain · {artifact.bytes} bytes</span>
-                    <span>SHA-256: {artifact.sha256.slice(0, 16)}…</span></div>
-                  <a className="download" href={`${API_URL}${artifact.download_url}`}>Download mock receipt ↓</a></>}
+                {visibleArtifact && <><div className="artifact-meta"><span>text/plain · {visibleArtifact.bytes} bytes</span>
+                    <span>SHA-256: {visibleArtifact.sha256.slice(0, 16)}…</span></div>
+                  <a className="download" href={`${API_URL}${visibleArtifact.download_url}`}>Download mock receipt ↓</a></>}
               </div>}
             </section>
           </div>
@@ -217,7 +223,7 @@ export default function Studio() {
               <div className="history-stats"><span>{history.length} total</span><span>{completed} completed</span></div></div>
             {!history.length ? <p className="empty-history">No jobs in this project yet.</p> :
               <div className="history-list">{history.map((j) =>
-                <button key={j.id} className={j.id === activeId ? "history-item active" : "history-item"} onClick={() => { setActiveId(j.id); setActiveJob(j); }}>
+                <button key={j.id} className={j.id === activeId ? "history-item active" : "history-item"} onClick={() => { setArtifact(null); setArtifactText(""); setActiveId(j.id); setActiveJob(j); }}>
                   <span className="history-prompt">{j.prompt}</span><span className="history-state">{j.state}</span>
                   <span className="history-date">{new Date(j.created_at).toLocaleString()}</span><span className="history-arrow">↗</span>
                 </button>)}</div>}
