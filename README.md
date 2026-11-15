@@ -64,3 +64,7 @@ Project documentation date: 2026-11-13. External project links, model releases a
 
 ## Start contributing
 [Read current status](docs/STATUS.md) · [First engineering task for Codex](docs/CODEX_START_HERE.md) · [Open development issues](https://github.com/anneshabiswaas22-collab/video-gen/issues) · [Colab preflight notebook](notebooks/colab/00_gpu_preflight.ipynb).
+
+## Complete repository study list
+
+[ALL_RECOMMENDED_REPOSITORIES.txt](docs/ALL_RECOMMENDED_REPOSITORIES.txt) lists **54 earlier recommended public repositories**, grouped by studio platforms, video models, image/audio tools, optimization, editing, and infrastructure. These are study candidates, not automatically approved dependencies; check each project's current official release and license before adoption.
