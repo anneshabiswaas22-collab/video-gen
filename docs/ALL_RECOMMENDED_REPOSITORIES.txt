@@ -1,0 +1,222 @@
+VIDEOGEN — PRIOR RECOMMENDED PUBLIC REPOSITORIES / STUDY CATALOG
+Destination: https://github.com/anneshabiswaas22-collab/video-gen
+Catalog prepared: 2026-11-15
+Purpose: one self-contained reference of repos previously suggested in our AI image/video/audio/movie studio discussions.
+
+IMPORTANT
+- This is a historical STUDY/INTEGRATION LIST, not proof every URL currently exists or remains actively maintained.
+- Verify actual upstream repository owner, latest branch/tag/commit, maintenance state, security, code LICENSE and model-weight LICENSE at implementation time.
+- Public code does not mean that hosted/proprietary model weights are downloadable or free to run. API wrappers may incur fees.
+- Never clone all repos into our monorepo. Build a proprietary/original product layer and integrate selected components as versioned dependencies/services.
+- FreeField/OpenField variants below are DISTINCT repositories and should not be conflated.
+- The original K 3.1 Pro name was ambiguous (Kling vs Kimi) and is NOT an approved open video model assumption.
+- No rankings, VRAM numbers, speed claims, commercial license clearance or GPU test results are guaranteed here.
+
+ARCHITECTURE PRIORITY: ComfyUI + optional FreeField workflows -> Wan 2.2 (video) + FLUX/Qwen (images) + Kokoro/ACE-Step (audio) + FFmpeg; LightX2V is a benchmark candidate. Our own frontend, API, job queue and movie workflow are the software we build.
+
+========================================================================
+A. CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES
+========================================================================
+01. ComfyUI
+    REPO: https://github.com/Comfy-Org/ComfyUI
+    STUDY: Primary workflow/inference engine; first-priority integration
+02. FreeField (neuregex)
+    REPO: https://github.com/neuregex/freefield
+    STUDY: Creative studio and ComfyUI workflows; reference/reuse selected workflows
+03. FreeField (droppedmyza)
+    REPO: https://github.com/droppedmyza/freefield
+    STUDY: Alternate FreeField project; investigate separately
+04. OpenField (wexloops)
+    REPO: https://github.com/wexloops/openfield
+    STUDY: Characters, camera, reference/movie tooling; study
+05. OpenField (VedSoni-dev)
+    REPO: https://github.com/VedSoni-dev/openfield
+    STUDY: Alternate OpenField; study, distinguish from wexloops
+06. SwarmUI
+    REPO: https://github.com/mcmonkeyprojects/SwarmUI
+    STUDY: Alternative self-hosted generation UI; study
+07. Open Generative AI
+    REPO: https://github.com/Anil-matcha/Open-Generative-AI
+    STUDY: Many hosted model APIs; API fees, not free weights
+08. EasyComfee
+    REPO: https://github.com/sintetizacom/easycomfee
+    STUDY: Higgsfield-style ComfyUI frontend reference
+09. Montagio
+    REPO: https://github.com/Jubzh-29/montagio
+    STUDY: Cinematic video effects; verify early-stage maturity
+10. Hildegard
+    REPO: https://github.com/baney75/hildegard
+    STUDY: AI director, character/camera patterns; license check
+11. Remiqora Video
+    REPO: https://github.com/inikolax/remiqora-video
+    STUDY: Storyboarding and film assembly reference; experimental
+12. NVAI-open
+    REPO: https://github.com/Mantux775/NVAI-open
+    STUDY: Desktop multimedia creative studio reference
+13. Velorn
+    REPO: https://github.com/VelornLabs/velorn
+    STUDY: AI video editing / MCP integration patterns
+14. Vanta
+    REPO: https://github.com/itsjwill/vanta
+    STUDY: Programmatic video, speech, music and captions reference
+15. BeatDesign
+    REPO: https://github.com/BeatAPI/BeatDesign
+    STUDY: Infinite canvas and creative agent UX; may need API provider
+16. OpenCut
+    REPO: https://github.com/opencutvideo/Opencut
+    STUDY: Web video editor and timeline study; verify repo URL/current state
+17. OpenChatCut
+    REPO: https://github.com/0xsline/OpenChatCut
+    STUDY: AI-agent timeline editor and MCP; assess AGPL
+18. OpenMontage
+    REPO: https://github.com/bhakimi/openmontage
+    STUDY: Agent-run AI filmmaking orchestration ideas; verify maturity
+
+========================================================================
+B. VIDEO AND AUDIO-VIDEO FOUNDATION MODELS
+========================================================================
+19. Wan 2.2
+    REPO: https://github.com/Wan-Video/Wan2.2
+    STUDY: Primary video model candidate; select checkpoint after GPU preflight
+20. Wan 2.1
+    REPO: https://github.com/Wan-Video/Wan2.1
+    STUDY: Older/smaller checkpoint reference for constrained VRAM
+21. LTX-2 family
+    REPO: https://github.com/Lightricks/LTX-2
+    STUDY: Audio-video generation; exact version and weight license require confirmation
+22. HunyuanVideo 1.5
+    REPO: https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5
+    STUDY: High-quality video alternative; evaluate VRAM and commercial terms
+23. CogVideo
+    REPO: https://github.com/THUDM/CogVideo
+    STUDY: Open video model research and alternative inference
+24. SkyReels V2
+    REPO: https://github.com/SkyworkAI/SkyReels-V2
+    STUDY: Long video generation research
+25. FramePack
+    REPO: https://github.com/lllyasviel/FramePack
+    STUDY: Memory-conscious long-video workflow research
+26. Wan2GP / WanGP
+    REPO: https://github.com/deepbeepmeep/Wan2GP
+    STUDY: Optimized/multi-model lower-memory video inference
+27. MiniMax H3
+    REPO: https://github.com/MiniMax-AI/MiniMax-H3
+    STUDY: Previously discussed as a potential public model; CHECK official availability and rights, do not rely on prior claims
+
+========================================================================
+C. IMAGE GENERATION AND EDITING
+========================================================================
+28. FLUX
+    REPO: https://github.com/black-forest-labs/flux
+    STUDY: Image generation; choose permitted checkpoint (e.g. Schnell where appropriate)
+29. Qwen Image
+    REPO: https://github.com/QwenLM/Qwen-Image
+    STUDY: Text-image and image editing / character keyframes
+
+========================================================================
+D. SPEECH, MUSIC AND SOUND
+========================================================================
+30. Kokoro
+    REPO: https://github.com/hexgrad/kokoro
+    STUDY: Lightweight text-to-speech / narration
+31. VibeVoice
+    REPO: https://github.com/microsoft/VibeVoice
+    STUDY: Multi-speaker speech research; check variant/license
+32. ACE-Step 1.5
+    REPO: https://github.com/ace-step/ACE-Step-1.5
+    STUDY: Music generation candidate
+33. MuseTalk
+    REPO: https://github.com/TMElyralab/MuseTalk
+    STUDY: Speech-driven lip synchronization
+34. faster-whisper
+    REPO: https://github.com/SYSTRAN/faster-whisper
+    STUDY: Transcription, subtitles, alignment pipeline
+
+========================================================================
+E. OPTIMIZED INFERENCE / TRAINING
+========================================================================
+35. LightX2V
+    REPO: https://github.com/ModelTC/LightX2V
+    STUDY: Fast/optimized diffusion video inference; benchmark against baseline
+36. Cache-DiT
+    REPO: https://github.com/vipshop/cache-dit
+    STUDY: Caching and diffusion speed research; quality checks required
+37. Nunchaku
+    REPO: https://github.com/nunchaku-tech/nunchaku
+    STUDY: Quantized inference accelerator; compatibility check
+38. FastVideo
+    REPO: https://github.com/hao-ai-lab/FastVideo
+    STUDY: Video inference/training acceleration research
+39. Musubi Tuner
+    REPO: https://github.com/kohya-ss/musubi-tuner
+    STUDY: LoRA/fine-tuning when GPU and legal dataset available
+40. DiffSynth-Studio
+    REPO: https://github.com/modelscope/DiffSynth-Studio
+    STUDY: Training and inference framework reference
+
+========================================================================
+F. VIDEO EDITING, RESTORATION, 3D AND MEDIA PIPELINE
+========================================================================
+41. FFmpeg
+    REPO: https://github.com/FFmpeg/FFmpeg
+    STUDY: Essential video/audio encode, mix, mux, trim, export
+42. Editly
+    REPO: https://github.com/mifi/editly
+    STUDY: Programmatic media composition and transitions
+43. SAM 2
+    REPO: https://github.com/facebookresearch/sam2
+    STUDY: Image and video segmentation / masks
+44. rembg
+    REPO: https://github.com/danielgatis/rembg
+    STUDY: Background removal
+45. Real-ESRGAN
+    REPO: https://github.com/xinntao/Real-ESRGAN
+    STUDY: Enhancement and upscaling
+46. Hunyuan3D 2
+    REPO: https://github.com/Tencent-Hunyuan/Hunyuan3D-2
+    STUDY: Future image-to-3D and environment research
+
+========================================================================
+G. APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS
+========================================================================
+47. shadcn/ui
+    REPO: https://github.com/shadcn-ui/ui
+    STUDY: Reusable UI components, avoid recreating widgets
+48. React Flow / xyflow
+    REPO: https://github.com/xyflow/xyflow
+    STUDY: Workflow node / visual editor
+49. LangGraph
+    REPO: https://github.com/langchain-ai/langgraph
+    STUDY: Director agents and stateful orchestration
+50. Keycloak
+    REPO: https://github.com/keycloak/keycloak
+    STUDY: Authentication/role management candidate
+51. Celery
+    REPO: https://github.com/celery/celery
+    STUDY: Asynchronous job scheduling, retry, worker tasks
+52. Valkey
+    REPO: https://github.com/valkey-io/valkey
+    STUDY: Queue/cache data store candidate
+53. Yjs
+    REPO: https://github.com/yjs/yjs
+    STUDY: Optional collaborative timeline/project editing
+54. FastAPI
+    REPO: https://github.com/fastapi/fastapi
+    STUDY: Python REST backend framework
+
+OTHER PRODUCTS/SERVICES PREVIOUSLY DISCUSSED (NOT OPEN SOURCE REPO ENGINES)
+- Higgsfield, Runway, Google Flow, Kling, Sora and Veo: competitive benchmarks; using APIs does not give ownership of underlying model weights.
+- Kaggle and Google Colab: managed experimentation/compute environments, NOT open-source video foundation models or production GPUs.
+- Tripo3D, Meshy and World Labs Marble: potential hosted 3D/scene tools; the service URLs alone do not supply reusable source repositories.
+- MiniMax H3 and Kimi/K3.1 were mentioned in earlier chat. Verify official repositories, checkpoint licensing and the exact intended model name before planning integration.
+
+IMPLEMENTATION ORDER
+M0: audit repo versions/licenses + scaffold API/frontend/mock worker.
+M1: first genuine PNG through a GPU-compatible image model.
+M2: first genuine video MP4 through compatible Wan checkpoint.
+M3: voice, subtitles, FFmpeg export.
+M4-M5: original editor/AI director, character identity, reshoots, timeline.
+M6-M7: optimization, benchmark, security, commercial deployment.
+
+TOTAL LISTED GITHUB REPOSITORIES: 54
+See docs/OPEN_SOURCE_STACK.md, docs/REUSE_FIRST.md, docs/LICENSE_SECURITY.md and docs/ROADMAP.md for authoritative selection policy.
