@@ -34,7 +34,9 @@ scheduling and retries are **not** completed.
 
 ### Acceptance classification
 
-- Mock test evidence: see GitHub PR checks and `docs/BUILD_RUN.md`.
+- **PASSED**: [application CI run 43741158859](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741158859) at `70dba92d1f8fc32b4f4064e0f919976566fa66fc`: Python lint, 7 pytest tests, isolated mock smoke, JS client/live API roundtrip, pip audit, TS typecheck, ESLint, Vitest, Next production build and npm production audit.
+- **PASSED**: documentation integrity [run 43741109382](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741109382).
+- Fresh clone manual test on owner Windows machine remains **NOT RUN**; npm transitive lockfile not yet committed (direct dependencies pinned).
 - Real image generation: NOT RUN.
 - Real video generation: NOT RUN.
 - Real audio generation: NOT RUN.
