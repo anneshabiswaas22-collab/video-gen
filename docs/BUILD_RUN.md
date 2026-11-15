@@ -49,6 +49,8 @@ python scripts/check_docs.py
 ruff check services integrations tests scripts/smoke_mock.py
 pytest
 python -m scripts.smoke_mock
+# With backend running in another terminal:
+node apps/web/test/live-api.mjs
 cd apps/web
 npm run typecheck && npm run lint && npm run test && npm run build
 ```

@@ -31,6 +31,16 @@ jobs:
         run: pytest
       - name: CPU end-to-end mock smoke
         run: python -m scripts.smoke_mock
+      - name: JavaScript client against live FastAPI mock
+        run: |
+          python -m uvicorn services.api.main:app --host 127.0.0.1 --port 8000 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:8000/v1/health >/dev/null && break
+            sleep 0.2
+          done
+          node apps/web/test/live-api.mjs
       - name: Python package vulnerability audit
         run: |
           python -m pip install pip-audit==2.9.0
