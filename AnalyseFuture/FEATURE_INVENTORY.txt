@@ -1,0 +1,344 @@
+FEATURE INVENTORY — PRESERVED REPOSITORY AND PROPOSED OWNED PRODUCT
+Inspection date: 2026-11-17 (Asia/Kolkata). Source import: f34553a3d2c2d68c15f4644520e65816f0d516f3.
+Paths below beginning F/ mean AnalyseFuture/upstream/freefield-main/.
+Paths beginning C/ mean AnalyseFuture/upstream/ComfyUI-master/ComfyUI-master/.
+
+1. STATUS AND COUNTING RULES
+This is a source-backed inventory, not a claim that VideoGen has implemented these features.
+The owned project contains planning, preflight and integrity tools; its six features/ folders
+are product boundaries and guides. Moving files or writing guides does not consolidate code.
+FreeField is a preserved third-party reference application; ComfyUI is an inference engine reference.
+REFERENCE CODE = code inspected; MANIFEST READY = upstream status field only; IDEA/SPECIFIED = plan.
+CPU tests exercise contracts and fake jobs. They do not verify model output, timing or avatar quality.
+No install, inference, deployment, model download or paid operation was executed for this inventory.
+
+2. EXACT INVENTORY TOTALS
+Original docs/FEATURE_REGISTRY.md: 33 feature rows, not 35: IMG 5, VID 6, AUD 4, MOV 6, AI 3, SYS 8, 3D 1.
+Current registry adds ENG-01..05: 33 inherited + 5 new learning requirements =38 total requirements.
+Six owned product domains: image, video, audio, movie, character continuity, English speaking friend.
+AI and SYS entries are shared support concerns; 3D-01 remains future research, not a seventh delivered domain.
+FreeField: 120 app manifests = image 70 + video 45 + audio 2 + utility 3.
+Status fields: 119 ready + 1 draft (moss-image). All 120 declare an existing workflow file.
+72 manifests identify tools/template_apps.py in source.notes: these are prompt/pipeline variants.
+537 model declarations reduce to 109 unique (repo,file,dir) tuples;70 declaration occurrences optional.
+17 distinct model tuples are marked gated; this is a manifest claim, not a download/license authorization.
+14 model packs;2 distinct pinned custom-node repositories. No weights are installed by this inventory.
+lab/cases.json:334 cases over118 app IDs;117 cases have showcase=true;108 IDs begin tpl-/tplx-.
+lab/cases.smoke.json:3 cases over2 model-free apps. These are separate from the 334 main cases.
+Node test definitions:50 in7 files. Two additional Python test scripts exist.
+
+3. SHARED EXECUTION AND APPLICATION FEATURES (REFERENCE CODE)
+F/server/registry.ts: JSON Schema/Ajv2020 validation; unique IDs/folder agreement; workflow loading;
+node/field bindings; template placeholders; presets; gallery and multiple-select restrictions;
+paint-mask links; output nodes; sibling modes; declared loader-model warnings; model-set reuse keys.
+F/server/runner.ts: typed/default inputs, range checks, required files and per-input size limits;
+random seeds; ordered unique multiple picks; prompt composition; option/preset writes; SDK assets;
+draft gate; gateway prepare; job submit; actionable workflow/missing-model errors; raw SSE parsing
+and reconnects. It requires COMFY_BASE_URL only when a Runner is constructed for backend work.
+F/server/history.ts: persist before submission; input copies; seed/settings/preset records;
+starting/queued/running/succeeded/failed/canceled/expired/lost states; atomic metadata writes;
+polling plus SSE previews/queue/progress; monotonic progress capped below100% before completion;
+retry transient observation failures with backoff; capture node errors/timings; download declared
+media outputs; extension correction for MP4 reported as image; recent-job resume after restart;
+cancel/delete including submit races; constrained result paths; optional visitor ownership.
+Observation retry is not a guaranteed idempotent task submission or durable distributed retry queue.
+F/server/guard.ts: optional shared demo passcode; keyed-hash HttpOnly/Secure cookie; random visitor
+IDs; persisted UTC daily run cap; active-run cap; loopback Host checks and cross-site write rejection.
+This is reference demo protection, not VideoGen accounts, RBAC, tenant security or billing.
+F/server/flags.ts: validated mediocre-example marks, optional note/timestamp, disk persistence;
+gallery-option keys and stale-mark pruning. Hosted server disables mark writes.
+F/server/cli.ts: validate; list apps; run app with --set/--file/--preset/--out/--draft;
+wait for success and save declared outputs. Run commands can invoke real backend compute.
+F/server/server.ts: HTTP catalog; workflow download; multipart async run submission; history list,
+detail, files/byte ranges, previews, cancellation and deletion; GPU status/wake; flags; local-only
+raw job/output routes; static UI. Backend access is lazy, so catalog browsing needs no GPU.
+Warm-state tracking is a recent-contact heuristic; device data is best effort, not GPU readiness proof.
+
+4. BROWSER FEATURES (REFERENCE CODE)
+F/web/js/main.js: hash routes for Explore, apps, studios, individual app, library and VRAM view;
+boot/disposal, catalog/flags loading, retry/recreate/compare/use-in hooks and hosted GPU wake.
+F/web/js/catalog.js + menu.js: categories, video tabs, families, model views, featured entries,
+last-used studio apps, icons/taglines, fit/estimate display and manifest-derived menus.
+F/web/js/workspace.js: prompt composer/sidebar layouts; persisted non-file settings; drag/drop,
+paste and type/size checks; dynamic forms/selects/sliders/seeds/presets; modes/gallery options;
+example reload; batch request count; recreate/retry/use-in; live results; workflow download.
+F/web/js/paint.js: browser mask painting and preview for inpainting; source replacement clears mask.
+F/web/js/feed.js: history polling, live run cards, progress/state display, deletion and action hooks.
+F/web/js/views.js: exploration/app catalogs/library and model VRAM map presentation.
+F/web/js/media.js + viewer.js: image/audio/video cards, lazy/hover playback, audio waveform,
+full media viewer and named downloads. F/web/js/compare.js supports image wipe/side-by-side and
+synchronized video comparison; dropped comparison files remain browser object URLs.
+F/web/js/nav.js: language switch, navigation, GPU warm/running status and wake control.
+F/web/js/i18n.js + app-locale.js + locales/: English/Spanish/Russian UI and Russian catalog text;
+fallback, plural/interpolation rules and display-only translation without mutating execution data.
+Localization does not provide speech translation or an English tutor.
+
+5. WORKFLOW BUILD, MODEL CATALOG AND OPERATIONS (REFERENCE CODE)
+F/tools/build_apps.py: reproducible API graphs from template/LTX/reshoot sources; explicit graph
+rewrites, LoRA links, local text branches, merged workflows, outputs and media-specific recipes.
+F/tools/template_apps.py: prompt-template variants reuse known base graphs with explicit edits;
+generates manifests/workflows/lab cases and can check its table. Not120 independent engines.
+F/tools/ui2api.py: UI nodes/links/widgets/subgraphs to flat API graph using object definitions.
+F/tools/import_workflow.py: draft app extraction, inferred inputs/outputs/model metadata,
+known-file lookup, unknown model TODOs, validation, overwrite protection and import report.
+F/tools/catalog.py: derive packs and VRAM reports; model-key deduplication; phase-weight estimates
+with optional imported measurement metadata. Weight totals exclude activations and cannot prove fit.
+F/tools/comfy_validate.py: prompt validation against running ComfyUI; tiny input/model placeholders;
+app/preset/lab variants; cancel queued prompts. Validation is not model inference.
+F/tools/ci_comfyui.sh: CPU ComfyUI and custom nodes at pins; installs dependencies, starts server.
+This is an optional external integration workflow, not executed during this inventory.
+F/tools/local_backend.py: setup/download/serve for owner GPU; ComfyUI:8188, API proxy:8189,
+gateway:8000; pack downloads and coordinated process startup. Requires compatible PyTorch/GPU.
+F/tools/doctor.py: Node/npm/Modal/profile/env preflight; model access HEAD checks; no weight download.
+F/tools/setup_token.py and setup_demo.py: owner-run token/passcode creation and env/Modal binding.
+These mutate credentials/configuration; preservation is not permission to execute them.
+F/tools/lab_queue.py: bounded file jobs, known-case patterns, shard/job/case caps, serial Modal
+invocation, logs and done/refused records; STOP mechanism. It can spend money when owner runs it.
+F/infra/gateway.py: bearer check (health open), model-change unload lock, status, reverse proxy,
+JSON absolute-link rewriting, SSE/file streaming and stripping auth before internal proxy.
+F/infra/common.py: shared image, ComfyUI/custom-node pins, model volume/download helpers and startup.
+F/infra/modal_app.py: optional GPU backend, CPU model downloads and object_info export.
+F/infra/web_app.py: optional CPU-hosted reference UI with passcode/caps and persistent history.
+F/infra/modal_profile.py: pin/check active Modal profile to avoid acting on another workspace.
+F/lab/core.py: case dependency ordering, generated/asset inputs, overrides and extra LoRAs;
+VRAM polling, per-case timing/status/output records, model unloading and FFmpeg web derivatives.
+F/lab/lab_modal.py: select/shard jobs, include dependencies, download/merge results, review/publish.
+F/lab/review.py: local ratings page, exportable browser ratings and optional peak writes.
+F/lab/publish.py: choose successful showcase outputs, preserve earlier good examples, copy previews,
+publish option galleries and clear replaced-example flags. Not an owned learning evaluation system.
+
+6. CALL BOUNDARIES AND DEPENDENCIES
+Browser -> server HTTP -> loadRegistry/app manifests -> Runner/History -> @comfyorg/sdk ->
+optional gateway -> comfy-api-proxy Comfy API v2 -> ComfyUI -> permitted custom nodes/model weights.
+Lab bypasses SDK: cases + app graph -> ComfyUI HTTP -> output/VRAM records -> review/publish -> UI assets.
+Node engine >=22.6; package-lock pins @comfyorg/sdk 0.5.0 and transitive artifacts; Ajv 8.20 range;
+dev @types/node 26.6.5 range and TypeScript 7.0.2 range. Use frozen npm ci, not lockfile rewrite.
+Python gateway needs aiohttp; optional Modal paths need modal; downloads need huggingface_hub;
+media operations need FFmpeg; inference needs torch/torchvision/torchaudio and engine requirements.
+F/infra/common.py pins ComfyUI e3bee7ffcb7d6547ed0bcd15221792f3b8646b17 and comfy-api-proxy 0.1.6.
+Custom nodes: Lightricks/ComfyUI-LTXVideo@44c8a36b7c31ee00b4271daed11dc2a4aa481140;
+comfyrob/ComfyUI-CrossViewWarp@fbb1e93c7193329ff3ce7c17f95166b539687876.
+The separately imported C/ tree has no upstream Git metadata establishing that it matches this pin.
+F/LICENSE is MIT code; C/LICENSE is GPL-3.0. Model/media/custom-node permissions remain separate.
+
+7. ALL120 REFERENCE APP MANIFESTS
+Format: ID | section/status | pack | model declaration count | manifest summary.
+Each row is traceable to F/apps/<ID>/app.json and its workflow path. Names/model-version claims
+are inherited snapshot declarations; this audit does not independently verify upstream releases.
+ai-influencer | image/ready | image-flux3 | 3 | Build a made-up influencer trait by trait: type, body, hair, face, style and scene (FLUX 3 Klein).
+ai-influencer-photo | image/ready | image-flux3 | 3 | Your own face as the influencer: change hair, style, extras and scene, the face stays (FLUX 3 Klein, one reference).
+angles | image/ready | image-qwen-edit | 5 | The same scene from another camera position: move, rotate, look down (Multiple Angles LoRA on Qwen-Image-Edit).
+asmr-host | video/ready | video-ltx25 | 6 | You hosting an ASMR studio with a big microphone and fairy lights.
+asmr-product | video/ready | video-ltx25 | 6 | Your product in an ASMR clip: tapping, scratching, no music.
+asmr-whisper | video/ready | video-ltx25 | 6 | You whispering and tapping in a classic ASMR clip.
+behind-the-scenes | video/ready | video-ltx25 | 6 | The camera pulls back from your photo to reveal the film set around it.
+billboard | image/ready | image-flux3 | 3 | Your photo on a giant lit billboard over a city street.
+breakdown | image/ready | image-flux3 | 3 | The subject of your photo taken apart into labeled components, knolling style.
+brick-toy | image/ready | image-flux3 | 3 | The subject of your photo rebuilt from interlocking plastic bricks.
+bullet-time-scene | video/ready | video-wan-effects | 6 | Freezes the moment and circles the camera around the subject, in their own scene (Wan 2.1 + Bullet Time LoRA).
+bullet-time-splash | video/ready | video-wan-effects | 9 | Bursts frozen water around the subject, then circles the camera through the suspended drops.
+bullet-time-white | video/ready | video-wan-effects | 9 | Puts the subject mid-jump on a white studio backdrop, then freezes time and circles the camera around them.
+burning-sunset | image/ready | image-flux3 | 3 | Your scene under a blazing sunset sky.
+cafe-60s | image/ready | image-flux3 | 3 | You in a 1960s cafe: period clothes, chrome counter, film grain.
+camera-copy | video/ready | video-ltx25 | 6 | Copies the camera move of any reference clip onto your image: push-ins, pans, orbits, cranes.
+camera-moves | video/ready | video-wan-camera | 6 | Animates your image with a precise camera move: pans, zooms and rolls at the speed you pick (Wan 2.2 Fun Camera).
+chameleon | video/ready | video-ltx25 | 9 | A chameleon in your product's colors appears on it; the product stays as it is.
+character | image/ready | image-flux3 | 3 | Puts the person from your reference photo into a new scene and keeps their look (FLUX 3 Image Klein).
+character-3 | image/ready | image-flux3 | 3 | The person from three of your photos in a new scene: more angles of one face keep the likeness closer (FLUX 3 Image Klein).
+character-swap | image/ready | image-flux3 | 3 | Replaces the person in a scene with the person from a second photo.
+cinema-studio | image/ready | image-flux3 | 3 | Pick genre, era, camera body, lens, focal length, aperture, lighting and color palette; they become part of the prompt.
+cinema-video | video/ready | video-ltx25 | 9 | Cinema Studio in motion: the same film look as the still, then up to three camera moves, a tempo and sound, on LTX-2.5.
+cloud-surf | video/ready | video-ltx25 | 9 | You surfing across pink clouds at sunset, same face.
+color-grade | image/ready | image-flux3 | 3 | Six color grades for a photo: teal and orange, vintage film, noir, pastel, B&W, golden hour.
+comic-book | image/ready | image-flux3 | 3 | Your photo as a comic book panel: ink lines, halftone, a caption box.
+commercial-faces | image/ready | image-flux3 | 3 | Campaign portraits of you: skincare, corporate, sportswear or editorial.
+create-image | image/ready | image-flux3 | 4 | Text to image with FLUX 3 Image Klein: aspect ratio, 1K to 2K, a photographic look, and a 9B upsampler that can expand your prompt.
+depth-map | image/ready | upscale | 1 | A depth map (or a normal map) of any photo, from MoGe-2's geometry estimate.
+dub | video/ready | video-ltx25 | 6 | Makes the person in a clip say new words, in any language: new voice track and new lip movement from your text (DubIt IC-LoRA).
+edit | image/ready | image-flux3 | 3 | Describe a change and FLUX 3 Image Klein applies it to your photo.
+edit-text | image/ready | image-flux3 | 3 | Replaces the text written in an image, keeping the font and perspective.
+effects | video/ready | video-wan-effects | 29 | Turns a photo into a 5-second effect clip: 24 open effect LoRAs, from Cakeify and a hydraulic press to money rain and a 360° orbit (Wan 2.1 image-to-video).
+expand-image | image/ready | image-flux3 | 3 | Grows a photo past its edges: FLUX 3 Image Klein draws only the new border, so the original stays as it was.
+extend-video | video/ready | video-h3 | 4 | Continues a clip from its last frame with MiniMax H3, sound included, and joins the new part after it.
+face-swap | image/ready | image-flux3 | 4 | Puts the face from a second photo onto the first; for faces you own or have permission to use.
+fashion-factory | image/ready | image-flux3 | 3 | A fashion catalog photo of you wearing a garment from a second photo.
+figure-3d | image/ready | image-flux3 | 3 | Your photo as a collectible figure in a blister pack on a shelf.
+fridge-ad | image/ready | image-flux3 | 3 | Your product inside an illuminated display fridge, condensation on the glass.
+game-styles | image/ready | image-flux3 | 3 | You as a character in 12 kinds of video game, from 16-bit pixel art to voxel worlds.
+genjutsu | video/ready | video-ltx25 | 5 | Composes a clip from one reference sheet: people, props, clothes or a place laid out side by side and named by position in the prompt (Ingredients IC-LoRA).
+giallo | image/ready | image-flux3 | 3 | A 1970s Italian giallo film still: red and blue gels, deep shadows, no blood.
+giant-product | image/ready | image-flux3 | 3 | Your product as a giant monument over a city skyline, people tiny at its base.
+glitter-sticker | image/ready | image-flux3 | 3 | You as a glossy glitter sticker with a white die-cut border.
+graffiti-ad | image/ready | image-flux3 | 3 | Your product as a spray-paint graffiti mural on a brick wall.
+h3-photo | video/ready | video-h3 | 4 | Animates a photo into a clip with its own sound on MiniMax H3; the clip keeps the photo's shape.
+h3-video | video/ready | video-h3 | 4 | A clip with its own sound from a prompt, on MiniMax H3: speech in quotes, sound effects and music come out of the same model.
+headshot | image/ready | image-flux3 | 3 | A professional studio headshot from one selfie: backdrop and outfit of your choice.
+idol | video/ready | video-ltx25 | 6 | Your K-pop idol moment: spotlights, wind, confetti, a pose.
+image-effects | image/ready | image-flux3 | 3 | Ten effects for a photo: glitch, double exposure, neon, sketch, watercolor and more.
+inpaint | image/ready | image-flux3 | 3 | Paint over the part of a photo to change and describe the change; FLUX 3 Image Klein redraws only what you painted.
+j-magazine | image/ready | image-flux3 | 3 | You on the cover of a Japanese fashion magazine.
+j-poster | image/ready | image-flux3 | 3 | A Japanese-style graphic poster of you.
+japanese-show | image/ready | image-flux3 | 3 | You on a retro Japanese TV variety show, 4-panel screen.
+kick-ad | video/ready | video-ltx25 | 6 | Plain grey boxes slide at your product and get knocked off screen while it stands still.
+macro-product | image/ready | image-flux3 | 3 | A macro photograph of one detail of your product: texture, edges and label filling the frame.
+macro-scene | image/ready | image-flux3 | 3 | An extreme macro close-up of your product in a natural setting: stone, leaves, sand or ice.
+magic-button | video/ready | video-ltx25 | 6 | A glowing button turns the scene around your product magical.
+mascot | image/ready | image-flux3 | 3 | You in a football club mascot costume on the pitch.
+melting-doodle | video/ready | video-ltx25 | 6 | Cartoon doodles appear over your photo and melt down the frame.
+meme | image/ready | image-flux3 | 3 | A meme image from a scene and two captions (FLUX 3 Klein).
+micro-beasts | image/ready | image-flux3 | 3 | You surrounded by tiny cute animals.
+mixed-media | video/ready | video-ltx25 | 9 | Restyles a clip in one of 16 looks: FLUX 3 Klein redraws the first frame in the look, and the clip's edges keep its structure (Union Control IC-LoRA).
+moodboard | image/ready | image-flux3 | 3 | Anything you describe, in the look three reference images share: palette, light, texture and mood, like a moodboard (FLUX 3 Image Klein).
+morph | video/ready | video-ltx25 | 9 | Fifteen transformations that keep the face: FLUX 3 Klein redraws the photo (statue, bride, cartoon, clones…) and LTX-2.5 morphs the photo into it.
+moss-image | image/draft | image-moss | 3 | Text to image with MOSS-Image (Apache-2.0); also takes a layout JSON that places each text and object in its own box.
+motion-transfer | video/ready | video-wan | 4 | Animates a character image with the motion of a driving clip, with Wan Animate 2.
+mukbang | video/ready | video-ltx25 | 6 | You at a table full of food, eating for the camera.
+mural | image/ready | image-flux3 | 3 | You hand-painted on a large street mural.
+music | audio/ready | audio | 3 | A full song from a style description and optional lyrics, with MiniMax Music 3.
+outfit-shot | image/ready | image-flux3 | 3 | A studio fashion shot of a garment on a model from your photo.
+outfit-swap | image/ready | image-flux3 | 3 | Wear the whole outfit of the person in another photo.
+outfit-vending | image/ready | image-flux3 | 3 | The clothes you are wearing, displayed item by item inside a lit vending machine.
+packshot | image/ready | image-flux3 | 3 | The closing frame of an ad: your product centered on a clean gradient with room for a tagline.
+paint-app | image/ready | image-flux3 | 3 | Your photo redrawn in a 1990s computer paint program.
+photodump | image/ready | image-flux3 | 3 | Four photos of you from one photo, in four scenes of an aesthetic, like a feed photo dump, in one run (FLUX 3 Image Klein).
+pixel-game | image/ready | image-flux3 | 3 | Your scene redrawn as 16-bit pixel art with a game HUD.
+plushie | image/ready | image-flux3 | 3 | The subject of your photo remade as a soft plush toy.
+poster | image/ready | image-flux3 | 3 | Turns a product photo into a printed advertising poster with your headline (FLUX 3 Image Klein).
+product-shot | image/ready | image-flux3 | 3 | Turns a plain photo of a product into a styled product shot: pedestal, splash, beach and more.
+rap-video | video/ready | video-ltx25 | 6 | A rap music video of you: low angle, stage lights, smoke, a beat.
+recast | video/ready | video-scail | 7 | Puts your character into a video in place of the person there, keeping their motion (SCAIL-2 with SAM 3.1 tracking).
+reframe | video/ready | video-ltx25 | 5 | Changes a clip's aspect ratio by painting what lies beyond the frame, in two stages (Lightricks' In-Outpainting IC-LoRA).
+relight | image/ready | image-qwen-edit | 5 | Relights a photo with a preset light or your own direction, softness, brightness and color, keeping the scene intact.
+remove-bg | image/ready | upscale | 1 | Cuts out the subject with BiRefNet and returns a PNG with transparency.
+renaissance | image/ready | image-flux3 | 3 | You as a Renaissance oil painting in a gilded museum frame.
+render-3d | image/ready | image-flux3 | 3 | A stylized 3D render of your photo: clay-like materials, soft studio light.
+reshoot | video/ready | video-h3 | 7 | Moves the camera to a new angle on an existing clip (MiniMax H3 + MoGe + CrossView).
+roller-coaster | video/ready | video-ltx25 | 9 | You on a roller coaster: the photo turns into the ride, same face.
+sdr-hdr | video/ready | video-ltx25 | 5 | Turns an SDR clip into a 10-bit HLG HDR master with Lightricks' SDR-to-HDR IC-LoRA; a tone-mapped preview comes with it.
+sfx | audio/ready | audio | 3 | Music beds, instruments, ambiences and one-shots with Stable Audio 3.
+shots | image/ready | image-qwen-edit | 5 | Nine framings of one image: wide, close-up, top-down, low angle and rotations.
+sketch-to-real | image/ready | image-flux3 | 3 | Turns a sketch into a photorealistic photo of the same scene.
+skin-enhancer | image/ready | image-flux3 | 3 | A beauty-editor retouch: even tone, natural pores kept, no plastic smoothing.
+smoke | utility/ready | core | 0 | Draws a solid color. Needs no models; proves the whole chain works end to end.
+smoke-invert | utility/ready | core | 0 | Inverts an uploaded image. Needs no models; proves uploads and downloads work.
+smooth | utility/ready | upscale | 1 | Adds in-between frames with FILM: smoother motion at the same length, or real slow motion.
+speak | video/ready | video-ltx25 | 6 | A photo says your line out loud: LTX-2.5 makes the voice, the lip sync and the motion in one pass, no TTS model needed.
+storm-creature | video/ready | video-ltx25 | 6 | A giant made of storm clouds and lightning rises behind your scene.
+style-reference | image/ready | image-krea2 | 4 | Paints anything you describe in the style of a reference image (Krea 2 Turbo with a style-reference LoRA).
+style-snap | image/ready | image-flux3 | 3 | You in a complete new outfit: streetwear, business, gala, athleisure, 70s or monochrome.
+styles | image/ready | image-krea2 | 12 | Text to image in one of Krea's nine official looks: watercolor, ink wash, retro anime, tarot and more.
+talking | video/ready | video-ltx25 | 7 | A portrait speaks or sings along to your audio, with LTX-2.5 audio-to-video in two stages.
+transitions | video/ready | video-ltx25 | 6 | Morphs a first frame into a last frame with a transition LoRA on LTX-2.5.
+truck-ad | video/ready | video-ltx25 | 6 | A toy delivery truck with your product printed on its side drives up and parks beside it.
+try-on | image/ready | image-flux3 | 3 | Try a garment on your own photo: same pose, same background, new clothes.
+ugc-shot | image/ready | image-flux3 | 3 | A casual phone photo of a hand holding your product, like a social media post.
+upscale | image/ready | upscale | 2 | SeedVR2 restores detail while enlarging 2× or 4×.
+upscale-video | video/ready | upscale | 2 | SeedVR2 restores and doubles the resolution of a clip.
+vfx-clean-plate | video/ready | video-ltx25 | 6 | Removes people and moving subjects from a shot and rebuilds the background.
+vfx-day-to-night | video/ready | video-ltx25 | 6 | Turns a daytime shot into a believable night version of the same shot.
+vfx-water | video/ready | video-ltx25 | 6 | Adds simulated water to a shot, following the scene's geometry.
+victory-card | image/ready | image-flux3 | 3 | Your face on a playing card in a winning poker hand.
+video | video/ready | video-ltx25 | 6 | Animates a still into a shot with synchronized audio, two stages with LTX-2.5.
+video-remove-bg | video/ready | upscale | 1 | Cuts the subject out of every frame of a clip with BiRefNet: the clip over a solid color, with its sound, and the matte for compositing.
+video-t2v | video/ready | video-ltx25 | 6 | A shot with synchronized audio from a prompt, two stages with LTX-2.5.
+volcano-ad | video/ready | video-ltx25 | 9 | The background turns into an erupting volcano behind your product.
+whats-next | image/ready | image-qwen-edit | 5 | The next shot of your scene: 8 cinematic continuations (next-scene LoRA on Qwen-Image-Edit).
+z-image | image/ready | image | 3 | Fast text to image with Z-Image Turbo, 8 steps; the lab makes its reference photos with it.
+zooms | image/ready | image-qwen-edit | 5 | Zoom levels of one image, from a wide view to an extreme close-up.
+
+8. COMFYUI ENGINE FEATURES AND BOUNDARIES (STATIC SOURCE INSPECTION)
+C/pyproject.toml declares 0.45.0. This is not proof of upstream authenticity or compatibility with
+FreeField's pinned e3bee7ff... engine; its manifests describe 0.42.0. Keep the snapshots separate.
+C/main.py: argument/startup configuration, extra model paths, database initialization, prompt
+worker and optional manager/custom-node prestartup hooks. Extension startup executes Python code;
+importing a workflow is not permission to install arbitrary untrusted custom nodes.
+C/execution.py: validate_prompt/validate_inputs, node execution and output merging, change-aware
+caches, PromptExecutor and PromptQueue; interruption, errors and completion feed the server.
+C/comfy_execution/graph.py: DynamicPrompt, dependency/topological ordering, cycles and node-input
+errors; caching.py: signature/ID, hierarchical, LRU and RAM-pressure caches. Not an owned job ledger.
+C/nodes.py: CLIP text conditioning/combine/area/mask/time controls; VAE encode/decode/tiled/inpaint;
+checkpoint/diffusers/UNet/CLIP/vision/VAE/LoRA/ControlNet/style loaders and application; latent
+batch/resize/composite/transform; KSampler; image load/save/preview and built-in node registration.
+C/comfy/sd.py: CLIP/VAE wrappers, text-encoder detection, LoRA patches, state/checkpoint/diffusion
+model loading and checkpoint save. comfy/model_detection.py/model_base.py and ldm/ carry model
+family implementations; presence of family code is not proof that any checkpoint runs here.
+C/comfy/sample.py and samplers.py: seeded noise, latent-channel setup, conditioning, masks, CFG,
+sigma schedulers and sampling implementations; comfy/model_management.py: device/dtype selection,
+VRAM accounting, GPU loading, offload, memory pressure and model cleanup/interruption.
+C/folder_paths.py: model/input/output/temp/user roots, registered model folders, extension/name
+lists, annotated paths, directory containment helpers and output-name generation. Model folders
+are external data locations, not uploaded weights supplied by this repository.
+C/comfy_extras/nodes_images.py and nodes_mask.py: crop/rotate/flip/pad/resize, tile lists, image
+batching/animated formats, SDR/HDR/color operations, composite/mask conversion/grow/feather.
+C/comfy_extras/nodes_video.py: LoadVideo/CreateVideo/GetVideoComponents/ConcatenateVideo,
+SaveVideo/WEBM, trimming/cropping/slicing and previews; these process media, not a movie editor.
+C/comfy_extras/nodes_audio.py: load/record/preview/save audio formats, latent/VAE audio,
+trim/split/join/concat/merge, volume/equalizer and sample-rate matching. Specialized nodes_audio_encoder,
+nodes_lt_audio, nodes_wan, nodes_flux, nodes_video_model and others expose model-specific graphs.
+C/server.py PromptServer: WebSocket progress; /object_info, /prompt, /queue, /history, /interrupt,
+/free, /system_stats; model/embedding/extension listing; image/mask uploads and file views; job
+listing/status/cancel routes. This engine HTTP API differs from comfy-api-proxy Comfy API v2.
+C/app/assets/: AssetManager, scanner/lifecycle/event records, file/content identity, upload/download,
+asset listing/update/delete, tags/filter/sort/cursors, seeding/cancel/missing handling and previews.
+C/app/database/db.py: SQLite/session setup, WAL, file locks/backups and Alembic migration binding;
+SQLAlchemy/Alembic/blake3 are conditional asset prerequisites; alembic_db/versions has 9 migrations.
+These are inference-engine assets, not VideoGen project/shot/learner/consent schemas.
+C/app/frontend_management.py: required frontend-package version checks, provider/release handling
+and optional release installation. The engine frontend is delivered through a separate package.
+C/app/user_manager.py/model_manager.py/subgraph_manager.py: user files/settings, model-file and
+subgraph services; custom_node_manager.py merges extension locales; nodes.load_custom_node and
+init_external_custom_nodes define extension-code loading. These are not production tenant controls.
+C/comfy_api/ exposes typed extension interfaces; comfy_api_nodes/ contains hosted provider
+integrations, some potentially paid or credentialed. Their presence does not authorize API use,
+and they are not substitutes for licensed local weights. api_server/routes/internal/ and
+services/terminal_service.py are internal engine-management surfaces, not a public tutor API.
+C/tests-unit/:159 test*.py files; C/tests/:24 Python files. Their purposes include graph/cache,
+sampling/model loading, API/data/asset and database behavior. Test presence only: none of these
+engine suites, no actual graph execution and no engine network startup was run for this audit.
+
+9. SIX OWNED PRODUCT DOMAINS: REUSE MAP AND MISSING WORK
+IMAGE STUDIO -> features/image-studio/: IMG-01..05; reference image apps, masking, registry/runner.
+Missing owned API/UI/adapter/license-approved checkpoint/artifact proof; reference images are not implementation.
+VIDEO STUDIO -> features/video-studio/: VID-01..06; reference video workflows, camera/motion/control,
+VFX, interpolation and upscaling. Missing licensed hardware-tested worker and owned asynchronous contract.
+AUDIO STUDIO -> features/audio-studio/: AUD-01..04; music/sfx, talking/speak/dub workflow references.
+Missing owned TTS/transcription/captions/alignment/language adapters; two audio apps are not all AUD features.
+MOVIE STUDIO -> features/movie-studio/: MOV-01..06 and AI-01..03; reuse lab dependency concepts and
+FFmpeg derivatives as research. Missing shot/take project graph, editable timeline, director approvals,
+coherent 60s proof and long-form orchestration; no 120-minute one-prompt guarantee.
+CHARACTER CONTINUITY -> features/character-continuity/: IMG-05/MOV-02; character/character-3,
+moodboard/reference/ingredients/recast examples. Missing consented identity ledger, continuity metrics,
+cross-shot asset versioning and repeatable identity evaluation; prompt wording cannot guarantee likeness.
+ENGLISH FRIEND -> features/english-speaking-friend/: ENG-01..05, five new IDEA requirements;
+speech/avatar concepts can inform an adapter, but no tutor/session/grammar/ASR/translation engine exists.
+Missing text/push-to-talk vertical slice, Bengali/code-switch evaluation, friendly correction policy,
+privacy/consent, latency measurement, learning outcomes and synchronized licensed avatar delivery.
+SHARED SYSTEMS -> SYS-01..08: reference job history, guards, model registry and GPU tracking are patterns;
+owned auth/tenancy/idempotency/queue/billing/storage/observability remain to implement and test.
+3D-01 remains research. figure-3d/render-3d create images, not editable mesh/scene assets.
+
+10. TEST COVERAGE AND GAPS
+F/test/registry.test.ts: 5; runner.test.ts: 18; history.test.ts: 13; guard.test.ts: 6;
+i18n.test.ts: 6; flags.test.ts: 1; app-locale.test.ts: 1 = 50 Node tests.
+They check schemas/bindings, parameter templates, missing-model errors, fake-backend prepare,
+draft gates, fake media history/SSE/progress/retry/resume/cancel/owner isolation, local guards,
+flags, translation placeholders/fallback and unchanged workflow values through localization.
+F/test/import_workflow_test.py checks hand-authored/image/video/UI conversion and CLI safeguards;
+F/test/gateway_test.py uses a fake proxy to check link rewriting, streaming and unauthorized requests.
+F/.github/workflows/validate.yml documents validate/test/typecheck, generated catalog consistency,
+Python compilation and optional CPU ComfyUI prompt checks. Nested workflows are reference material;
+they do not automatically run as root repository CI after relocation.
+Root scripts/check_docs.py and scripts/gpu_preflight.py predate the bulk import; documentation and
+preflight tooling are real code, not a studio generation service. Root CI originally checks docs/syntax.
+Recovery parent agent reports post-move 50 Node tests, typecheck, validate and Python gateway/
+importer checks passed, plus startup/HTTP smoke on port 3001 including workflow download. This
+inventory subtask performed static inspection only. Consult validation report for full run evidence.
+
+11. CONCRETE MISSING/INCOMPLETE IMPORT EVIDENCE
+F/web/examples/index.json is absent in the imported source. Server loadExamples() returns{} safely.
+AnalyseFuture/imported-examples/index.json contains 118 app entries, but only19 loose folders;
+it must not silently replace the missing FreeField index without checking every referenced asset.
+Published images and inherited VRAM figures are historical assets, not new local GPU verification.
+Main lab cases omit model-free smoke/smoke-invert by design; separate smoke cases include them.
+No owned production application, full engine integration, current GPU run or public deployment
+is established by this file. Preserve references until a separately scoped implementation passes gates.

@@ -1,3 +1,12 @@
+> **Current checkout note — 2026-11-17:** This is
+> `sarfiaroui-oss/video-gen`, with the feature map in
+> [features](../../features/README.md) and current
+> [validation report](../../AnalyseFuture/TEST_AND_VALIDATION_REPORT.txt).
+> The source-repository PR/CI snapshot below is historical. It does not establish
+> that its application code is present here. The bulk imports were preserved,
+> and the English companion was added to product planning; no GPU inference or
+> tutor behavior is claimed. See [reorganization findings](../REPOSITORY_REORGANIZATION.md).
+
 # VideoGen — verified evidence, branch/PR state and open backlog
 
 **Observation date:** 2026-11-16 (Asia/Kolkata). GitHub may change after this snapshot. **Always re-fetch live branch refs, PRs, issues and Action runs before modifying code.** This document separates completed CPU work from planned GPU/product work.

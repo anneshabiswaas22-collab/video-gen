@@ -46,3 +46,25 @@ Large language-model control plane, multimodal model training from scratch, true
 
 ## Work queue format
 Each GitHub issue: user story, priority, dependencies, reuse alternatives, license notes, definition of done, test modes (CPU/GPU), artifacts/links and risk. No broad "implement everything" mega tasks.
+
+## Combined-product tutor track — added 2026-11-17
+
+The M0–M7 studio milestones remain. The owner added the English-speaking friend
+as a first-class feature; it need not wait for long-form film generation.
+Shared M0 contract/security foundations precede any public service.
+
+- **T0 — text learning loop (PLANNED):** English/Bangla teacher-reviewed examples,
+  transcript editing, correction preferences, uncertainty/valid-variant handling.
+  Acceptance: a usable text loop and documented human evaluation, not mock output
+  presented as effective teaching.
+- **T1 — narrow adult speech pilot (PLANNED):** push-to-talk, replay, a licensed
+  simple avatar, optional phrase review, privacy/deletion, text fallback.
+  Acceptance: actual recognition and speech tests, measured turn latency and cost,
+  teacher review and consented adult usability results. No user camera required.
+- **T2 — research after pilot evidence (NOT RUN):** interruptions, richer avatars,
+  additional reviewed languages and optional approved creative-scene export.
+  Each experiment needs a test, accountable owner, cost ceiling and stop condition.
+
+Year 1, Year 2 and Years 3–5 in [the future vision](../AnalyseFuture/PROJECT_VISION_AND_FUTURE_ROADMAP.txt)
+are conditional ambitions, not delivery commitments or guaranteed AI breakthroughs.
+See [the feature map](../features/README.md) for dependencies and boundaries.

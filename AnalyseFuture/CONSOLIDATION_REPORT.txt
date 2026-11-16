@@ -1,0 +1,50 @@
+CONSOLIDATION REPORT — 17 November 2026
+
+What was combined
+The original creative-studio vision and newly requested English conversation
+companion now share one product plan, six feature entry folders, shared platform
+boundaries and explicit cross-feature links. Root README and PROJECT_IDEA.txt
+are current entrypoints; existing architecture, roadmap and historical evidence
+remain. ENG-01..05 and T0..T2 make new learning scope traceable without silently
+replacing M0..M7. Historical source-repository CI is distinguished from current
+checkout evidence.
+
+What moved
+2,131 tracked import/example files moved intact to AnalyseFuture. See the JSON
+manifest and ORIGINAL_TO_NEW_PATH_MAPPING.txt for every path. 1,306 ComfyUI files
+retain their original wrapper, 764 FreeField files retain relative dependency
+paths, and 61 loose example/index files remain together. Licenses and unique
+assets survive. Original root README bytes are also preserved as a separate
+historical .txt snapshot. Ignored FreeField local dependencies/outputs moved
+with the directory and are not committed.
+
+What was NOT falsely merged
+Zero source-code implementations were merged, deduplicated, rewritten or lost.
+No owned competing services exist on current accessible refs. A graph engine
+and its client reference studio are complementary layers, not duplicate products
+to flatten. The unique loose examples and incomplete gallery metadata were not
+spliced into the reference app. Reference frameworks remain coherent for future
+study; feature guides map what can be selectively reused after verification.
+
+Compatibility repairs
+Documentation entrypoints, feature registry/roadmap/status and historical memory
+notes identify current paths and evidence. Root CI gains byte-preservation and
+feature-entry checks. Python venv launchers were regenerated at the moved path;
+existing Node dependencies resolve there. Current environment install/start
+drafts are updated separately so future tasks do not target removed root paths.
+No public API, schema, test assertion, model workflow or upstream package manifest
+was changed. No deployment config exists for an owned app, and none was invented.
+
+Production exclusion
+The active root has no npm workspace, pyproject, recursive runtime import or
+deployment manifest that includes AnalyseFuture. Root CI only runs explicit
+owned validators, reading archived documentation/bytes as data. Nested upstream
+.github workflows remain nested and inactive on GitHub. No auto-start of archive
+code is configured. This is an exclusion boundary, not malware sandboxing:
+manual commands or a future overly broad build could still execute archived code.
+Review before promoting any reference into active product dependencies.
+
+Validation compares the unchanged original Git blobs, then reruns reference tests
+and local requests after relocation. See TEST_AND_VALIDATION_REPORT.txt for
+passed versus unrun behavior. The architecture is prepared; no owned AI tutor or
+GPU product feature is represented as implemented by these guides.

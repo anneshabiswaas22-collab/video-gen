@@ -43,3 +43,21 @@ P0 = first end-to-end working product; P1 = key differentiation; P2 = growth; P3
 
 ## Traceability
 For every implemented feature, add issue/PR link, upstream version, license check, tests and real output evidence. Use a feature flag for capabilities not currently available on the selected GPU. Maintain accessibility and honest error states for unsupported models.
+
+## Combined-product learning feature — added 2026-11-17
+
+The original 33 requirements above remain. These additional requirements are
+**IDEA**, not implemented. They share reviewed platform/audio/asset interfaces
+but keep learning records isolated from studio publishing.
+
+| ID | Feature | Scope | Delivery gate |
+|---|---|---|---|
+| ENG-01 | Text conversation, meaning-preserving English alternatives, ambiguity questions | English friend | T0 teacher-reviewed text pilot |
+| ENG-02 | English/Bangla push-to-talk, editable transcripts, replay and fallback | English friend | T1 measured speech evaluation |
+| ENG-03 | Disclosed, licensed synthetic avatar and optional correction modes | English friend | T1 accessibility and rights checks |
+| ENG-04 | Opt-in phrase review, consent, deletion and learning-data isolation | English friend | T1 privacy tests and adult pilot |
+| ENG-05 | Streaming turns, interruption and additional evaluated languages | Research | T2 evidence and budget required |
+
+See [the guide](../features/english-speaking-friend/README.md) and
+[detailed idea](../features/english-speaking-friend/PROJECT_IDEA.txt).
+All six product domains are indexed in [features](../features/README.md).

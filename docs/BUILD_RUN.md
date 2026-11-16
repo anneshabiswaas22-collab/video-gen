@@ -1,3 +1,45 @@
+# Current setup and validation — 2026-11-17
+
+Use the existing isolated checkout; do not create a worktree unless requested.
+There is no owned VideoGen or tutor application to deploy in this checkout.
+The [feature map](../features/README.md) and [inventory](../AnalyseFuture/FEATURE_INVENTORY.txt)
+separate plans from preserved reference implementations.
+
+From the repository root, run `python scripts/check_docs.py`,
+`python scripts/check_structure.py`, and
+`python -m py_compile scripts/gpu_preflight.py scripts/check_docs.py scripts/check_structure.py`.
+These checks need only the Python standard library (Python 3.12 validated).
+
+For an explicitly scoped reference-development task, use
+`AnalyseFuture/upstream/freefield-main/` (Node 24.22.1 validated; its declared
+minimum is Node 22.6). Run `npm ci --ignore-scripts --no-audit --no-fund`,
+`npm run validate`, `npm run typecheck`, and `npm test`. This package has no
+build step; Node executes TypeScript directly. Its manifest/workflow tests do
+not prove real generation. Do not run upstream installers automatically.
+
+Optional reference server: from that same directory run
+`FREEFIELD_HOST=127.0.0.1 PORT=3000 npm run serve`. Check the UI returns HTML,
+`/api/apps` returns 120 entries, `/api/history` returns JSON and `/api/gpu`
+reports no configured backend when `COMFY_BASE_URL` is absent. Use local requests;
+do not expose the unconfigured reference as the owned product. Live processes
+must restart after moves or in a new task. Keep the reference server loopback-only.
+
+Optional Python reference checks use its ignored `.venv`:
+`python -m venv .venv`, then `.venv/bin/python -m pip install aiohttp==3.14.4`,
+`.venv/bin/python test/gateway_test.py`, and
+`.venv/bin/python test/import_workflow_test.py`.
+After relocation, recreate venv launcher scripts; do not rely on old absolute paths.
+No real secrets or inference backend are required for these fake-backend tests.
+
+Archived code is excluded from the active product by explicit paths and the
+absence of any root package/workspace/import/deploy linkage. This is not an OS
+sandbox: manual execution is still possible and requires review. GPU inference,
+model downloads, custom-node installation and paid provider use are separate,
+owner-approved tasks. [Validation evidence](../AnalyseFuture/TEST_AND_VALIDATION_REPORT.txt)
+records what actually ran.
+
+## Historical build brief (preserved)
+
 # Build, run and verify — current state
 
 **As of 2026-11-13, this is a documentation-first repository.** There is no application or working inference backend yet. Running "npm start" or "python generate.py" in the root would be misleading. See M0 in ROADMAP.md for scaffold requirements.

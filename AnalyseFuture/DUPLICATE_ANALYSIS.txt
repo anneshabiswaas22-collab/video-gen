@@ -1,0 +1,177 @@
+DUPLICATE ANALYSIS — EXACT SOURCE BYTES AND CONSOLIDATION DECISIONS
+Source: f34553a3d2c2d68c15f4644520e65816f0d516f3; inspected2026-11-17 Asia/Kolkata.
+
+1. METHOD AND SCOPE
+Enumerated every tracked source file with git ls-tree, read all unique source blobs using
+git cat-file --batch, and computed SHA-256 over actual blob bytes. Ignored node_modules/venvs,
+generated results and later recovery documents are outside this baseline duplicate count.
+Cross-checked every 2,131 imported entry against RELOCATION_MANIFEST.json and preserved bytes.
+This compares content, not filenames; matching Git blob identifiers were not the only hash evidence.
+
+2. EXACT COUNTS
+Tracked baseline files: 2178; unique SHA-256 contents: 1996.
+Duplicate-content groups: 40; files in those groups: 222.
+Copies beyond one representative per group: 182.
+Total baseline bytes: 111,800,125; theoretical redundant bytes: 12,501,362.
+No files or redundant bytes were removed; this is an analytical count, not a cleanup action.
+One group contains 26 empty placeholder/package files; empty package markers have distinct path roles.
+One nonempty Python group is internal ComfyUI distributions.py in two engine modules.
+The other 38 duplicate groups contain image assets. These are not duplicated studio services.
+Basename groups occurring more than once: 62;
+basename groups with DIFFERENT source content: 59.
+Repeated app.json/workflow.api.json/README.md names are directory conventions, not deletion evidence.
+
+3. LOOSE EXAMPLES VS REFERENCE EXAMPLE TREE
+Loose source files moved together to imported-examples/: 61.
+Byte-identical to at least one FreeField web/examples file: 30.
+Not byte-identical to ANY FreeField web/examples file: 31.
+Identical source portraits/products may intentionally feed many app demonstrations.
+Nonmatching files include the index plus different result/poster assets; retain them unchanged.
+Root index metadata lists 118 apps while loose media covers19 folders. This is an incomplete
+set, not proof that 31 unmatched files are wrong or malicious. Keep its index and folders together.
+Unmatched original paths:
+  index.json
+  style-snap/card.jpg
+  style-snap/full.jpg
+  talking/poster.jpg
+  transitions/input-last-full.jpg
+  transitions/input-last.jpg
+  transitions/poster.jpg
+  truck-ad/poster.jpg
+  try-on/card.jpg
+  try-on/full.jpg
+  ugc-shot/card.jpg
+  ugc-shot/full.jpg
+  upscale-video/poster.jpg
+  upscale/card.png
+  upscale/full.png
+  vfx-clean-plate/poster.jpg
+  vfx-day-to-night/poster.jpg
+  vfx-water/poster.jpg
+  victory-card/card.jpg
+  victory-card/full.jpg
+  video-remove-bg/input-clip.jpg
+  video-remove-bg/poster.jpg
+  video-t2v/poster.jpg
+  video/poster.jpg
+  volcano-ad/poster.jpg
+  whats-next/card.jpg
+  whats-next/full.jpg
+  whats-next/input-image-full.jpg
+  whats-next/input-image.jpg
+  zooms/card.jpg
+  zooms/full.jpg
+
+4. CONSOLIDATION DECISIONS FROM CODE BOUNDARIES
+Owned VideoGen runtime implementations competing with each other: NONE found in this checkout.
+The six features/ folders document intended ownership; they are not merged feature code.
+FreeField web/server and ComfyUI are separate cooperating layers, not competing duplicate backends.
+FreeField Runner -> SDK -> API proxy/gateway -> ComfyUI is the supported reference boundary.
+Do not combine their server files, dependency manifests, migrations, public APIs or tests by filename.
+Keep both references upstream-relative under AnalyseFuture/upstream; preserve licenses/notices.
+72 FreeField template manifests deliberately reuse base workflows through tools/template_apps.py.
+The runner/registry, modelKey, packs/catalog and lab model collection already centralize shared
+behavior. Their separate app manifests hold different prompts/bindings/output paths; keep them.
+ComfyUI internal identical distributions.py modules are preserved because upstream import paths
+are separate. Redirecting imports or deleting one would alter third-party code and needs tests.
+Python lab/core.py and TS runner.ts both resolve/apply inputs for different callers: direct
+ComfyUI lab evaluation versus SDK UI submission. This is semantic overlap, not byte duplication.
+Future owned integration should define one schema and contract tests for both adapters rather
+than blindly copy either engine or consolidate different languages during folder recovery.
+Original docs/FEATURE_REGISTRY.md contains 33 requirements; current registry adds ENG-01..05
+for 38 total. Six product guides group them;
+AI/SYS remain shared and3D remains future research. Grouping requirements is not implementation.
+Compatible consolidation in this change is organizational: one preserved reference location per
+imported tree, one preserved loose-example collection, and explicit owned feature entry points.
+No owned competing implementation needed a source merge. No code consolidation is claimed.
+
+5. ALL EXACT DUPLICATE GROUPS
+Each entry gives SHA-256, bytes per file, count and ORIGINAL source paths. Resolve imported
+paths through RELOCATION_MANIFEST.json; source originals remain recoverable in Git history.
+01. SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 bytes=0 copies=26
+    ComfyUI-master/ComfyUI-master/api_server/__init__.py | ComfyUI-master/ComfyUI-master/api_server/routes/__init__.py | ComfyUI-master/ComfyUI-master/api_server/routes/internal/__init__.py | ComfyUI-master/ComfyUI-master/api_server/services/__init__.py | ComfyUI-master/ComfyUI-master/app/__init__.py | ComfyUI-master/ComfyUI-master/blueprints/put_blueprints_here | ComfyUI-master/ComfyUI-master/comfy/ldm/cogvideo/__init__.py | ComfyUI-master/ComfyUI-master/comfy/ldm/minimax_music/__init__.py | ComfyUI-master/ComfyUI-master/comfy/ldm/mmaudio/vae/__init__.py | ComfyUI-master/ComfyUI-master/comfy/ldm/modules/diffusionmodules/__init__.py | ComfyUI-master/ComfyUI-master/comfy/ldm/modules/distributions/__init__.py | ComfyUI-master/ComfyUI-master/comfy/ldm/modules/encoders/__init__.py | ComfyUI-master/ComfyUI-master/comfy/ldm/supir/__init__.py | ComfyUI-master/ComfyUI-master/comfy_api_nodes/__init__.py | ComfyUI-master/ComfyUI-master/tests-unit/app_test/__init__.py | ComfyUI-master/ComfyUI-master/tests-unit/asset_export_test/__init__.py | ComfyUI-master/ComfyUI-master/tests-unit/assets_test/__init__.py | ComfyUI-master/ComfyUI-master/tests-unit/comfy_extras_test/__init__.py | ComfyUI-master/ComfyUI-master/tests-unit/folder_paths_test/__init__.py | ComfyUI-master/ComfyUI-master/tests-unit/jobs_cancel_test/__init__.py | ComfyUI-master/ComfyUI-master/tests-unit/prompt_server_test/__init__.py | ComfyUI-master/ComfyUI-master/tests-unit/security_test/__init__.py | ComfyUI-master/ComfyUI-master/tests/__init__.py | ComfyUI-master/ComfyUI-master/tests/inference/__init__.py | ComfyUI-master/ComfyUI-master/utils/__init__.py | freefield-main/infra/__init__.py
+02. SHA256=6913cb6d6b035933f5d877e36c326bad718dde201f1770ddf9a804dcd0bf6edc bytes=130080 copies=17
+    freefield-main/web/examples/asmr-whisper/input-image-full.jpg | freefield-main/web/examples/character-swap/input-image2-full.jpg | freefield-main/web/examples/face-swap/input-image2-full.jpg | freefield-main/web/examples/fashion-factory/input-image-full.jpg | freefield-main/web/examples/giallo/input-image-full.jpg | freefield-main/web/examples/glitter-sticker/input-image-full.jpg | freefield-main/web/examples/headshot/input-image-full.jpg | freefield-main/web/examples/idol/input-image-full.jpg | freefield-main/web/examples/j-magazine/input-image-full.jpg | freefield-main/web/examples/japanese-show/input-image-full.jpg | freefield-main/web/examples/micro-beasts/input-image-full.jpg | freefield-main/web/examples/morph/input-image-full.jpg | freefield-main/web/examples/paint-app/input-image-full.jpg | freefield-main/web/examples/render-3d/input-image-full.jpg | freefield-main/web/examples/roller-coaster/input-image-full.jpg | style-snap/input-image-full.jpg | victory-card/input-image-full.jpg
+03. SHA256=da844bf65bf544539dc72c8f40aa068db561948cf4b9d462b3b4c591e5503597 bytes=97068 copies=17
+    freefield-main/web/examples/asmr-whisper/input-image.jpg | freefield-main/web/examples/character-swap/input-image2.jpg | freefield-main/web/examples/face-swap/input-image2.jpg | freefield-main/web/examples/fashion-factory/input-image.jpg | freefield-main/web/examples/giallo/input-image.jpg | freefield-main/web/examples/glitter-sticker/input-image.jpg | freefield-main/web/examples/headshot/input-image.jpg | freefield-main/web/examples/idol/input-image.jpg | freefield-main/web/examples/j-magazine/input-image.jpg | freefield-main/web/examples/japanese-show/input-image.jpg | freefield-main/web/examples/micro-beasts/input-image.jpg | freefield-main/web/examples/morph/input-image.jpg | freefield-main/web/examples/paint-app/input-image.jpg | freefield-main/web/examples/render-3d/input-image.jpg | freefield-main/web/examples/roller-coaster/input-image.jpg | style-snap/input-image.jpg | victory-card/input-image.jpg
+04. SHA256=13e2139beeed309980003fed19aab9b623b517d6c4dfe8bcd876fc548dc6044b bytes=78751 copies=14
+    freefield-main/web/examples/asmr-host/input-image.jpg | freefield-main/web/examples/cafe-60s/input-image.jpg | freefield-main/web/examples/cloud-surf/input-image.jpg | freefield-main/web/examples/commercial-faces/input-image.jpg | freefield-main/web/examples/game-styles/input-image.jpg | freefield-main/web/examples/h3-photo/input-image.jpg | freefield-main/web/examples/j-poster/input-image.jpg | freefield-main/web/examples/mascot/input-image.jpg | freefield-main/web/examples/mukbang/input-image.jpg | freefield-main/web/examples/mural/input-image.jpg | freefield-main/web/examples/rap-video/input-image.jpg | freefield-main/web/examples/renaissance/input-image.jpg | freefield-main/web/examples/skin-enhancer/input-image.jpg | try-on/input-image.jpg
+05. SHA256=646d57ce6648e8b47f0a647c524a9c4d5e6f66cc3ed9229cad760ac97d6f2859 bytes=112534 copies=14
+    freefield-main/web/examples/asmr-host/input-image-full.jpg | freefield-main/web/examples/cafe-60s/input-image-full.jpg | freefield-main/web/examples/cloud-surf/input-image-full.jpg | freefield-main/web/examples/commercial-faces/input-image-full.jpg | freefield-main/web/examples/game-styles/input-image-full.jpg | freefield-main/web/examples/h3-photo/input-image-full.jpg | freefield-main/web/examples/j-poster/input-image-full.jpg | freefield-main/web/examples/mascot/input-image-full.jpg | freefield-main/web/examples/mukbang/input-image-full.jpg | freefield-main/web/examples/mural/input-image-full.jpg | freefield-main/web/examples/rap-video/input-image-full.jpg | freefield-main/web/examples/renaissance/input-image-full.jpg | freefield-main/web/examples/skin-enhancer/input-image-full.jpg | try-on/input-image-full.jpg
+06. SHA256=0ddfa006d5e9aa66180c87d5a8129c698c7e3b005a45de6d2430673c6302f833 bytes=31441 copies=13
+    freefield-main/web/examples/behind-the-scenes/input-image.jpg | freefield-main/web/examples/billboard/input-image.jpg | freefield-main/web/examples/character/input-reference.jpg | freefield-main/web/examples/edit/input-image.jpg | freefield-main/web/examples/face-swap/input-image.jpg | freefield-main/web/examples/outfit-swap/input-image.jpg | freefield-main/web/examples/relight/input-image.jpg | freefield-main/web/examples/speak/input-image.jpg | talking/input-portrait.jpg | transitions/input-first.jpg | upscale/input-image.jpg | video/input-image.jpg | z-image/card.jpg
+07. SHA256=58b174b46a228ceafb104dd8cf54dfa7a3697fdb34df13b4db551e95acb88ade bytes=94555 copies=13
+    freefield-main/web/examples/behind-the-scenes/input-image-full.jpg | freefield-main/web/examples/billboard/input-image-full.jpg | freefield-main/web/examples/character/input-reference-full.jpg | freefield-main/web/examples/edit/input-image-full.jpg | freefield-main/web/examples/face-swap/input-image-full.jpg | freefield-main/web/examples/outfit-swap/input-image-full.jpg | freefield-main/web/examples/relight/input-image-full.jpg | freefield-main/web/examples/speak/input-image-full.jpg | talking/input-portrait-full.jpg | transitions/input-first-full.jpg | upscale/input-image-full.jpg | video/input-image-full.jpg | z-image/full.jpg
+08. SHA256=00f15edee6af3e4dcf0d776b8c6ed1be8fdb7fa16b43d575c3ea8195bc591a72 bytes=21854 copies=12
+    freefield-main/web/examples/asmr-product/input-image.jpg | freefield-main/web/examples/fridge-ad/input-image.jpg | freefield-main/web/examples/giant-product/input-image.jpg | freefield-main/web/examples/kick-ad/input-image.jpg | freefield-main/web/examples/macro-product/input-image.jpg | freefield-main/web/examples/macro-scene/input-image.jpg | freefield-main/web/examples/magic-button/input-image.jpg | freefield-main/web/examples/packshot/input-image.jpg | freefield-main/web/examples/poster/input-image.jpg | truck-ad/input-image.jpg | ugc-shot/input-image.jpg | volcano-ad/input-image.jpg
+09. SHA256=d99581e1a51c86e9168c5c5005e64c6f471f6ef4c876f7e481add985f0c5d53d bytes= 50411 copies=12
+    freefield-main/web/examples/asmr-product/input-image-full.jpg | freefield-main/web/examples/fridge-ad/input-image-full.jpg | freefield-main/web/examples/giant-product/input-image-full.jpg | freefield-main/web/examples/kick-ad/input-image-full.jpg | freefield-main/web/examples/macro-product/input-image-full.jpg | freefield-main/web/examples/macro-scene/input-image-full.jpg | freefield-main/web/examples/magic-button/input-image-full.jpg | freefield-main/web/examples/packshot/input-image-full.jpg | freefield-main/web/examples/poster/input-image-full.jpg | truck-ad/input-image-full.jpg | ugc-shot/input-image-full.jpg | volcano-ad/input-image-full.jpg
+10. SHA256=0bf6f6bef22bcfcd1434baa6eabaf39cdc05e5125ad74f71cf875038d81377c8 bytes=47319 copies=6
+    freefield-main/web/examples/angles/input-image.jpg | freefield-main/web/examples/character-swap/input-image.jpg | freefield-main/web/examples/color-grade/input-image.jpg | freefield-main/web/examples/comic-book/input-image.jpg | freefield-main/web/examples/image-effects/input-image.jpg | freefield-main/web/examples/pixel-game/input-image.jpg
+11. SHA256=6a8867e7ae23e739522b3421c691a9975b60660c318a7e43c821790490002088 bytes=125565 copies=6
+    freefield-main/web/examples/angles/input-image-full.jpg | freefield-main/web/examples/character-swap/input-image-full.jpg | freefield-main/web/examples/color-grade/input-image-full.jpg | freefield-main/web/examples/comic-book/input-image-full.jpg | freefield-main/web/examples/image-effects/input-image-full.jpg | freefield-main/web/examples/pixel-game/input-image-full.jpg
+12. SHA256=32a7d5914f8509602598e205cae4ca52224a18059bf3accca26f6f4b321ba392 bytes=59363 copies=4
+    freefield-main/web/examples/smooth/input-clip.jpg | upscale-video/input-clip.jpg | vfx-clean-plate/input-clip.jpg | vfx-day-to-night/input-clip.jpg
+13. SHA256=566177b1d0112e0ee300981a62461c99d9b82cfebb1349128fb363af72e10d30 bytes=58456 copies=4
+    freefield-main/web/examples/bullet-time-white/input-image.jpg | freefield-main/web/examples/figure-3d/input-image.jpg | freefield-main/web/examples/outfit-swap/input-image2.jpg | freefield-main/web/examples/outfit-vending/input-image.jpg
+14. SHA256=95a2b4ee1d74ac29c88c690ac51d565d9229a710719e55fb5a52a817d3da43e2 bytes=80432 copies=4
+    freefield-main/web/examples/bullet-time-white/input-image-full.jpg | freefield-main/web/examples/figure-3d/input-image-full.jpg | freefield-main/web/examples/outfit-swap/input-image2-full.jpg | freefield-main/web/examples/outfit-vending/input-image-full.jpg
+15. SHA256=3d3212f618a95b5d9df4d5ac327fed83300c74e6a13c1423957372bdab52fc24 bytes=73491 copies=3
+    freefield-main/web/examples/breakdown/input-image-full.jpg | freefield-main/web/examples/effects/input-image-full.jpg | freefield-main/web/examples/graffiti-ad/input-image-full.jpg
+16. SHA256=526b0f9903d7b3be37233881769466e75f2100d4a5d5f90fa90b5b3e0df23e44 bytes=24664 copies=3
+    freefield-main/web/examples/breakdown/input-image.jpg | freefield-main/web/examples/effects/input-image.jpg | freefield-main/web/examples/graffiti-ad/input-image.jpg
+17. SHA256=55974f720f5d00b683038fc0a1452c0f60950cf628242033699ba4bd3196359c bytes=181530 copies=3
+    freefield-main/web/examples/burning-sunset/input-image-full.jpg | freefield-main/web/examples/expand-image/input-image-full.jpg | freefield-main/web/examples/shots/input-image-full.jpg
+18. SHA256=5f63d3289fabf5d03207acea893830bb6d88d549930f6cbe1ffcf4a1d2c092ab bytes=93437 copies=3
+    freefield-main/web/examples/character-3/input-photo1-full.jpg | freefield-main/web/examples/inpaint/input-image-full.jpg | freefield-main/web/examples/photodump/input-photo-full.jpg
+19. SHA256=a24f6ca1d69b721ac981d892e577c528129d28ad9f83836dd3efe4c8737a03b1 bytes=30958 copies=3
+    freefield-main/web/examples/character-3/input-photo1.jpg | freefield-main/web/examples/inpaint/input-image.jpg | freefield-main/web/examples/photodump/input-photo.jpg
+20. SHA256=cb9391a453d2cb89036afea2fe1ed122100df65edf05cf53079f55035bec8ff9 bytes=59400 copies=3
+    freefield-main/web/examples/burning-sunset/input-image.jpg | freefield-main/web/examples/expand-image/input-image.jpg | freefield-main/web/examples/shots/input-image.jpg
+21. SHA256=e2d64686d34e493982ef4d59637ac1b5565aa33d30e116781a73b482ca8e1381 bytes=67554 copies=3
+    freefield-main/web/examples/fashion-factory/input-image2.jpg | freefield-main/web/examples/outfit-shot/input-image2.jpg | try-on/input-image2.jpg
+22. SHA256=f5393a54af44d5f9ee1ca8f6e090b3bee4f204cde279537dd1cc3df3127b80e1 bytes=193697 copies=3
+    freefield-main/web/examples/fashion-factory/input-image2-full.jpg | freefield-main/web/examples/outfit-shot/input-image2-full.jpg | try-on/input-image2-full.jpg
+23. SHA256=05b66dcc2bf4220a88a33e6651fae88a5613bca40af6a60abda00461b696fe08 bytes=244006 copies=2
+    freefield-main/web/examples/camera-copy/input-image-full.jpg | freefield-main/web/examples/camera-moves/input-image-full.jpg
+24. SHA256=081a46c7cb9367e66a3813ef284e768a83a2e9bc632a8c3f9bd6846df18eb8e9 bytes=67432 copies=2
+    freefield-main/web/examples/morph/options/effect/renaissance/poster.jpg | freefield-main/web/examples/morph/poster.jpg
+25. SHA256=10b519ac003776d0d9531e1de8d9ac2c9e7f3feab8f823fedeff1d5c7d96eee6 bytes=80 copies=2
+    ComfyUI-master/ComfyUI-master/.ci/windows_amd_base_files/run_amd_gpu.bat | ComfyUI-master/ComfyUI-master/.ci/windows_intel_base_files/run_intel_gpu.bat
+26. SHA256=28fe17ff8a4f6d4f7dfebfddf19958b4dd87b9f79abe5beedd928299bb525734 bytes=156853 copies=2
+    freefield-main/web/examples/melting-doodle/input-image-full.jpg | zooms/input-image-full.jpg
+27. SHA256=32087a7eebaca19697095ff77d822745f7a016f41a911eb1b7d389bd12fe808c bytes=119477 copies=2
+    freefield-main/web/examples/melting-doodle/input-image.jpg | zooms/input-image.jpg
+28. SHA256=324c82ccc8addba1562a03313ce053b461ab24a44fb6115fa79ee1c5d676f0f0 bytes= 50471 copies=2
+    freefield-main/web/examples/product-shot/input-product-full.jpg | freefield-main/web/examples/remove-bg/input-image-full.jpg
+29. SHA256=32d40ff2ad3618d55c8d4d742577c83ea12db3cf7ecebeae68b48fabb0a1ada3 bytes=88574 copies=2
+    freefield-main/web/examples/camera-copy/input-image.jpg | freefield-main/web/examples/camera-moves/input-image.jpg
+30. SHA256=3ae3040d1e43ecfff4ea9daa7807fa345e28cf93ae5e34d29436d49bb11df772 bytes=2964 copies=2
+    ComfyUI-master/ComfyUI-master/comfy/ldm/mmaudio/vae/distributions.py | ComfyUI-master/ComfyUI-master/comfy/ldm/modules/distributions/distributions.py
+31. SHA256=5e883d2fa98c760e99b55bb6ee6169c85dadbe45e66f88327e9df9b203eb550b bytes=4561 copies=2
+    freefield-main/lab/assets/mask-face-a-jacket.png | freefield-main/web/examples/inpaint/input-mask-full.png
+32. SHA256=60abd9346af8044b1b091e2401df9dbdd9dc9508d92790513769a484e65740fb bytes=67067 copies=2
+    freefield-main/web/examples/ai-influencer/card.jpg | freefield-main/web/examples/ai-influencer/options/kind/an-ordinary-believable-person/card.jpg
+33. SHA256=60baef21313b76ce93abd847af4a4a24844ba3762c064b77d6d312555a393b7e bytes=43279 copies=2
+    freefield-main/web/examples/motion-transfer/input-motion.jpg | freefield-main/web/examples/recast/input-clip.jpg
+34. SHA256=7d02aea927c44cba7ac9ebe77e8b0be9b09e1a4a2e73cc500dfc9c247b7a715c bytes=23309 copies=2
+    freefield-main/web/examples/effects/options/effect/cakeify/poster.jpg | freefield-main/web/examples/effects/poster.jpg
+35. SHA256=9355f09a7d8f0917065f36c2e0de7bc50368104a8a89ac94fc1ace2080aae2a3 bytes=22181 copies=2
+    freefield-main/web/examples/product-shot/input-product.jpg | freefield-main/web/examples/remove-bg/input-image.jpg
+36. SHA256=aa8d3d5d02643686ff9051ff3dd850636e2b3e58922d362559a5c6e3b3a2137b bytes=21085 copies=2
+    freefield-main/web/examples/dub/input-clip.jpg | freefield-main/web/examples/speak/poster.jpg
+37. SHA256=ab38ec91e0f0abb911c056dc8b6893ffa505f3f83c9d4bdec81cb332147e07f3 bytes=49446 copies=2
+    freefield-main/web/examples/reshoot/input-clip.jpg | vfx-water/input-clip.jpg
+38. SHA256=b8aceada94ff1c8254492a97ba12bc33cccac91d097616a0481cb5956abe0f41 bytes=64904 copies=2
+    freefield-main/web/examples/mixed-media/options/style/anime/poster.jpg | freefield-main/web/examples/mixed-media/poster.jpg
+39. SHA256=ccda4809688825038791598692954daf755c59aa6ddbd780f0deacb9b032f556 bytes=80591 copies=2
+    freefield-main/web/examples/motion-transfer/input-character-full.jpg | freefield-main/web/examples/recast/input-character-full.jpg
+40. SHA256=dd7e624d644955a63d3014798c591fc87702875974eee01c6744a296b5091c3b bytes=58507 copies=2
+    freefield-main/web/examples/motion-transfer/input-character.jpg | freefield-main/web/examples/recast/input-character.jpg
+
+6. LIMITS AND FOLLOW-UP
+Exact-byte hashing detects identical contents, not functional equivalence, malware or ownership.
+Different bytes can implement similar behavior; source/module review informs the decisions above.
+Generated media rights, upstream authenticity and model-weight licenses still need separate review.
+This audit did not execute imported programs, install packages or exercise GPU inference.
+No irreversible history rewrite, force push, file deletion or silent deduplication was used.

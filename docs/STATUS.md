@@ -1,3 +1,12 @@
+> **Current status — 2026-11-17:** The repository is now organized around
+> [six combined-product features](../features/README.md). The earlier plans and
+> historical evidence remain. Imports live in [AnalyseFuture](../AnalyseFuture/README.md);
+> no owned generation or English tutor service is implemented here. See
+> [the audit](../AnalyseFuture/REPOSITORY_AUDIT.txt) and
+> [current local test outcomes](../AnalyseFuture/TEST_AND_VALIDATION_REPORT.txt).
+> The dated material below is preserved history and is superseded by this note
+> where it describes the current repository or current validation status.
+
 # Verified repository status and first tasks
 
 **Date:** 2026-11-13. **Branch:** main. **Scope:** architecture and developer handoff, NOT a finished AI generation service.

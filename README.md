@@ -1,70 +1,72 @@
-# VideoGen — Open AI Creative Studio
+# VideoGen — Creative Studio + English AI Friend
 
-> **Status: project charter and developer handoff (documentation-first).** This repository describes the product to build; it **does not** yet contain a proven working generation service, trained model, benchmark results, or deployed product.
+One proposed product for creating images, videos, voices and editable movies,
+and practising English with a friendly speaking avatar. The original studio
+vision remains; the English companion is now a first-class feature.
 
-## Our mission
+**Current state:** product plans, engineering handoffs and CPU-tested third-party
+references. This checkout has no owned production web/API stack, implemented
+English tutor or verified GPU generation. Feature folders describe responsibilities,
+not completed applications. Historical evidence from another repository is
+labeled separately in [PROJECT_MEMORY.md](PROJECT_MEMORY.md).
 
-Build an **original, commercially viable AI creative studio** competitive with the user experience of Higgsfield, Runway, Google Flow, and Kling: generate and edit **images, videos, voices, music, sound effects, and eventually long-form movies** in one cohesive workspace. Our differentiation: character continuity across shots, AI-assisted directing, scene-level revision, camera/motion workflows, model-choice transparency, editable projects, and low-cost GPU operations.
+Read or download the plain-text plans:
 
-**Non-negotiables:** own our application's code and identity; reuse maintained open-source tooling; do not copy proprietary models/services; check licenses for *code and weights*; minimize wasteful Codex work; verify output on real GPU rather than claiming success from code review. Core engineering via Codex Cloud; real inference initially on the owner's Google Colab GPU (and optionally Kaggle, where permitted). Dedicated GPU workers are a future deployment option.
+- [Combined product idea — PROJECT_IDEA.txt](PROJECT_IDEA.txt)
+- [Detailed English AI friend idea](features/english-speaking-friend/PROJECT_IDEA.txt)
+- [Full future vision and multi-year roadmap](AnalyseFuture/PROJECT_VISION_AND_FUTURE_ROADMAP.txt)
 
-## New here? Read these in order
+## Find a feature
 
-1. [PROJECT_CHARTER.md](docs/PROJECT_CHARTER.md) — business objective, audience, benchmark, product principles.
-2. [ARCHITECTURE.md](docs/ARCHITECTURE.md) — owned monorepo, model adapters, GPU execution, persistence, API and boundaries.
-3. [FEATURE_REGISTRY.md](docs/FEATURE_REGISTRY.md) — complete target feature inventory and maturity labels.
-4. [OPEN_SOURCE_STACK.md](docs/OPEN_SOURCE_STACK.md) — candidate repos and **reuse/build decisions**.
-5. [ROADMAP.md](docs/ROADMAP.md) — milestones, sequencing, measurable acceptance criteria.
-6. [GPU_COLAB.md](docs/GPU_COLAB.md) — Colab constraints, proposed notebook workflow and resource discipline.
-7. [LICENSE_SECURITY.md](docs/LICENSE_SECURITY.md) — code/weights rights, security/privacy and operating constraints.
-8. [BENCHMARKS.md](docs/BENCHMARKS.md) — fair comparisons and quality/cost measurement.
-9. [DECISIONS.md](docs/DECISIONS.md) — decisions vs. open questions; avoid assumed claims.
-10. [AGENTS.md](AGENTS.md) and [CONTRIBUTING.md](CONTRIBUTING.md) — Codex and human contributor instructions.
+| Feature folder | Intended outcome |
+|---|---|
+| [Image studio](features/image-studio/README.md) | Generate and edit images; prepare reference sheets |
+| [Video studio](features/video-studio/README.md) | Create and revise short clips with supported controls |
+| [Audio studio](features/audio-studio/README.md) | Speech, captions, music and sound |
+| [Movie studio](features/movie-studio/README.md) | Assemble versioned scenes, shots and takes |
+| [Character continuity](features/character-continuity/README.md) | Keep consented characters and environments reusable |
+| [English-speaking friend](features/english-speaking-friend/README.md) | Practise with an AI avatar; get gentle English corrections and multilingual help |
 
-The [documentation index](docs/README.md) connects every design, operation, and reference. No access to the original planning conversation is needed.
+[The feature map](features/README.md) explains shared services and development
+order. Creative rendering uses asynchronous jobs; conversation needs a separate
+interactive speech path. Private learning recordings do not become creative
+assets without explicit consent. Start with English/Bangla and a simple licensed
+avatar; universal languages and photorealistic live video are research goals.
 
-## High-level design
+## Repository organization and preservation
 
-```text
-Own Web App (Next.js/React, original product UX)
-        |
-Own API (FastAPI, auth, jobs, projects, assets, quotas)
-        |
-Orchestrator / queues / model registry / cost & quality policies
-        |
-ComfyUI adapter + optional optimized inference adapters (LightX2V etc.)
-        |
-Images (FLUX/Qwen) | Video (Wan/LTX) | Audio (Kokoro/ACE-Step)
-        |
-GPU worker (Colab notebook during research; dedicated workers in production)
-        |
-Assets + immutable generation metadata + FFmpeg movie assembly
+- `features/`: one guide per product feature, with status and acceptance criteria.
+- `docs/`: shared architecture, roadmap, feature registry, licensing and history.
+- `scripts/`, `notebooks/colab/`, `.github/`: shared validation, hardware inspection and CI.
+- [AnalyseFuture](AnalyseFuture/README.md): imported ComfyUI/FreeField sources, examples and recovery reports.
+
+All 2,131 bulk-import files are preserved byte-for-byte. Nothing was deduplicated
+or silently discarded. See [the inventory and findings](docs/REPOSITORY_REORGANIZATION.md)
+and [relocation manifest](AnalyseFuture/RELOCATION_MANIFEST.json). The
+[previous README](AnalyseFuture/project-history/README.before-reorganization.txt)
+is also preserved. Repository cleanup does not establish account security.
+
+## Develop and verify
+
+Read [AGENTS.md](AGENTS.md), [documentation index](docs/README.md),
+[build/run instructions](docs/BUILD_RUN.md), [roadmap](docs/ROADMAP.md),
+[feature registry](docs/FEATURE_REGISTRY.md) and [current status](docs/STATUS.md).
+Root checks use Python's standard library:
+
+```sh
+python scripts/check_docs.py
+python scripts/check_structure.py
+python -m py_compile scripts/gpu_preflight.py scripts/check_docs.py scripts/check_structure.py
 ```
 
-**Repository strategy:** one owned *application monorepo*, multiple external engines installed/versioned as dependencies or isolated services; do not indiscriminately vendor entire upstream repos or commit model weights. FreeField is a **workflow/reference source**, not a second mandatory competing backend.
+Introduce owned application code through bounded, tested milestones. Prefer
+maintained, pinned integrations over copying model repositories. Review source,
+model, voice and asset rights separately. No paid APIs, model downloads, training
+or GPU rental without owner budget approval. CPU mocks are separate from real
+hardware and media validation.
 
-## What exists today
-
-- Product vision, architecture proposal, candidate repository map, security/licensing checklist, staged backlog, contributor instructions.
-- Actual model integration, UI, APIs, Colab inference and tests are **planned, not implemented** until proven in code and hardware.
-- Any upstream project feature counts, memory needs, model versions or marketing claims are **candidates requiring verification**, not accepted benchmarks.
-
-## First work item
-
-See [Milestone M0](docs/ROADMAP.md): audit pinned upstream sources, verify licenses and GPU constraints, scaffold an ownable repo with a minimal FastAPI/Next.js integration and tests, and then implement one reproducible generation path. Define CPU-mock tests for Codex Cloud and mark GPU-dependent tests explicitly.
-
-## Guiding rule
-
-**Reuse foundations. Build differentiation. Benchmark everything.** Read [REUSE_FIRST.md](docs/REUSE_FIRST.md) before adding a feature.
-
----
-
-Public repo: https://github.com/anneshabiswaas22-collab/video-gen  
-Project documentation date: 2026-11-13. External project links, model releases and license details must be rechecked at integration time.
-
-## Start contributing
-[Read current status](docs/STATUS.md) · [First engineering task for Codex](docs/CODEX_START_HERE.md) · [Open development issues](https://github.com/anneshabiswaas22-collab/video-gen/issues) · [Colab preflight notebook](notebooks/colab/00_gpu_preflight.ipynb).
-
-## Complete repository study list
-
-[ALL_RECOMMENDED_REPOSITORIES.txt](docs/ALL_RECOMMENDED_REPOSITORIES.txt) lists **54 earlier recommended public repositories**, grouped by studio platforms, video models, image/audio tools, optimization, editing, and infrastructure. These are study candidates, not automatically approved dependencies; check each project's current official release and license before adoption.
+Current repository: [sarfiaroui-oss/video-gen](https://github.com/sarfiaroui-oss/video-gen).
+Older `anneshabiswaas22-collab/video-gen` links remain historical provenance,
+not proof its unmerged application code exists here. The preserved
+[54-source catalog](docs/ALL_RECOMMENDED_REPOSITORIES.txt) remains research,
+not an installation list. Project plans do not imply frontier-model parity.

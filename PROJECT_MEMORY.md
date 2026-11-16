@@ -1,3 +1,13 @@
+> **Current repository update — 2026-11-17 (Asia/Kolkata):** The working origin is
+> `sarfiaroui-oss/video-gen`. The owner explicitly combined the creative studio
+> with an English-speaking AI friend. See [feature folders](features/README.md),
+> [combined idea](PROJECT_IDEA.txt), and [recovery report](docs/REPOSITORY_REORGANIZATION.md).
+> All 2,131 files introduced at `f34553a` are preserved under `AnalyseFuture/`.
+> This checkout contains no owned web/API/tutor implementation. The PR #8 and CI
+> evidence below belongs to the historical source repository; it is preserved,
+> not claimed as current code. Current validation lives in
+> [TEST_AND_VALIDATION_REPORT.txt](AnalyseFuture/TEST_AND_VALIDATION_REPORT.txt).
+
 # VideoGen — CANONICAL PROJECT MEMORY / START HERE
 
 **Last comprehensive handoff snapshot:** 2026-11-16 (Asia/Kolkata).  

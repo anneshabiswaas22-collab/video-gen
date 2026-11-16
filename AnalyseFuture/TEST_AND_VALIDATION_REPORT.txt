@@ -1,0 +1,81 @@
+TEST AND VALIDATION REPORT — 17 November 2026
+
+Environment: Linux CPU, Node24.22.1, npm11.9.0, Python3.12.14.
+Starting baseline: f34553a3d2c2d68c15f4644520e65816f0d516f3.
+Pre-move onboarding ran documentation checks, all50 reference Node tests,
+manifest/typechecking, importer/gateway tests and HTTP requests successfully.
+Post-move reference validation used AnalyseFuture/upstream/freefield-main.
+
+PASSED AFTER RELOCATION
+- npm ls --all: installed dependency tree resolves. Non-host-platform TypeScript
+  binaries are optional and absent as expected; Linux x64 binary is installed.
+- npm run validate:120 apps,119 ready/1 draft,0 errors,0 warnings.
+- npm run typecheck: TypeScript exits0, no diagnostics.
+- npm test:50 executed,50 passed,0 failed/cancelled/skipped/todo.
+- Regenerated Python venv launchers at new path; pip check: no broken requirements.
+- .venv/bin/python test/gateway_test.py: fake proxy link rewriting, event stream
+  forwarding and auth assertions completed (gateway relink ok).
+- .venv/bin/python test/import_workflow_test.py: all assertions passed, including
+  input/model/output preservation, UI conversion and CLI overwrite/id checks.
+- New-path server started on loopback port3001. GET / HTML200; /api/apps200 and120
+  apps; /api/history200 JSON; /api/gpu200 configured:false; first catalog app
+  figure-3d workflow download200 with10 nodes. No live inference attempted.
+- Git connectivity check and read/fetch of current origin/main succeeded.
+
+DIAGNOSED INITIAL STARTUP FAILURE
+A restart attempt on port3000 returned EADDRINUSE. A previous onboarding listener
+already occupied it. No unrelated process was killed. Starting the relocated
+server on free port3001 resolved the conflict and all functional requests above
+passed. This is an instance port conflict, not an application regression.
+
+ROOT/DOCUMENTATION/PRESERVATION AND DELIVERY CHECKS
+These are completed and recorded below before commit/push. See final evidence
+section for actual results; do not infer a pass merely from this command list.
+Commands: python scripts/check_docs.py; python scripts/check_structure.py;
+python -m py_compile scripts/gpu_preflight.py scripts/check_docs.py scripts/check_structure.py;
+git diff --check; staged original-blob/mode verification; secret-format review.
+
+NOT RUN / NOT APPLICABLE
+- Owned studio/tutor tests, build/deploy or DB migrations: no owned implementation
+  or such runnable scripts exist on current refs. Feature guides are planning.
+- Real ComfyUI startup/core unit suite/custom nodes/model compatibility/GPU outputs:
+  not required for a byte-preserving move; dependencies/hardware not prepared.
+- ASR/TTS/tutor behavior, learning outcomes, avatar rendering and new languages:
+  no implementation, teacher pilot, selected model or approved inference budget.
+- Paid providers, massive model downloads, GPU renting/training: not authorized.
+- Dependency vulnerability certification or formal malware audit: not performed.
+- Browser visual/accessibility end-to-end run: not executed; HTTP smoke only.
+- GitHub-hosted Actions and fresh-task restore/publication: separate observations,
+  not established by local checks or draft saves.
+- GitHub API permission/protection metadata: request returned Forbidden; Git
+  supports read/fetch and the ordinary push enforces server restrictions.
+
+Inherited test info: Russian catalog music.credits falls back to English; its
+translation test passes and logs the missing item. No assertions were disabled.
+No archived source, workflow, lockfile or application API changed to make tests pass.
+
+FINAL LOCAL EVIDENCE
+- python scripts/check_docs.py: PASSED; all required17 documents and scanned
+  relative Markdown links resolve, including new feature/recovery entrypoints.
+- python scripts/check_structure.py: PASSED; all6 feature guides and14 requested
+  reports exist; all2131 original archived blobs match recorded bytes/hash/identity.
+- Validator negative check: PASSED; a temporary manifest with a deliberately
+  wrong content hash is rejected. No archived bytes were modified for the test.
+- Root Python compilation: PASSED for all3 scripts.
+- Staged baseline comparison: PASSED;2131 original blob/modes at new locations,
+ 47 prior paths retained,11 approved original updates,28 new files,2206 total.
+- Original README snapshot matches original Git blob. Original content of all9
+  supplemented historical guides remains present in full.
+- Selected staged owned/recovery credential-pattern review: PASSED, no matches.
+  Imported bytes were scanned separately; neither scan is exhaustive.
+- Full staged diff --check reports one inherited trailing-whitespace line in
+  README.before-reorganization.txt (original Markdown hard-break spaces). It is
+  intentionally preserved byte-for-byte. Scoped diff --check excluding only
+  that historical snapshot PASSED; no new active-file whitespace errors.
+- Available original Python1071 and JSON/notebook427 files parsed statically
+  without failures; not a claim of semantic correctness or runtime compatibility.
+
+Environment draft: cleared obsolete install_script (no default archive install);
+saved start_skill with current validation paths and explicitly opt-in reference
+commands. Save succeeded; owner review/save and environment publication remain
+separate. No fresh-task restore or hosted CI result has been asserted.

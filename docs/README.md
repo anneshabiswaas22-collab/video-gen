@@ -37,3 +37,16 @@ Review model versions, upstream commit SHAs, licenses, hosted API pricing and GP
 ## Full historical source repository catalog
 
 - [ALL_RECOMMENDED_REPOSITORIES.txt](ALL_RECOMMENDED_REPOSITORIES.txt) — 54 previously discussed GitHub repositories and practical use cases, with research/compatibility cautions.
+
+## Current combined product and repository recovery
+
+- [Feature-oriented product entry points](../features/README.md)
+- [Combined product idea](../PROJECT_IDEA.txt)
+- [Detailed English-speaking AI friend idea](../features/english-speaking-friend/PROJECT_IDEA.txt)
+- [Repository analysis and path changes](REPOSITORY_REORGANIZATION.md)
+- [Recovery reports and preserved imports](../AnalyseFuture/README.md)
+- [Complete file inventory](../AnalyseFuture/COMPLETE_FILE_INVENTORY.txt)
+- [Feature inventory](../AnalyseFuture/FEATURE_INVENTORY.txt)
+- [Security findings and review limits](../AnalyseFuture/SECURITY_AUDIT.txt)
+- [Validation outcomes](../AnalyseFuture/TEST_AND_VALIDATION_REPORT.txt)
+- [Future product vision and roadmap](../AnalyseFuture/PROJECT_VISION_AND_FUTURE_ROADMAP.txt)

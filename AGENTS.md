@@ -48,3 +48,16 @@ self-contained next-session prompt. **Never rely on unavailable chat messages** 
 understand the project. Refresh live GitHub issues, commits and CI because recorded
 snapshots can be stale. After EVERY meaningful PR or milestone, update this
 version-controlled handoff and the verification/status ledger with facts and exact links.
+
+## Current repository and feature boundaries (2026-11-17)
+
+The owner explicitly combined VideoGen with the English-speaking AI friend.
+Read `features/README.md`, `PROJECT_IDEA.txt` and
+`AnalyseFuture/NEXT_DEVELOPER_INSTRUCTIONS.txt` before new implementation.
+The separate channel/assets mentioned above remain out of scope; the new tutor
+feature is in scope here. Historical PR/CI links do not establish current code.
+`AnalyseFuture/upstream/` and `AnalyseFuture/imported-examples/` are preserved
+references, excluded from the active product. Do not automatically execute or
+promote them, or change their bytes without an explicit reviewed migration.
+Run `python scripts/check_structure.py` along with the documentation check.
+Use the existing isolated checkout; do not create worktrees unless requested.
