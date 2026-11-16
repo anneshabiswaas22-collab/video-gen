@@ -1,6 +1,6 @@
 # VideoGen — Open AI Creative Studio
 
-> **Status: project charter and developer handoff (documentation-first).** This repository describes the product to build; it **does not** yet contain a proven working generation service, trained model, benchmark results, or deployed product.
+> **Status:** `main` started as documentation-first. The `feat/m0-2-mock-studio` branch adds a CPU-only, local mock studio (pending review/CI), **not** genuine AI inference, a deployed product or GPU benchmarks.
 
 ## Our mission
 
@@ -46,8 +46,14 @@ Assets + immutable generation metadata + FFmpeg movie assembly
 ## What exists today
 
 - Product vision, architecture proposal, candidate repository map, security/licensing checklist, staged backlog, contributor instructions.
-- Actual model integration, UI, APIs, Colab inference and tests are **planned, not implemented** until proven in code and hardware.
+- The M0.2 feature branch adds a mock API/worker and original web UI; verify its PR tests before treating it as merged. Genuine model integration, Colab inference and GPU benchmarks remain **unimplemented**.
 - Any upstream project feature counts, memory needs, model versions or marketing claims are **candidates requiring verification**, not accepted benchmarks.
+
+## Local mock prototype (feature branch)
+
+See [M0.2 build/run](docs/BUILD_RUN.md) for API, web, and CPU-only mock job
+commands, plus [two-repository research](docs/TWO_REPO_DEEP_STUDY.md).
+No model weights or paid GPU are needed for this development path.
 
 ## First work item
 

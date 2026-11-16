@@ -1,5 +1,25 @@
 # Verified repository status and first tasks
 
+## Verified M0.2 CPU CI — 2026-11-15
+
+- Pull request: [#8](https://github.com/anneshabiswaas22-collab/video-gen/pull/8).
+- Full application workflow [run 43741158859](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741158859) at commit `70dba92d1f8fc32b4f4064e0f919976566fa66fc`: **PASSED** Python dependency install and pip check, Ruff lint, pytest (7 tests), CPU smoke, JavaScript client against **real local FastAPI**, pip-audit; **PASSED** Next web typecheck, lint, Vitest, production build and npm production dependency audit.
+- Documentation integrity PR workflow [run 43741109382](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741109382): **PASSED**.
+- Worker contract tests use `httpx.MockTransport`; no running ComfyUI.
+- **NOT RUN:** actual owner Colab GPU/VRAM, genuine AI PNG/MP4/WAV, throughput benchmarks, fresh-clone setup on the owner's machine, production multitenant authentication/isolation.
+- This handoff evidence establishes a working CPU-only CI vertical slice, **not** a publicly deployable or AI-generating product. No release/merge has occurred.
+
+## M0.2 feature branch activity — 2026-11-15
+
+Branch `feat/m0-2-mock-studio` introduces original Next.js UI, FastAPI local-only
+API, durable SQLite project/job/artifact metadata, CPU worker, typed contracts,
+ComfyUI HTTP boundary and initial CI/tests. **This is a feature branch, not a merged
+release.** See [local setup](BUILD_RUN.md), [implementation checklist](M0_2_CHECKLIST.md),
+[two-repository study](TWO_REPO_DEEP_STUDY.md), and GitHub PR checks for current
+execution evidence. It runs a synthetic plain-text mock receipt, NOT AI inference.
+
+
+
 **Date:** 2026-11-13. **Branch:** main. **Scope:** architecture and developer handoff, NOT a finished AI generation service.
 
 ## Completed in this handoff
