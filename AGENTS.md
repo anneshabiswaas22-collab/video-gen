@@ -39,3 +39,12 @@ A feature is NOT done because code compiles, the UI renders, a README mentions i
 - Merge complete FreeField, ComfyUI and model repos into this Git tree.
 - Treat disputed/unverified product version names, VRAM numbers or model releases as confirmed.
 - Touch unrelated repositories (including the separate English-learning channel) without explicit scope.
+
+## Essential long-chat continuity — READ THIS BEFORE NEW WORK
+The canonical self-contained project handoff is [PROJECT_MEMORY.md](PROJECT_MEMORY.md).
+Its [memory bundle](docs/memory/README.md) preserves requirements, historical decisions,
+upstream research links, GitHub branch/PR/CI evidence, architecture diagrams and a
+self-contained next-session prompt. **Never rely on unavailable chat messages** to
+understand the project. Refresh live GitHub issues, commits and CI because recorded
+snapshots can be stale. After EVERY meaningful PR or milestone, update this
+version-controlled handoff and the verification/status ledger with facts and exact links.
