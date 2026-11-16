@@ -79,3 +79,8 @@ Environment draft: cleared obsolete install_script (no default archive install);
 saved start_skill with current validation paths and explicitly opt-in reference
 commands. Save succeeded; owner review/save and environment publication remain
 separate. No fresh-task restore or hosted CI result has been asserted.
+
+GITHUB DELIVERY OBSERVATION
+Ordinary direct-main push succeeded for implementation commit 8e421f19060b5b086beb71b16d5739cd5e2ff553.
+Remote refs/heads/main read-back matched exactly and git status was clean.
+No PR or force push was used. Hosted Actions results remain unobserved.

@@ -41,3 +41,11 @@ The complete inventory includes every original path and a final authored-file li
 Reusable environment draft: obsolete automatic reference install cleared; current
 start instructions saved, with no default archived-service startup. Requires
 owner review/save and publication in environment settings to activate a snapshot.
+
+VERIFIED DELIVERY
+Implementation commit: 8e421f19060b5b086beb71b16d5739cd5e2ff553
+Ordinary git push origin HEAD:refs/heads/main succeeded. Remote git ls-remote
+read-back returned that exact SHA for main. No PR, force push or protection
+bypass was used. The working tree was clean after delivery. This follow-up
+record documents that observed delivery; its own commit hash is reported in
+the final user response rather than embedded recursively in this file.

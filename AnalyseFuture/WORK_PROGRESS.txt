@@ -36,3 +36,12 @@ passed; root scripts compile. Historical README whitespace is retained as eviden
 and is the only full-diff whitespace warning. Environment draft paths are saved
 without automatic archive installation/startup. Remaining delivery operations:
 ordinary commit/push and remote read-back; final chat supplies their actual outcome.
+
+DELIVERY COMPLETED
+Implementation commit 8e421f19060b5b086beb71b16d5739cd5e2ff553 was pushed directly to main
+and verified by remote read-back. All local validation above completed. The
+following documentation-only delivery record is also committed/pushed normally;
+see final chat/git log for its SHA. No implementation directories remain pending
+for this preservation/reorganization scope. Product implementation, account
+security review, real hardware/teacher tests and environment publication remain
+separate next steps, not claims completed by recovery.
