@@ -21,6 +21,6 @@ The friend may use a licensed avatar prepared through the creative studio, and a
 
 ## Development order and evidence
 
-Complete the shared M0 audit and owned CPU mock path first. Develop one measurable end-to-end feature at a time, following the [roadmap](../docs/ROADMAP.md) and [test plan](../docs/TEST_PLAN.md). The learning feature can begin with text and push-to-talk interaction before photorealistic video. It does not depend on completing long-form movie generation.
+Complete the shared M0 audit and owned CPU mock path first. Develop one measurable end-to-end feature at a time, following the [roadmap](../docs/product/ROADMAP.md) and [test plan](../docs/quality/TEST_PLAN.md). The learning feature can begin with text and push-to-talk interaction before photorealistic video. It does not depend on completing long-form movie generation.
 
 Every capability needs its own issue, pinned dependency and license review, runnable checks, limitations and evidence before its status changes. Candidate tools in preserved imports are research references, not automatically approved dependencies. No paid APIs, model downloads or GPU spending are authorized by this folder structure.

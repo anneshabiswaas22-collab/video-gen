@@ -1,3 +1,7 @@
+> **Functional reorganization — 2026-11-17:** Start with [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md).
+> Every starting tracked file is assigned in [FILE_PLACEMENT.json](docs/repository/FILE_PLACEMENT.json).
+> This pass only sorts and repairs references; **no tests were run**, as requested.
+
 # VideoGen — Creative Studio + English AI Friend
 
 One proposed product for creating images, videos, voices and editable movies,
@@ -8,13 +12,13 @@ vision remains; the English companion is now a first-class feature.
 references. This checkout has no owned production web/API stack, implemented
 English tutor or verified GPU generation. Feature folders describe responsibilities,
 not completed applications. Historical evidence from another repository is
-labeled separately in [PROJECT_MEMORY.md](PROJECT_MEMORY.md).
+labeled separately in [docs/memory/PROJECT_MEMORY.md](docs/memory/PROJECT_MEMORY.md).
 
 Read or download the plain-text plans:
 
-- [Combined product idea — PROJECT_IDEA.txt](PROJECT_IDEA.txt)
+- [Combined product idea — docs/product/PROJECT_IDEA.txt](docs/product/PROJECT_IDEA.txt)
 - [Detailed English AI friend idea](features/english-speaking-friend/PROJECT_IDEA.txt)
-- [Full future vision and multi-year roadmap](AnalyseFuture/PROJECT_VISION_AND_FUTURE_ROADMAP.txt)
+- [Full future vision and multi-year roadmap](docs/product/FUTURE_ROADMAP.txt)
 
 ## Find a feature
 
@@ -41,22 +45,22 @@ avatar; universal languages and photorealistic live video are research goals.
 - [AnalyseFuture](AnalyseFuture/README.md): imported ComfyUI/FreeField sources, examples and recovery reports.
 
 All 2,131 bulk-import files are preserved byte-for-byte. Nothing was deduplicated
-or silently discarded. See [the inventory and findings](docs/REPOSITORY_REORGANIZATION.md)
-and [relocation manifest](AnalyseFuture/RELOCATION_MANIFEST.json). The
+or silently discarded. See [the inventory and findings](docs/repository/REPOSITORY_REORGANIZATION.md)
+and [relocation manifest](AnalyseFuture/repository-inventory/RELOCATION_MANIFEST.json). The
 [previous README](AnalyseFuture/project-history/README.before-reorganization.txt)
 is also preserved. Repository cleanup does not establish account security.
 
 ## Develop and verify
 
 Read [AGENTS.md](AGENTS.md), [documentation index](docs/README.md),
-[build/run instructions](docs/BUILD_RUN.md), [roadmap](docs/ROADMAP.md),
-[feature registry](docs/FEATURE_REGISTRY.md) and [current status](docs/STATUS.md).
+[build/run instructions](docs/operations/BUILD_RUN.md), [roadmap](docs/product/ROADMAP.md),
+[feature registry](docs/product/FEATURE_REGISTRY.md) and [current status](docs/development/STATUS.md).
 Root checks use Python's standard library:
 
 ```sh
-python scripts/check_docs.py
-python scripts/check_structure.py
-python -m py_compile scripts/gpu_preflight.py scripts/check_docs.py scripts/check_structure.py
+python scripts/maintenance/check_docs.py
+python scripts/maintenance/check_structure.py
+python -m py_compile scripts/hardware/gpu_preflight.py scripts/maintenance/check_docs.py scripts/maintenance/check_structure.py
 ```
 
 Introduce owned application code through bounded, tested milestones. Prefer
@@ -68,5 +72,5 @@ hardware and media validation.
 Current repository: [sarfiaroui-oss/video-gen](https://github.com/sarfiaroui-oss/video-gen).
 Older `anneshabiswaas22-collab/video-gen` links remain historical provenance,
 not proof its unmerged application code exists here. The preserved
-[54-source catalog](docs/ALL_RECOMMENDED_REPOSITORIES.txt) remains research,
+[54-source catalog](docs/research/ALL_RECOMMENDED_REPOSITORIES.txt) remains research,
 not an installation list. Project plans do not imply frontier-model parity.

@@ -173,7 +173,7 @@ erDiagram
 
 ```mermaid
 flowchart TD
-    START["New ChatGPT/Codex session"] --> MEMORY["Read PROJECT_MEMORY.md"]
+    START["New ChatGPT/Codex session"] --> MEMORY["Read docs/memory/PROJECT_MEMORY.md"]
     MEMORY --> GUIDES["Read docs/memory index + AGENTS.md"]
     GUIDES --> LIVE["Check live GitHub main/PRs/issues/CI"]
     LIVE --> TASK["Pick smallest unblocked issue"]

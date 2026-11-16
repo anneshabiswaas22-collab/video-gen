@@ -1,9 +1,9 @@
 # Contributing to VideoGen
 
-Thanks for helping build a creator-first AI generation studio. Start with [README](README.md), [architecture](docs/ARCHITECTURE.md), [roadmap](docs/ROADMAP.md) and [AGENTS.md](AGENTS.md). This repository currently contains a *plan*, not a working AI service.
+Thanks for helping build a creator-first AI generation studio. Start with [README](README.md), [architecture](docs/architecture/ARCHITECTURE.md), [roadmap](docs/product/ROADMAP.md) and [AGENTS.md](AGENTS.md). This repository currently contains a *plan*, not a working AI service.
 
 ## First contribution path
-1. Read the active milestone and [feature registry](docs/FEATURE_REGISTRY.md); claim one small, clearly bounded issue.
+1. Read the active milestone and [feature registry](docs/product/FEATURE_REGISTRY.md); claim one small, clearly bounded issue.
 2. Create a topic branch from main and open a pull request. Do not push huge external model repositories or binary checkpoints.
 3. Before writing new code, search for maintained libraries/workflows that already do the task. Document links, licenses, maintenance, implementation cost and VRAM demands.
 4. Add or update tests and example data. Distinguish mocked CPU tests from real GPU tests.

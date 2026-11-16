@@ -13,9 +13,9 @@
 - [M0.2 commit](https://github.com/anneshabiswaas22-collab/video-gen/commit/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37)
 - [Verified application CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390592)
 - [Verified docs CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390571)
-- [Existing initial project roadmap](../ROADMAP.md), [status](../STATUS.md), [architecture](../ARCHITECTURE.md), [feature registry](../FEATURE_REGISTRY.md), [reuse-first](../REUSE_FIRST.md), [security/license](../LICENSE_SECURITY.md), [Colab research plan](../GPU_COLAB.md), [cost plan](../COST_PLAN.md), [movie studio](../MOVIE_STUDIO.md), [test plan](../TEST_PLAN.md), [decisions](../DECISIONS.md), [data model](../DATA_MODEL.md), [API contract](../API_CONTRACT.md), [complete history](../PROJECT_HISTORY.md).
+- [Existing initial project roadmap](../product/ROADMAP.md), [status](../development/STATUS.md), [architecture](../architecture/ARCHITECTURE.md), [feature registry](../product/FEATURE_REGISTRY.md), [reuse-first](../research/REUSE_FIRST.md), [security/license](../security/LICENSE_SECURITY.md), [Colab research plan](../operations/GPU_COLAB.md), [cost plan](../operations/COST_PLAN.md), [movie studio](../../features/movie-studio/DESIGN.md), [test plan](../quality/TEST_PLAN.md), [decisions](../architecture/DECISIONS.md), [data model](../architecture/DATA_MODEL.md), [API contract](../architecture/API_CONTRACT.md), [complete history](PROJECT_HISTORY.md).
 - **Primary deep-study research and triage:** [PR #8 report](https://github.com/anneshabiswaas22-collab/video-gen/blob/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37/docs/TWO_REPO_DEEP_STUDY.md). See source-level links and code/license analysis there.
-- [Historical 54-repository study catalog](../ALL_RECOMMENDED_REPOSITORIES.txt) — full prior list retained as-is.
+- [Historical 54-repository study catalog](../research/ALL_RECOMMENDED_REPOSITORIES.txt) — full prior list retained as-is.
 
 ## 2. Exactly two deeply studied foundation repositories
 
@@ -60,7 +60,7 @@
 
 ## 3. Complete 54-repository historical catalog (clickable)
 
-This table is **generated from** the existing `docs/ALL_RECOMMENDED_REPOSITORIES.txt` in this repo. It intentionally lists candidates outside the two primary foundation studies; don't confuse presence with approval. The historical existence check said 53/54 resolved and the Montagio URL was unavailable at that time. Avoid assuming repositories are maintained today.
+This table is **generated from** the existing `docs/research/ALL_RECOMMENDED_REPOSITORIES.txt` in this repo. It intentionally lists candidates outside the two primary foundation studies; don't confuse presence with approval. The historical existence check said 53/54 resolved and the Montagio URL was unavailable at that time. Avoid assuming repositories are maintained today.
 
 | No. | Repository | Historical category | Adoption state |
 |---:|---|---|---|
@@ -121,9 +121,9 @@ This table is **generated from** the existing `docs/ALL_RECOMMENDED_REPOSITORIES
 
 ## 4. Other relevant source and process links
 
-- [Open source stack and shortlisting](../OPEN_SOURCE_STACK.md)
-- [Dependency license register](../DEPENDENCY_REGISTER.csv) — main baseline may be behind PR #8 updates; see [PR dependency version](https://github.com/anneshabiswaas22-collab/video-gen/blob/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37/docs/DEPENDENCY_REGISTER.csv).
-- [Colab notebook](../../notebooks/colab/00_gpu_preflight.ipynb) and [GPU preflight script](../../scripts/gpu_preflight.py) — **hardware inspection only**, not inference proof.
+- [Open source stack and shortlisting](../research/OPEN_SOURCE_STACK.md)
+- [Dependency license register](../research/DEPENDENCY_REGISTER.csv) — main baseline may be behind PR #8 updates; see [PR dependency version](https://github.com/anneshabiswaas22-collab/video-gen/blob/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37/docs/DEPENDENCY_REGISTER.csv).
+- [Colab notebook](../../notebooks/colab/00_gpu_preflight.ipynb) and [GPU preflight script](../../scripts/hardware/gpu_preflight.py) — **hardware inspection only**, not inference proof.
 - [ComfyUI GitHub issue/security pages](https://github.com/Comfy-Org/ComfyUI/security)
 - [FreeField GitHub issue/security pages](https://github.com/neuregex/freefield/issues)
 - [FastAPI](https://github.com/fastapi/fastapi), [Next.js](https://github.com/vercel/next.js), [FFmpeg](https://github.com/FFmpeg/FFmpeg), [Wan2.2](https://github.com/Wan-Video/Wan2.2), [Kokoro](https://github.com/hexgrad/kokoro), [LightX2V](https://github.com/ModelTC/LightX2V)

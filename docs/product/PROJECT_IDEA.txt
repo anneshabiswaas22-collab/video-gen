@@ -1,0 +1,151 @@
+CURRENT LOCATION NOTE: repository-relative paths follow PROJECT_STRUCTURE.md.
+This functional sorting pass did not run tests or implement the product. Earlier
+evidence is historical; the full English companion concept remains in its feature.
+
+VIDEOGEN — CREATIVE STUDIO + ENGLISH-SPEAKING AI FRIEND
+Combined project idea, 17 November 2026 (Asia/Kolkata)
+STATUS: proposal and feature organization, not an implemented combined service.
+
+THE IDEA
+
+One workspace helps people create original images, video, speech and editable
+movies, and practise English with a friendly synthetic conversation partner.
+Creators use the studio; learners can open a simpler speaking-practice screen
+without learning media production. Shared licensed characters, voices and
+scenarios can connect the experiences, but private learning data stays separate.
+
+A learner chooses a disclosed AI man, woman or stylized adult avatar. They can
+speak imperfect English, Bengali or another explicitly supported language.
+The partner responds to the meaning, offers “You could say it this way...” and
+lets the learner try again. For “Yesterday I go market”, it can suggest “I went
+to the market yesterday” and continue the conversation. Unclear meaning gets
+a clarification question, not an invented confident correction. Acceptable
+accents and dialects are respected. Corrections can wait until a turn or the
+session ends; constant interruption must not destroy confidence.
+
+SIX FEATURES
+
+1. IMAGE STUDIO (features/image-studio/)
+Generate images and reference sheets, then add editing, masking and upscaling.
+First proof: one genuine, permitted, decodable PNG with recorded model version,
+seed, settings, time, hardware and provenance. References can support other
+features but do not guarantee consistent generated identity.
+
+2. VIDEO STUDIO (features/video-studio/)
+Create and revise short clips using controls the selected model actually
+supports. Keep input references and takes; support explicit failures and
+cancellation. First proof: a playable MP4 with verified frames, duration, codec,
+model/workflow revision, latency, resource usage and cost.
+
+3. AUDIO STUDIO (features/audio-studio/)
+Provide cleared speech, transcription, captions and media mixing, then evaluate
+music, sound and dubbing. Share speech adapters with the learning feature when
+latency and privacy fit. First proof: intelligible licensed speech and a
+playable export with aligned captions. Voice cloning is outside initial scope.
+
+4. MOVIE STUDIO (features/movie-studio/)
+Manage scripts, scenes, shots and multiple takes. Let users replace a shot
+without losing history and approve the assembled timeline. First proof: a
+reviewed 60-second sequence with editable shot history. Longer films are
+assembled and revised, not promised from one magic prompt.
+
+5. CHARACTER CONTINUITY (features/character-continuity/)
+Keep versioned, consented reference sheets, wardrobe, environments and voice
+choices. Measure identity drift across shots instead of claiming perfection.
+Avatar licenses must permit each intended display/export use. A photograph
+alone is not permission to impersonate its subject.
+
+6. ENGLISH-SPEAKING FRIEND (features/english-speaking-friend/)
+Start with Bengali-speaking adults, English practice, text and push-to-talk,
+editable transcripts, optional gentle corrections, replay, phrase review and a
+simple licensed animated avatar. User camera access is optional and off by
+default. First proof: a teacher-reviewed meaning-preserving conversation loop,
+then measured recognition, speech output and an opt-in pilot. More languages
+require qualified reviewers and evaluation data, not a universal promise.
+
+SHARED FOUNDATIONS
+
+Use shared accounts, consent, assets, capability descriptions, cost controls
+and monitoring through explicit interfaces. Creative rendering needs async jobs;
+conversation needs a separate responsive session path. A slow clip render must
+not freeze a learning turn. Share eligible assets only with approval: using one
+account does not authorize publication or training on private conversations.
+Default to no retained raw camera/audio, minimal telemetry, clear deletion and
+usable text/audio fallbacks. Do not hide credentials in clients or logs.
+
+VALUE OF THE EARLIER WORK
+
+The charter, architecture, registry, roadmap, legal/security constraints, source
+research and historical engineering evidence remain. The historical handoff
+mentions an unmerged mock-studio implementation in another repository. Verify
+that source independently before recovering it; do not claim its CI proves this
+checkout's application works. Here the owned studio/tutor are plans, while
+FreeField is a preserved runnable reference with its own CPU tests.
+
+ComfyUI, FreeField and loose examples are preserved intact in AnalyseFuture/.
+The relocation manifest records every moved file and original Git identity.
+These imports are research, not automatically approved production dependencies.
+Review code, weights, voices and media rights separately. The feature guides
+provide ownership boundaries, not six newly implemented applications.
+
+WHAT WE CAN BUILD FIRST
+
+Complete the owned M0 CPU mock workflow and evaluate exact dependency licenses.
+Mocks must be clearly labeled; a text receipt cannot stand in for generated
+media or language-learning effectiveness. Then choose a bounded creative proof
+and a bounded tutor proof, with their different tests:
+- One permitted image workflow on owner-approved hardware; inspect the real file.
+- Typed English/Bengali learning with teacher-reviewed examples, uncertainty and
+  correction preferences; add speech after that interaction works.
+Do not start six full applications at once. Reuse maintained infrastructure;
+build the distinctive learner experience, editable projects and continuity.
+No paid APIs, model downloads, training or GPU rental are authorized by this
+planning document.
+
+ROADMAP AND RESPONSIBILITY
+
+Year 1 ambition, conditional on budget and staff: a small adult Bengali-English
+pilot and the first genuinely validated image/short-video workflow. The owner
+sets scope and spending; engineers implement; an educator evaluates corrections;
+a privacy/security reviewer checks release boundaries. Release gates require
+measured useful behavior, not a calendar anniversary.
+
+Year 2 ambition, after evidence: better interruption handling, scenarios and
+review; one carefully evaluated additional language; stronger shot continuity
+and short multi-shot editing. An avatar/media engineer and speech specialist
+investigate richer rendering only if learner value justifies latency and cost.
+Optional lesson exports need explicit preview and learner approval.
+
+Years 3–5 research: private on-device speech, low-bandwidth practice, additional
+dialects and accessibility needs, richer cleared avatars, long-story continuity
+and scalable workers. Researchers, teachers and specialist partners evaluate
+experiments with an accountable owner, test, budget and stop condition. AI
+coding assistance cannot replace human language review, rights checks, user
+research or real hardware evidence. Breakthroughs are not guaranteed.
+
+WHAT CANNOT BE PROMISED
+
+Perfect translation of all languages; zero incorrect corrections; knowing every
+intention; human feelings; guaranteed fluency or exam scores; perfect identity
+in every scene; free unlimited GPU rendering; frontier-model parity; or a
+coherent hours-long film from one prompt. Some are research problems; “never
+makes a mistake” is an unsuitable promise however long we wait. A cinematic
+video model does not automatically provide cheap real-time conversation.
+Use text/audio and simple animation while ambitious rendering remains uncertain.
+
+MEASURE SUCCESS
+
+For creative tools: inspect real files; record revisions, settings, dimensions,
+frames, latency, peak VRAM, failure rates and cost. Review continuity on a fixed
+multi-shot set. For learning: measure meaning preservation, false corrections,
+recognition problems, turn latency and transfer to unfamiliar speaking tasks.
+Publish sample sizes and limits. Proposed metrics are targets until measured.
+Test permission boundaries, deletion, consent revocation, recovery and spending.
+A useful creation or a clearer conversation is progress; more model names,
+folders and realistic faces alone are not.
+
+DETAILED READING
+features/english-speaking-friend/PROJECT_IDEA.txt — learning design and dialogues.
+docs/product/FUTURE_ROADMAP.txt — full future research vision.
+docs/product/ROADMAP.md — existing M0–M7 creative milestones plus tutor milestones.
+AnalyseFuture/analysis/FEATURE_INVENTORY.txt — current code and planned features.

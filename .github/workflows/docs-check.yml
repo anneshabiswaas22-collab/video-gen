@@ -14,8 +14,8 @@ jobs:
         with:
           python-version: '3.11'
       - name: Check relative Markdown links and required project files
-        run: python scripts/check_docs.py
+        run: python scripts/maintenance/check_docs.py
       - name: Check feature layout and preserved original files
-        run: python scripts/check_structure.py
+        run: python scripts/maintenance/check_structure.py
       - name: Check preflight Python syntax
-        run: python -m py_compile scripts/gpu_preflight.py scripts/check_docs.py scripts/check_structure.py
+        run: python -m py_compile scripts/hardware/gpu_preflight.py scripts/maintenance/check_docs.py scripts/maintenance/check_structure.py

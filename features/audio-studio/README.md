@@ -8,7 +8,7 @@ Create narration, dialogue, captions, sound effects and music, then mix them wit
 
 Start with licensed text-to-speech, explicit voice choice and captioned media assembly. Add transcription, alignment, multi-speaker dialogue, dubbing and music/SFX through separately reviewed integrations. Preserve original speech and edited takes so users can compare revisions.
 
-Traceability: [M3 roadmap](../../docs/ROADMAP.md), [AUD-01–04 registry](../../docs/FEATURE_REGISTRY.md), [source candidates](../../docs/OPEN_SOURCE_STACK.md). The [movie studio](../movie-studio/README.md) consumes mastered tracks; the [English friend](../english-speaking-friend/README.md) consumes interactive transcription and speech output. Reuse adapters where appropriate, while keeping private practice recordings separate from creative assets.
+Traceability: [M3 roadmap](../../docs/product/ROADMAP.md), [AUD-01–04 registry](../../docs/product/FEATURE_REGISTRY.md), [source candidates](../../docs/research/OPEN_SOURCE_STACK.md). The [movie studio](../movie-studio/README.md) consumes mastered tracks; the [English friend](../english-speaking-friend/README.md) consumes interactive transcription and speech output. Reuse adapters where appropriate, while keeping private practice recordings separate from creative assets.
 
 ## Dependencies and acceptance
 

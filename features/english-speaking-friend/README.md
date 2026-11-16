@@ -18,6 +18,6 @@ Conversation needs an interactive session path rather than waiting for asynchron
 
 ## Acceptance and next work
 
-Register a bounded learning-feature milestone alongside the existing [roadmap](../../docs/ROADMAP.md); review current ASR, translation, language-model, TTS and avatar candidates under the [reuse](../../docs/REUSE_FIRST.md) and [license/security](../../docs/LICENSE_SECURITY.md) rules before installation.
+Register a bounded learning-feature milestone alongside the existing [roadmap](../../docs/product/ROADMAP.md); review current ASR, translation, language-model, TTS and avatar candidates under the [reuse](../../docs/research/REUSE_FIRST.md) and [license/security](../../docs/security/LICENSE_SECURITY.md) rules before installation.
 
 CPU checks should exercise transcript edits, meaning-preserving corrections, unsupported languages, consent/deletion and failure recovery. Human evaluation with Bangla-English speakers and an English educator should measure correction usefulness, meaning preservation and false corrections. Measure real turn latency and speech intelligibility on chosen hardware. Any numeric goals in the idea document are targets until measured. **Tutor behavior, language coverage, avatar rendering and hardware checks: NOT RUN.**
