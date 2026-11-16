@@ -64,3 +64,10 @@ If a prior conversation is missing, say so; **do not fabricate exact historical 
 ## Continuous improvement for reliable memory
 
 At each session end, produce a short `STATE_EVIDENCE...` changelog entry and update the first paragraph of `PROJECT_MEMORY.md`. Once a month or major release, review broken research links and obsolete model names, report current date/version, archive historical snapshots instead of deleting provenance. Keep the full 54-repo catalog as historical and track newly adopted dependencies separately. Avoid bloating the core README or writing unsupported marketing claims.
+
+## Refresh offline handoff
+
+After changing canonical docs, reconstruct the one-file handoff from the eight
+source paths described in [memory index](README.md). The GitHub native Markdown
+files remain the authoritative editable source; the .txt is a snapshot. Keep the
+snapshot dated and never claim it is a verbatim private chat export.

@@ -92,3 +92,12 @@ The first *genuine* model must be chosen **after** the actual GPU hardware prefl
 - [Updating project memory after each change](docs/memory/MAINTENANCE_PROTOCOL.md)
 
 **Scope and honesty:** Some older conversations are unavailable verbatim. This archive preserves their accessible, relevant *decisions and project facts*, not a fabricated full conversation transcript. The current GitHub repo and PR are the authoritative technical record; the next agent should refresh statuses from live GitHub.
+
+## One-file portable handoff
+
+For new ChatGPT/Codex chats that cannot browse GitHub, upload the
+[VIDEOGEN_ONE_FILE_HANDOFF.txt](docs/memory/VIDEOGEN_ONE_FILE_HANDOFF.txt)
+file. It includes the complete canonical specification, history, architecture
+diagrams, 54-repository links, CI evidence and reusable continuation prompt.
+It is a repository knowledge snapshot, **not** a verbatim export of chats that
+were not available to the assistant.

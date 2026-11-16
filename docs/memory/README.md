@@ -43,3 +43,12 @@ GitHub's **live commits, PRs and CI results** override any dated snapshot in thi
 ### Historical message caveat
 
 We cannot automatically recover a complete, word-for-word export of every prior ChatGPT chat. The history document deliberately records only **available, relevant conversation facts and decisions**. If an important past promise is missing, the owner may later provide a chat export or link; add its verified content under the maintenance protocol instead of inventing it.
+
+## Offline one-file context
+
+[VIDEOGEN_ONE_FILE_HANDOFF.txt](VIDEOGEN_ONE_FILE_HANDOFF.txt) concatenates eight
+essential source files, including the full canonical specification, architecture
+charts, project conversation/decision summary, 54-link research catalog, actual
+branch/PR/CI evidence and copy-ready continuation prompt. Use it as a single
+file attachment when a new AI session cannot browse GitHub. Other documentation
+remains accessible through the index above.

@@ -1,0 +1,1063 @@
+VIDEOGEN — ONE-FILE PORTABLE RESEARCH, CHAT HISTORY & ENGINEERING HANDOFF
+============================================================================================
+Generated: 2026-11-16
+Repository: https://github.com/anneshabiswaas22-collab/video-gen
+Purpose: upload or paste this file to a NEW ChatGPT/Codex session when old chats
+do not load. Read PROJECT_MEMORY.md first, then the detailed archived sections.
+This file combines 8 complete public project documents, including a 54-repository
+URL catalog, eight editable Mermaid diagrams, and verified CI/PR evidence.
+IMPORTANT: this is a curated documentation/history summary, NOT a verbatim
+export of unavailable previous chats. Check live GitHub for newer status.
+============================================================================================
+
+
+============================================================================================
+FILE: PROJECT_MEMORY.md
+============================================================================================
+# VideoGen — CANONICAL PROJECT MEMORY / START HERE
+
+**Last comprehensive handoff snapshot:** 2026-11-16 (Asia/Kolkata).  
+**Source of truth:** [VideoGen repository](https://github.com/anneshabiswaas22-collab/video-gen).  
+**Audience:** any human developer, ChatGPT session, GPT-6 Astra/Codex agent, reviewer or new contributor.  
+**Read this file first whenever the original chat is inaccessible.** This is a durable *engineering handoff*, not a verbatim or complete export of all past private chats.
+
+> **IMPORTANT CURRENT STATE:** On 2026-11-16, `main` is the documentation-first branch at `2a88181dc0408f6477dd52a6ed8ded762f149bcd`. A real CPU-only mock vertical slice lives in **[PR #8](https://github.com/anneshabiswaas22-collab/video-gen/pull/8)**, branch `feat/m0-2-mock-studio`, commit `ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37`. GitHub Actions [application CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390592) and [documentation CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390571) both passed for this commit. **PR #8 was open, ready for review, cleanly mergeable, but not merged** at the time of the snapshot. Recheck GitHub live before acting; this snapshot can become stale.
+
+## What we are building
+
+Build **VideoGen, an original, ownable, commercially viable AI Creative Studio** with integrated image generation/editing, short-form video, voice/speech, sound/music, post-production, controllable cinematic shots, persistent characters/environments, reshoots, and eventually an editable multi-shot movie pipeline. Compare *user experience* with Higgsfield, Runway, Google Flow and Kling; they are **benchmarks, not freely available source code**. Never claim to outperform them without measured tests.
+
+Owner priorities: save GPT/Codex credits; reuse maintained legally compatible libraries instead of rewriting inference engines; start locally with CPU mocks; use owner-controlled Colab GPU for **interactive testing** once verified; no unapproved paid APIs, GPU rental, giant model downloads, or unlicensed third-party code/weights. Own the product identity, UI, API, project/job data model and distinctive movie workflow.
+
+Primary differentiation: **stable character identity across shots**, editable scene/shot/take history, explicit camera/motion controls when the active model supports them, human-approved AI director, cost/quality transparency, individually regenerable shots, long-form assembly with FFmpeg rather than single-prompt 120-minute generation.
+
+This is a general-purpose software platform; the separately discussed 3D animated American-English-learning family channel can be a **future integration/stress test**, but its scripts, assets, characters and other repositories are NOT to be copied or modified here without explicit scope.
+
+## Exact primary research foundations (TWO)
+
+1. **[ComfyUI](https://github.com/Comfy-Org/ComfyUI)** — managed external inference/workflow engine. Source code inspected at `258f880d0c026bfc22acab679858ab2e2c70573d`; source LICENSE GPL-3.0. Integrate by a typed private HTTP/WS adapter; no wholesale vendoring. Commercial distribution/integration effects and every model weight license remain separate legal gates.
+2. **[FreeField](https://github.com/neuregex/freefield)** — MIT-licensed *source-code* reference for app manifests, workflow bindings, model packs, generated UI, results history, GPU laboratory and validation. Inspected at `f0c2358a46c7008ff8503d4324b6cc8bc7657e75`. Don't fork or copy its whole UI/branding; build our own VideoGen manifest system. Every external media asset, checkpoint, custom node and workflow must be checked independently.
+
+Historical research catalog: **[54 recommended repositories](docs/ALL_RECOMMENDED_REPOSITORIES.txt)**. They are *candidates*, not 54 approved runtime dependencies. The historical list reported 53/54 URLs resolving on 2026-11-15, with Montagio unavailable; URL existence is not safety/commercial permission. Detailed study: [two-repository audit on the PR branch](https://github.com/anneshabiswaas22-collab/video-gen/blob/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37/docs/TWO_REPO_DEEP_STUDY.md).
+
+## Architecture and verified code boundaries
+
+```text
+Next.js / React / TS / Tailwind (owned VideoGen Studio UI)
+       |
+FastAPI / Pydantic v1 API (owned; auth/quota future)
+       |
+Job orchestration + persistent projects/jobs/events/artifact provenance
+       |
+CPU mock worker (M0)  →  ComfyUI adapter / real private GPU worker (M1+)
+       |                         |
+SQLite + local text receipts      Pinned workflow -> selected licensed model
+(M0 dev only)                     | -> verified media -> durable storage
+       |
+Later: FFmpeg, speech, storyboards, character bible, editable scene/shot/timeline
+```
+
+Proposed monorepo: `apps/web/`, `services/api/`, `services/worker/`, `packages/schemas/`, `integrations/comfyui/`, `integrations/media/`, `workflows/`, `notebooks/colab/`, `tests/`, `infra/`, `scripts/`, `docs/`, `.github/workflows/`. These are *intended boundaries*, not a claim every folder has working code on main.
+
+PR #8 implements: Next.js project/prompt/model/job/history screen; FastAPI `/v1/health`, `/v1/models`, `/v1/projects`, `/v1/projects/{id}`, `/v1/jobs`, `/v1/jobs/{id}`, plus list/history/artifacts routes; Pydantic models; SQLite status persistence; idempotent job creation; worker transitions `QUEUED → RUNNING → SUCCEEDED | FAILED`, marked `text/plain` mock artifact (SHA-256); ComfyUI typed adapter *stub* with simulated HTTP transport. The mock job returns a **receipt**, NOT an AI image/video. It has **no authentication or production tenant isolation** and must only be bound to localhost.
+
+**CI evidence:** seven Python API/adapter tests passed, Python lint, CPU smoke, real Node fetch → running FastAPI → worker → artifact round trip, Python audit, frontend typecheck/lint/tests/production build, npm audit, and docs integrity all passed. No real GPU, genuine PNG/MP4/WAV or owner-Windows fresh-clone proof was executed. Exact final commit `ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37`.
+
+## Roadmap / gates, in dependency order
+
+| Stage | Outcome | Status at snapshot |
+|---|---|---|
+| M0.1 / [#1](https://github.com/anneshabiswaas22-collab/video-gen/issues/1) | Code + weights + commercial/license gate | PENDING |
+| M0.2 / [#2](https://github.com/anneshabiswaas22-collab/video-gen/issues/2) | Original web/API/SQLite/mock worker/CI | **IMPLEMENTED ON UNMERGED PR #8**, CI PASSED |
+| M0.3 / [#3](https://github.com/anneshabiswaas22-collab/video-gen/issues/3) | Real Colab GPU/VRAM/RAM/disk preflight | PENDING hardware validation |
+| M1 / [#4](https://github.com/anneshabiswaas22-collab/video-gen/issues/4) | One genuine licensed checkpoint → verified PNG | NOT RUN |
+| M2 / [#5](https://github.com/anneshabiswaas22-collab/video-gen/issues/5) | Real Wan-compatible short MP4, measured frames/codec/VRAM | NOT RUN |
+| M3 / [#6](https://github.com/anneshabiswaas22-collab/video-gen/issues/6) | Kokoro speech, subtitles, FFmpeg assembly | NOT RUN |
+| M4 | Usable multi-modality studio, preview, asset library | PLANNED |
+| M5 / [#7](https://github.com/anneshabiswaas22-collab/video-gen/issues/7) | Versioned character/scene/shot/take/movie timeline; 60-second proof | PLANNED |
+| M6 | Benchmark quality/VRAM/latency/cost; LightX2V comparison | PLANNED |
+| M7 | Auth/tenant boundaries, quotas, deployment, billing, legal release gates | PLANNED |
+
+The first *genuine* model must be chosen **after** the actual GPU hardware preflight. Wan2.2 is the preferred *video candidate*, NOT an approved fixed 5B/14B checkpoint. For images, FLUX or Qwen variants require precise weight-license and GPU verification. Audio candidate Kokoro. Media assembly FFmpeg. No production Colab web hosting.
+
+## Five immutable engineering rules
+
+1. **Never confuse implemented, CPU MOCK TESTED, GPU VERIFIED, deployed and planned**. Status must have a test/commit/artifact link.
+2. **Inspect latest GitHub state and existing AGENTS.md / ADR first**, then branch or use PR as appropriate; do not overwrite PR #8 or erase history.
+3. **Choose REUSE vs BUILD** only after license, model-weight, VRAM, maintenance, security and version assessment. No automatic cloning/copying all 54 repositories.
+4. **Budget/security:** no paid APIs or GPUs without approval; no model weights/secrets/PII in Git; no arbitrary executable ComfyUI graphs; no unauthenticated public GPU/worker endpoints.
+5. **Finish working narrow vertical slices with tests**, docs, CI, evidence and a clear PR rather than a fancy inactive UI or overengineered roadmap.
+
+## Quick resume instructions for next agent
+
+- Open the latest default branch and [open PRs](https://github.com/anneshabiswaas22-collab/video-gen/pulls); check whether [PR #8](https://github.com/anneshabiswaas22-collab/video-gen/pull/8) merged since this document.
+- Read [AGENTS.md](AGENTS.md), [architecture](docs/ARCHITECTURE.md), [decisions](docs/DECISIONS.md), [existing project history](docs/PROJECT_HISTORY.md), and the [complete continuity bundle](docs/memory/README.md).
+- If PR #8 unmerged, **review it rather than build a second M0**. Do not merge without owner/reviewer instructions. Run CI and a fresh clone test.
+- Then handle [license issue #1](https://github.com/anneshabiswaas22-collab/video-gen/issues/1) and [Colab preflight #3](https://github.com/anneshabiswaas22-collab/video-gen/issues/3); only then plan genuine inference milestone M1.
+- Every future PR must update this memory bundle and [verification snapshot](docs/memory/STATE_EVIDENCE_AND_OPEN_ISSUES.md) with live commit/PR/CI results, unresolved blockers, and exact next step.
+
+## Documents in this continuity bundle
+
+- [Memory index and reading order](docs/memory/README.md)
+- [Canonical scope, requirements, detailed roadmap and architecture](docs/memory/PROJECT_CANONICAL_HANDOFF.md)
+- [Past-conversation summary, chronology and decisions](docs/memory/CONVERSATION_AND_DECISION_HISTORY.md)
+- [Architecture, job, GPU, continuity and roadmap charts](docs/memory/ARCHITECTURE_AND_WORKFLOW_DIAGRAMS.md)
+- [All core research links and 54-repo catalog](docs/memory/SOURCE_AND_REPOSITORY_LINKS.md)
+- [Verified state, PR, issues, tests and gaps](docs/memory/STATE_EVIDENCE_AND_OPEN_ISSUES.md)
+- [Exact continuation prompt + developer workflow](docs/memory/DEVELOPER_CONTINUATION_GUIDE.md)
+- [Updating project memory after each change](docs/memory/MAINTENANCE_PROTOCOL.md)
+
+**Scope and honesty:** Some older conversations are unavailable verbatim. This archive preserves their accessible, relevant *decisions and project facts*, not a fabricated full conversation transcript. The current GitHub repo and PR are the authoritative technical record; the next agent should refresh statuses from live GitHub.
+
+## One-file portable handoff
+
+For new ChatGPT/Codex chats that cannot browse GitHub, upload the
+[VIDEOGEN_ONE_FILE_HANDOFF.txt](docs/memory/VIDEOGEN_ONE_FILE_HANDOFF.txt)
+file. It includes the complete canonical specification, history, architecture
+diagrams, 54-repository links, CI evidence and reusable continuation prompt.
+It is a repository knowledge snapshot, **not** a verbatim export of chats that
+were not available to the assistant.
+
+============================================================================================
+FILE: docs/memory/PROJECT_CANONICAL_HANDOFF.md
+============================================================================================
+# VideoGen — complete canonical product and engineering handoff
+
+**Recorded:** 2026-11-16. Read [PROJECT_MEMORY.md](../../PROJECT_MEMORY.md) first. This document is intended to answer **what, why, how, current state, and next action** without an old chat.
+
+## 1. Mission, owner requirements and position
+
+**Mission:** Build one original commercial AI Creative Studio covering image generation/editing, video generation, audio/voice/music, media finishing, controllable cinematic shots, reusable characters/environments and eventually coherent editable movies. Target individual creators, YouTubers, filmmakers, independent studios and later API users. UX benchmarks: Higgsfield, Runway, Google Flow and Kling. Do NOT copy proprietary product visuals, logos, APIs or model weights, and do not claim #1 or quality parity without fair measurements.
+
+Owner wants a software business whose users can self-serve, rather than labor-intensive client-service engagements. Product should be approachable and credible, with future free/premium or other sustainable monetization only after real compute costs, consent and commercial rights are understood. **M0 does not implement billing, subscriptions, ads, hosting or pricing.** The current engineering task is not a speculative business redesign.
+
+The owner can collaborate with GPT-6 Astra/Codex Cloud and has access to an interactive Google Colab GPU, but the actual device class, VRAM, storage and quota are UNKNOWN. Keep runtime requirements explicit. Free Colab and Kaggle are *experimentation platforms*, not unlimited reliable public production capacity. No unapproved paid APIs, GPU rental or bulk checkpoint download.
+
+## 2. Exact product feature pillars
+
+**Image Studio:** prompt-to-image, image-to-image, image edit/inpaint/outpaint, masks, aspect extension, background/object handling, upscaling, presets, references and image versions. Don't show model-specific controls unless actually supported.
+
+**Video Studio:** text-to-video, image-to-video, later video-to-video/motion-transfer, first/last frame, supported extension, supported camera and motion conditions, temporal comparison, reshoots and export. Start with a *short* real video and verify actual decoded codec/fps/frames.
+
+**Audio Studio:** text-to-speech/narration, approved multi-voice, background music/SFX, transcript/subtitles, synchronization, mixing, lip-sync (later). Kokoro and faster-whisper are candidates; FFmpeg for media assembly. Check every model/voice/music license and consent.
+
+**Cinematic/Movie Studio:** written premise/script -> storyboards -> scene/shot graph -> character/environment bible -> approved references -> generation per shot -> independent take review/reshoot -> dialogue/SFX/music/subtitles -> non-destructive timeline -> FFmpeg export -> validated movie artifact. First measurable film proof is an editable 60-second sequence with recurring characters; 20 minutes and 1–2 hours are **later assembly targets**, not one-inference requests.
+
+**AI Director:** suggested prompts, scenes, camera/framing/continuity and cost-aware routing; human approval before expensive actions, untrusted agent output cannot execute shell, workflows, remote requests or secret access.
+
+**Model/GPU Studio:** versioned model/capability registry, approved workflow schemas, checkpoint hash/license, GPU tier and cost estimates, benchmark actual latency/VRAM/success/accepted result, one heavy inference per constrained GPU when needed. LightX2V/quantization/offload only after baseline.
+
+**Platform:** accessible original Next.js interface; durable jobs/assets/projects, progress/error/retry/cancellation semantics, API; later auth/tenants/quota/payment/deployment. Do not implement all product modules at M0.
+
+## 3. Boundaries and code organization
+
+```text
+video-gen/
+  apps/web/                  Next.js/React/TypeScript/Tailwind product UI
+  services/api/              FastAPI, Pydantic, REST v1 and future auth
+  services/worker/           CPU mock then isolated GPU execution
+  packages/schemas/          Versioned shared API/domain contracts
+  integrations/comfyui/      Typed private service adapter
+  integrations/media/        FFmpeg and related media-specific adapters (future)
+  workflows/                 Approved, pinned and validated templates (future)
+  notebooks/colab/           Reproducible device preflight/experiments
+  tests/                     CPU unit/integration and optional GPU
+  infra/                     Local and later production infrastructure
+  scripts/                   Docs validation, GPU preflight, smoke/setup
+  docs/                      This handoff, research, decisions and roadmap
+  .github/workflows/         Validation, tests, security and build checks
+```
+
+**One owned application** with multiple replaceable engines; avoid vendoring full ComfyUI, FreeField, model repos or unmaintained UI forks. ComfyUI speaks to our worker over a protected adapter; FreeField contributes architectural patterns/learning, not a second backend. Preserve existing functional code and ADRs. Main is still documentation-first until PR #8 merges.
+
+**Preferred M0 technology:** Next.js 16, React 19, TS, Tailwind (version pins in PR #8), FastAPI/Pydantic, SQLite for local durable metadata, local filesystem for *mock* receipt bytes; HTTP poll for job progress. No Celery/Valkey/Postgres/S3 yet because M0 needs verified local usability, not expensive ops. Later add PostgreSQL-compatible metadata migrations, S3-like durable media, a real queue, isolated workers and secure authentication when requirements demand.
+
+## 4. Domain data and invariants
+
+| Entity | Primary data | Invariants |
+|---|---|---|
+| Project | ID, owner/tenant (future), name, timestamps, settings | User/tenant owns it; never reveal another tenant |
+| Asset | ID, project, storage key, MIME, size, SHA-256, dimensions/fps if media, rights | Immutable bytes/hash/version; private by default |
+| ModelDefinition | stable ID/version, repo/source pin, weight pin/hash/license, true capabilities, input constraints | Never advertise an unavailable installed model |
+| WorkflowDefinition | ID, version, approved engine graph, input/output schema and resource estimates | Only operator-reviewed node graph; no arbitrary executable JSON |
+| GenerationJob | stable ID, immutable request/model/workflow, idempotency scope/key, state/progress/errors, timestamps | No duplicate charge/work on idempotent retries; append-only provenance |
+| GenerationArtifact | asset ID, job, model/workflow/seed/reference metadata, hash, media validation | Completed artifacts never silently mutate |
+| WorkerCapability | engine, available models, VRAM, memory, concurrency and health | GPU placement informed by observed data |
+| CharacterReference | stable character ID, approved appearance/voice/wardrobe versions | Regeneration reuses approved reference versions; drift is measured |
+| EnvironmentReference | image/layout/set references and props | Versioned and reproducible |
+| Scene/Shot/Take | narrative order, assigned characters, reference IDs, camera/time, many take versions | Reshoot one shot without overwriting accepted takes |
+| TimelineTrack/Clip | non-destructive audio/video/subtitle tracks, timecodes, effects | Editable after exporting |
+| Usage/AuditEvent | real GPU seconds, costs, errors, authorized actions | No secrets/private media leaked into logs |
+
+M0 currently implements a small subset of these in the PR: Project, ModelDefinition, WorkflowDefinition, GenerationRequest/Job, Artifact, WorkerCapability, SQLite events. It does **not** implement user/organization auth, real video asset metadata, true cost metering, movie timeline or expensive dispatch.
+
+## 5. M0 v1 HTTP contract and job state machine
+
+Required endpoint surface: GET `/v1/health`, GET `/v1/models`, POST `/v1/projects`, GET `/v1/projects/{id}`, POST `/v1/jobs`, GET `/v1/jobs/{id}`. PR #8 additionally implements project listing/job listing, events, workflow list, artifact metadata and receipt download.
+
+Example **mock-only** job request after creating a project:
+
+```json
+{
+  "project_id": "proj_<generated_uuid_hex>",
+  "model_id": "mock-preview-v1",
+  "prompt": "A lantern-lit mountain village at dusk",
+  "idempotency_key": "client-request-00001"
+}
+```
+
+States: `QUEUED -> RUNNING -> SUCCEEDED | FAILED` for local mock. Error responses use stable codes; reusing a key with conflicting inputs returns `IDEMPOTENCY_CONFLICT`. Tests cover failure flags and invalid models. Later GPU lifecycle can include RESERVING/DOWNLOADING_MODELS/UPLOADING, timed-out/cancelled worker states with correct semantics. **Mock artifact = text/plain receipt labelled NOT AI-GENERATED.**
+
+## 6. Reuse and exact two foundation projects
+
+**ComfyUI:** [official GitHub](https://github.com/Comfy-Org/ComfyUI), inspected at `258f880d0c026bfc22acab679858ab2e2c70573d`. GPL-3.0 source; use external managed engine. In pinned versions, inspect `server.py` (HTTP/WebSocket/queue/history), `execution.py` (execution and graph validation), `comfy/model_management.py` (VRAM/memory policy) and workflow API formats. A VideoGen worker translates validated *allowlisted* workflow inputs into `POST /prompt`, monitors progress/history and imports verified output. Cancel safely; do not use global interrupt on unrelated jobs. Third-party nodes can execute code; isolate/approve them.
+
+**FreeField:** [official GitHub](https://github.com/neuregex/freefield), inspected at `f0c2358a46c7008ff8503d4324b6cc8bc7657e75`. MIT source; inspect `schema/app.schema.json`, `apps/*/app.json`, `apps/*/workflow.api.json`, `server/registry.ts`, `server/runner.ts`, `server/history.ts`, `server/guard.ts`, `tools/comfy_validate.py`, `tools/catalog.py`, `infra/gateway.py`, `lab/core.py`, `.github/workflows/validate.yml`. Use patterns for generated forms, input-to-node binding checks, model license/VRAM manifests, provenance and lab cases; do NOT clone the entire product or its visual branding. Upstream GPU example counts are not our benchmarks.
+
+Wan2.2 is the preferred first **video candidate after GPU preflight**, not a promise any particular checkpoint fits Colab. FLUX/Qwen for licensed compatible first image candidate. Kokoro speech in M3, FFmpeg assembly in M3, LightX2V optimization only in M6. The [complete catalog](../ALL_RECOMMENDED_REPOSITORIES.txt) lists 54 studies, not adopted dependencies.
+
+## 7. Milestones and acceptance
+
+**M0.1 license research (Issue #1):** verify correct upstream repos, source and weight licenses, exact version pins, dependency compatibility, deployment/commercial concerns; mark VERIFIED/PENDING/BLOCKED. No software-license assumption from GitHub visibility.
+
+**M0.2 mock vertical slice (Issue #2):** Next.js UI, FastAPI with real backend requests, durable SQLite, mock worker/jobs/provenance, tests and CI, no GPU; implemented on **PR #8** with passing CI, pending human review/merge and fresh-clone owner test. No inference claim.
+
+**M0.3 Colab preflight (Issue #3):** execute checked-in preflight in owner-controlled notebook; capture GPU device, VRAM, RAM, disk, torch/CUDA, runtime restrictions, storage persistence. Do not hardcode a GPU tier.
+
+**M1 real image (Issue #4):** choose one permitted model/weight after licenses/hardware; start actual ComfyUI and generate a PNG; validate PNG decoding, width/height, SHA, prompt/seed/model/weight version, latency/VRAM. Evidence required.
+
+**M2 real video (Issue #5):** select GPU-compatible Wan variant; generate a short genuine MP4; FFmpeg/ffprobe verify codec, frames, FPS, resolution, duration; record OOM/latency/VRAM and provenance.
+
+**M3 audio/post (Issue #6):** Kokoro TTS, subtitles, FFmpeg mux/encode and verified sync. No fake previews or bought voices without rights.
+
+**M4 studio:** integrated image/video/audio tabs and asset library with honest capability gating, comparison/history and previews; usable by new creators.
+
+**M5 film (Issue #7):** character references, versioned environment/scene/shot/takes, human-approved direction, non-destructive timeline, per-shot reshoot and full 60-second repeated-character benchmark.
+
+**M6 optimization:** baseline vs LightX2V/offload/quantization; same settings/hardware, reproducible quality and VRAM/latency metrics.
+
+**M7 commercialization:** auth, multi-tenant isolation, quotas, secure GPU worker service, billing/cost, observability/recovery, legal and model-license review, secure deployment.
+
+## 8. Security, cost, legal, quality: mandatory gates
+
+- No API keys/secrets/PII/user media/model weights in Git; no arbitrary prompt->shell conversion.
+- Check source, checkpoint weights, third-party assets/custom nodes, training sources and output rights independently.
+- ComfyUI GPL-3.0 and potential AGPL dependencies require actual legal review; process isolation alone does not automatically eliminate obligations.
+- No public unauthenticated ComfyUI, uploaded arbitrary workflow graphs, unreviewed custom node code, or open Colab production tunnel.
+- Cost per **accepted output** includes all GPU time, failures/retries, storage/egress, API charges and post-processing; no unsupported quality/VRAM assertions.
+- All output metadata should include model/checkpoint pins, hash, prompt/settings/seed, input hashes, GPU, runtime, VRAM and integrity checks when applicable.
+- Separate PASSED, FAILED, NOT RUN, PENDING, BLOCKED. A green CPU mock CI is not a GPU result.
+- No model foundation training from scratch in MVP, no massive download in M0, no unapproved charges.
+
+## 9. Verified project state at handoff
+
+`main` initial baseline: `2a88181dc0408f6477dd52a6ed8ded762f149bcd`; documentation-first with existing docs CI and Colab preflight script/notebook. PR #8 branch `feat/m0-2-mock-studio`, last implementation/evidence commit `ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37`. Both [application CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390592) and [documentation CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390571) passed for PR head. PR unmerged at observation. **Main may have newer docs-only commits from this handoff; check live state before using these old SHA values.**
+
+CLI / dev commands from PR branch [runbook](https://github.com/anneshabiswaas22-collab/video-gen/blob/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37/docs/BUILD_RUN.md):
+
+```bash
+git clone https://github.com/anneshabiswaas22-collab/video-gen.git
+cd video-gen
+git switch feat/m0-2-mock-studio
+python -m venv .venv
+source .venv/Scripts/activate   # Windows Git Bash
+python -m pip install -e ".[dev]"
+npm install --prefix apps/web
+bash scripts/dev.sh
+```
+
+Open local web `http://127.0.0.1:3000`, FastAPI docs `http://127.0.0.1:8000/docs`. Re-evaluate commands after merge/changes.
+
+## 10. Biggest blockers and next exact action
+
+1. **Review/merge PR #8 if still open**, with explicit owner/reviewer instruction; check latest main, merge conflicts, CI, smoke on a clean clone. Do not overwrite, force-push or auto-merge unreviewed changes.
+2. Finish **source+weight+commercial licensing register** (#1). Decide owned application source license.
+3. Execute **real Colab hardware preflight** (#3) and archive non-sensitive measurements.
+4. Then implement **one** licensed real image workflow (#4); stop and verify the artifact before pursuing video.
+5. For every completed task update [canonical memory](../../PROJECT_MEMORY.md), [state ledger](STATE_EVIDENCE_AND_OPEN_ISSUES.md), [history](CONVERSATION_AND_DECISION_HISTORY.md), source/version register, ADR, and task checklist.
+
+**This document is deliberately readable standalone.** The memory archive index links to detailed charts, source URLs, chronological rationale, the copy-ready continuation prompt, and maintenance protocol.
+
+============================================================================================
+FILE: docs/memory/CONVERSATION_AND_DECISION_HISTORY.md
+============================================================================================
+# VideoGen conversation history and decision provenance
+
+**Version:** 2026-11-16. **Purpose:** make the long-running VideoGen project resumable without conversational memory. Records known user objectives and previously verified engineering actions. **This is a curated, factual reconstruction—not a word-for-word export of all chats.** Earlier conversation messages unavailable in the current working context must never be fabricated.
+
+## Timeline — known project milestones
+
+| Time / event | User need or research outcome | Persistent consequence | Confidence |
+|---|---|---|---|
+| Before 2026-11-12 | Wants to own a low-cost AI image/video creation platform; GPT/Codex writes application; owner has access to Colab GPU | Own application, prefer open-source dependencies, not an expensive API-only wrapper | Context available |
+| 2026-11-12 | Asked which public video-generation repos surpass FreeField, FreeField vs Wan, MiniMax source availability, and Colab/Kaggle model/GPU feasibility | Distinguish application stack from model inference; verify source and checkpoints, do not assume proprietary code is public | Context available |
+| 2026-11-12 to 2026-11-13 | Wants a competitor to best user-facing creative platforms, as many useful features as lawful and economically sustainable, minimal wasted Codex credits; single vs combined repo question | One owned monorepo + best specialized engines through adapters, not a giant merged source repository | Context available |
+| 2026-11-13 | Requested all research, product vision, priorities, architecture, developer guide in `video-gen` so any new AI/developer can contribute without the chat | Initial charter, roadmap, AGENTS, docs, issue list, CI, Colab preflight committed to main | Previously reported + current GitHub verified |
+| 2026-11-13 to 2026-11-15 | Asked for catalog of all repositories studied and a `.txt` file in GitHub | `docs/ALL_RECOMMENDED_REPOSITORIES.txt` lists 54 historical candidates, grouped by category | Live file verified |
+| 2026-11-15 | Asked to check GitHub PRs and merge where appropriate; open VideoGen PR list was initially empty | PR policy: inspect branches/CI, don't overwrite; avoid merging unreviewed changes | Live check |
+| 2026-11-15 | Supplied detailed Master Development Prompt (principal engineer; study **exactly two** primary repos ComfyUI + FreeField; implement Issue #2 end-to-end mock rather than documentation only) | M0.2 chosen before real inference; strict legal/security/budget and verification requirements; branch+review PR | User directive available |
+| 2026-11-15 | Live repo main inspected, starting `2a88181dc0408f6477dd52a6ed8ded762f149bcd`: documentation-only; first checks pass for docs | No false claims of existing generation backend; preserve original docs | Live evidence |
+| 2026-11-15 | ComfyUI master source `258f880d...` and FreeField main `f0c2358a...` inspected, licenses checked | ComfyUI GPL external engine; FreeField MIT source manifest reference; third-party assets/weights pending | Live GitHub source code/license review |
+| 2026-11-15 | Implemented API/web/SQLite/mock worker and scoped ComfyUI HTTP adapter in `feat/m0-2-mock-studio`; tested/iteratively fixed CI | Working **CPU mock** implementation lives in PR #8; do not label as GPU inference | GitHub commits/CI |
+| 2026-11-15 | Final M0 PR #8 commit `ae953a3...`, Python 7 tests, lint, live JS->FastAPI smoke, frontend tests/types/build, npm+pip audits, docs CI passed | PR ready for review, left unmerged; M1 remains not run | GitHub actions |
+| 2026-11-16 | Wants **all project details, research, charts, links, history, decisions, tasks and future-agent instructions pushed to GitHub**, because long ChatGPT chats fail to load | This self-contained permanent `PROJECT_MEMORY.md` + `docs/memory/` archive is the handoff path | Current user directive |
+
+## User's stable requirements — MUST preserve
+
+- Our software is independently owned and branded, developed in `anneshabiswaas22-collab/video-gen`; competitors' products are product-quality references, not source to copy.
+- The end goal is a capable creative studio for text/image/video/audio generation, editing and movie production, but **build it incrementally** with tested vertical slices and capability gates.
+- Prioritize **practical reuse** (ComfyUI, licensed models, FFmpeg, manifest patterns), avoid spending GPT/Codex credits building a new base model or duplicating code.
+- GPU inference is resource-intensive; start with mock API and local CPU CI, then use owner-run Colab preflight and approved compatible checkpoints; Colab is not a 24/7 production service.
+- Maintain **character identity across multi-shot videos**, approved references, scene graph, shot/take history, non-destructive regeneration, cinematic/camera controls and AI director with human approvals.
+- Real verification means a genuine PNG/MP4/WAV decoded and hashed on recorded hardware; merely compiling, listing a workflow or making a mock text file is NOT generation proof.
+- Separate model-weight license from repository source-code license, third-party workflows/assets, deployment and training-data rights. Not all public repos or checkpoints allow commercial redistribution.
+- No paid API, GPU rental, hidden costs, large M0 weights, unsafe custom nodes, public unauthenticated inference worker endpoints or secrets in Git without explicit owner authorization.
+- Keep developer instructions, decisions, exact links and checklists in GitHub so lost chats do not block development.
+
+## Decisions made and reasons
+
+| Decision | Why | Revisit only when |
+|---|---|---|
+| One VideoGen monorepo | Own stable product/data contracts; prevent scattered forks and accidental license mixing | Documented ADR and measured integration reason |
+| ComfyUI as external engine | Existing tested graph execution/GPU resource model; avoids writing new inference framework | Verified blocker/license incompatibility or benchmark advantage |
+| FreeField as pattern/reference | Detailed manifest->form->workflow structure; fast learning without rebranding | Feature-specific legal and compatibility review |
+| Exactly TWO deep study foundations for M0 | Prevent open-ended clone/research spending | New verified blocking evidence |
+| Async job contract, idempotency, provenance | Needed for robust expensive GPU operations and reproducible movie shots | Never remove; can evolve schema |
+| SQLite + in-process mock worker for M0 | Test full path without Redis/Postgres/GPU cost | Real multi-worker load/persistence/recovery requirements |
+| Separate real GPU milestones | Honest output quality, hardware feasibility and model licensing | Not negotiable; only status advances after evidence |
+| Single coherent movie = short scene/shot graph + editor | Long 20–120 minute productions cannot be one reliable giant inference | Better model evidence, while retaining editability |
+
+## Related interests intentionally outside scope
+
+There are separate AI animation/story-building, advanced video-editor, English tutor, and other application repositories. **Do not combine their code, issues or assets into VideoGen**. VideoGen can later become a model provider for content creation but no direct cross-repo work is authorized in this project scope.
+
+A previously discussed American-English-learning 3D family video series needs 15-second shots and recurring characters, useful as a later **continuity benchmark only**. Original content assets and scripts belong to the separate creative production project.
+
+## Caveats: what cannot be restored
+
+This archive does **not** preserve all exact user/assistant messages, full model reasoning, expired external pages, or every unverified suggestion in earlier chats. It preserves decisions, substantive requirements, research sources, evidence, links and workflow. To add a full verbatim conversation export later, verify rights/privacy and explicitly mark provenance/date; never claim the missing text was recovered.
+
+============================================================================================
+FILE: docs/memory/ARCHITECTURE_AND_WORKFLOW_DIAGRAMS.md
+============================================================================================
+# VideoGen — editable architecture and process charts
+
+**Format:** GitHub-native Mermaid diagrams (text in version control). These represent **planned boundaries** unless specifically identified as PR #8 implemented. Rendering requires a Mermaid-compatible GitHub Markdown viewer; all diagrams are also explained in captions so agents can read their text.
+
+## Chart 1 — Product architecture (target; M0 highlighted)
+
+```mermaid
+flowchart TD
+    C["Creator / browser"] --> W["Owned Next.js / React VideoGen UI"]
+    W --> API["Owned FastAPI / Pydantic / OpenAPI"]
+    API --> P["Projects + access policy"]
+    API --> J["Durable job / idempotency / history"]
+    J --> DB[("SQLite M0 / PostgreSQL later")]
+    J --> M0["CPU mock executor — IMPLEMENTED in PR #8"]
+    M0 --> R["text/plain MOCK receipt — NOT AI media"]
+    J -. "M1+ after license/GPU checks" .-> Q["Private GPU scheduling"]
+    Q --> A["Versioned ComfyUI adapter"]
+    A --> G["External ComfyUI GPU inference service"]
+    G --> IM["Licensed image/video checkpoints"]
+    G --> V["Validate, hash and store generated artifacts"]
+    V --> S[("Durable private media storage")]
+    S --> E["FFmpeg media + editable shot timeline (future)"]
+    E --> W
+```
+
+**Explanation:** The browser never runs arbitrary ComfyUI workflows or owns private engine tokens. At M0 the API and mock worker use SQLite and a text artifact. Future real inference is **inside a separate private boundary**, not an exposed Colab service.
+
+## Chart 2 — CPU mock job sequence (implemented in PR #8)
+
+```mermaid
+sequenceDiagram
+    participant U as Creator
+    participant UI as Next.js UI
+    participant API as FastAPI
+    participant DB as SQLite
+    participant WK as CPU mock worker
+    U->>UI: Create project and write prompt
+    UI->>API: POST /v1/projects
+    API->>DB: Insert project
+    DB-->>API: New project ID
+    API-->>UI: Project
+    U->>UI: Generate (mock model)
+    UI->>API: POST /v1/jobs + idempotency_key
+    API->>DB: Verify project and reuse-or-insert job
+    DB-->>API: Stable job ID
+    API-->>UI: Job QUEUED / RUNNING
+    WK->>DB: Atomically claim queued job
+    WK->>DB: State RUNNING and progress events
+    WK->>DB: Save synthetic text receipt and SHA-256
+    WK->>DB: State SUCCEEDED or FAILED
+    loop While not terminal
+      UI->>API: GET /v1/jobs/{id}
+      API-->>UI: State, progress, artifact/error
+    end
+    UI->>API: GET /v1/artifacts/{id}
+    API-->>UI: text/plain provenance and download link
+    UI-->>U: Download clearly labeled MOCK receipt
+```
+
+**M0 guards:** same idempotency key/payload returns same job; conflicting payload returns 409. Invalid model or missing project rejected. Failure recorded; no GPU execution, paid calls or "AI image" preview.
+
+## Chart 3 — Job state transitions by milestone
+
+```mermaid
+stateDiagram-v2
+    [*] --> QUEUED
+    QUEUED --> RUNNING: Mock worker claims job
+    RUNNING --> SUCCEEDED: Verified mock receipt
+    RUNNING --> FAILED: Execution error
+    QUEUED --> FAILED: Explicit durable failure (future)
+    FAILED --> [*]
+    SUCCEEDED --> [*]
+    state "Future GPU extension" as G {
+      [*] --> RESERVING
+      RESERVING --> MODEL_LOADING
+      MODEL_LOADING --> INFERENCING
+      INFERENCING --> OUTPUT_VALIDATING
+      OUTPUT_VALIDATING --> [*]
+    }
+```
+
+**Future-only extension:** use typed terminal states for timeout/cancel/lost worker and isolated retries; never claim M0 cancellation or reliable distributed exactly-once semantics.
+
+## Chart 4 — Human-approved movie/character continuity pipeline
+
+```mermaid
+flowchart LR
+    SCRIPT["Concept + versioned script"] --> DIRECTOR["AI director proposes shots"]
+    DIRECTOR --> APPROVAL{"Human approves?"}
+    APPROVAL -- No --> SCRIPT
+    APPROVAL -- Yes --> BIBLE["Character + environment bibles"]
+    BIBLE --> SHOTS["Scene graph -> versioned shots"]
+    SHOTS --> KEYFRAME["Approved appearance + references"]
+    KEYFRAME --> GENERATE["Licensed model generates short takes"]
+    GENERATE --> QA{"Continuity / quality QA"}
+    QA -- "Rejected take" --> RETAKE["Reshoot only the affected shot"]
+    RETAKE --> GENERATE
+    QA -- "Approved" --> TIMELINE["Editable timeline / clips / audio / subtitles"]
+    TIMELINE --> RENDER["FFmpeg assemble and render"]
+    RENDER --> CHECK["Decodability / sync / hashes / provenance"]
+    CHECK --> MOVIE["60s measured proof -> eventually full episode/movie"]
+```
+
+**Core differentiation:** character IDs, reference versions, wardrobe/voice/environment continuity and approved-take history. Reusing a seed/prompt alone does not guarantee identity. Full movies are **shot assemblies**, not one huge model call.
+
+## Chart 5 — Dependency-ordered work graph
+
+```mermaid
+flowchart TD
+    AUDIT["Inspect actual main, open PRs and CI"] --> M02["M0.2 mock app + testable API (PR #8)"]
+    AUDIT --> LICENSE["M0.1 source and model license register"]
+    M02 --> REVIEW["Review and merge CPU mock PR when authorized"]
+    LICENSE --> GATE{"Licenses/commercial rights acceptable?"}
+    REVIEW --> GPU["M0.3 actual Colab GPU/VRAM/disk preflight"]
+    GPU --> FIT{"Checkpoint fits real hardware?"}
+    GATE -- Yes --> FIT
+    FIT -- Yes --> M1["M1 genuine validated PNG"]
+    M1 --> M2["M2 genuine validated Wan-compatible MP4"]
+    M2 --> M3["M3 audio / voice / subtitles / FFmpeg"]
+    M3 --> M4["M4 full creative studio UX"]
+    M4 --> M5["M5 recurring-character editable 60s film"]
+    M5 --> M6["M6 optimization / measured benchmarks"]
+    M6 --> M7["M7 production security + commercial operations"]
+    GATE -- No --> RESEARCH["Find licensed alternate checkpoint"]
+    RESEARCH --> GATE
+    FIT -- No --> SIZE["Smaller/quantized/offload version if supported"]
+    SIZE --> FIT
+```
+
+**Important:** M0.2 and license study can happen concurrently; genuine M1 cannot start until both licensing and actual GPU fit are known.
+
+## Chart 6 — Threat, trust and deployment boundaries
+
+```mermaid
+flowchart LR
+    USER["Untrusted browser/user input"] --> VALIDATE["VideoGen validation / auth later"]
+    VALIDATE --> ALLOW["Approved model + workflow registry"]
+    ALLOW --> JOBS["Persistent job queue"]
+    JOBS --> PRIVATE["Private authenticated worker boundary (future)"]
+    PRIVATE --> ENGINE["Pinned ComfyUI + reviewed custom nodes"]
+    ENGINE --> ARTIFACTS["Validated output bytes"]
+    ARTIFACTS --> STORE["Private storage + project permissions"]
+    STORE --> USER
+    BAD["Arbitrary graph, shell, URL, secret, filesystem path"] -. "Reject" .-> VALIDATE
+```
+
+**M0 security warning:** API has **no login, tenant isolation, public rate limit or quota**. CORS is not authentication. Bind only 127.0.0.1; never deploy M0 directly on the public internet or tunnel a Colab instance to serve strangers.
+
+## Chart 7 — Domain relationships for movie system (target model)
+
+```mermaid
+erDiagram
+    PROJECT ||--o{ GENERATION_JOB : owns
+    PROJECT ||--o{ ASSET : owns
+    MODEL_DEFINITION ||--o{ GENERATION_JOB : executes
+    WORKFLOW_DEFINITION ||--o{ GENERATION_JOB : configures
+    GENERATION_JOB ||--o{ GENERATION_ARTIFACT : yields
+    GENERATION_ARTIFACT }o--|| ASSET : references
+    PROJECT ||--o{ CHARACTER_REFERENCE : contains
+    PROJECT ||--o{ ENVIRONMENT_REFERENCE : contains
+    PROJECT ||--o{ SCENE : contains
+    SCENE ||--o{ SHOT : contains
+    SHOT ||--o{ TAKE : contains
+    TAKE }o--o| GENERATION_ARTIFACT : uses
+    PROJECT ||--o{ TIMELINE_TRACK : contains
+    TIMELINE_TRACK ||--o{ CLIP : contains
+    CLIP }o--o| GENERATION_ARTIFACT : uses
+```
+
+**Scope:** only project, job, mock artifact, events and lightweight model/workflow contracts are currently in PR #8. Character/scene/clip entities are future milestones.
+
+## Chart 8 — Source-of-truth continuity workflow
+
+```mermaid
+flowchart TD
+    START["New ChatGPT/Codex session"] --> MEMORY["Read PROJECT_MEMORY.md"]
+    MEMORY --> GUIDES["Read docs/memory index + AGENTS.md"]
+    GUIDES --> LIVE["Check live GitHub main/PRs/issues/CI"]
+    LIVE --> TASK["Pick smallest unblocked issue"]
+    TASK --> STUDY["Reuse/license/GPU gate for that issue"]
+    STUDY --> IMPLEMENT["Feature branch / tests / code"]
+    IMPLEMENT --> EVIDENCE["Record exact commit/CI/artifacts"]
+    EVIDENCE --> UPDATE["Update PROJECT_MEMORY + status/history + decisions"]
+    UPDATE --> PR["PR review and approved merge"]
+    PR --> START
+```
+
+**Maintenance rule:** diagrams describe *intended* architecture, not proof it exists; edit their captions and state ledger whenever a milestone changes. Avoid diagrams that promise automatic production inference before corresponding tests.
+
+============================================================================================
+FILE: docs/memory/SOURCE_AND_REPOSITORY_LINKS.md
+============================================================================================
+# VideoGen — research sources, official links and upstream study register
+
+**Snapshot date:** 2026-11-16. This is an index, not a statement of current maintenance, fit, license, checkpoint availability or commercial clearance. GitHub and model cards may change. Always independently verify current head and release before integrating.
+
+## 1. VideoGen project sources (authoritative)
+
+- [Main repository](https://github.com/anneshabiswaas22-collab/video-gen)
+- [Current branches](https://github.com/anneshabiswaas22-collab/video-gen/branches)
+- [Open pull requests](https://github.com/anneshabiswaas22-collab/video-gen/pulls)
+- [Issues / milestones](https://github.com/anneshabiswaas22-collab/video-gen/issues)
+- [GitHub Actions](https://github.com/anneshabiswaas22-collab/video-gen/actions)
+- [M0.2 PR #8](https://github.com/anneshabiswaas22-collab/video-gen/pull/8) — real CPU mock, **not** image/video AI inference
+- [M0.2 commit](https://github.com/anneshabiswaas22-collab/video-gen/commit/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37)
+- [Verified application CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390592)
+- [Verified docs CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390571)
+- [Existing initial project roadmap](../ROADMAP.md), [status](../STATUS.md), [architecture](../ARCHITECTURE.md), [feature registry](../FEATURE_REGISTRY.md), [reuse-first](../REUSE_FIRST.md), [security/license](../LICENSE_SECURITY.md), [Colab research plan](../GPU_COLAB.md), [cost plan](../COST_PLAN.md), [movie studio](../MOVIE_STUDIO.md), [test plan](../TEST_PLAN.md), [decisions](../DECISIONS.md), [data model](../DATA_MODEL.md), [API contract](../API_CONTRACT.md), [complete history](../PROJECT_HISTORY.md).
+- **Primary deep-study research and triage:** [PR #8 report](https://github.com/anneshabiswaas22-collab/video-gen/blob/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37/docs/TWO_REPO_DEEP_STUDY.md). See source-level links and code/license analysis there.
+- [Historical 54-repository study catalog](../ALL_RECOMMENDED_REPOSITORIES.txt) — full prior list retained as-is.
+
+## 2. Exactly two deeply studied foundation repositories
+
+### ComfyUI — external execution engine
+
+**Official:** [Comfy-Org/ComfyUI](https://github.com/Comfy-Org/ComfyUI). Snapshot SHA `258f880d0c026bfc22acab679858ab2e2c70573d` (2026-11-15 source inspection).
+
+| Relevant official source | Why it matters |
+|---|---|
+| [LICENSE](https://github.com/Comfy-Org/ComfyUI/blob/258f880d0c026bfc22acab679858ab2e2c70573d/LICENSE) | GPL-3.0 source; assess actual distribution/derivative obligations |
+| [server.py](https://github.com/Comfy-Org/ComfyUI/blob/258f880d0c026bfc22acab679858ab2e2c70573d/server.py) | HTTP/WS API, queue, history, model and node endpoints |
+| [execution.py](https://github.com/Comfy-Org/ComfyUI/blob/258f880d0c026bfc22acab679858ab2e2c70573d/execution.py) | Node graph execution, validation, caches and scheduling |
+| [comfy/model_management.py](https://github.com/Comfy-Org/ComfyUI/blob/258f880d0c026bfc22acab679858ab2e2c70573d/comfy/model_management.py) | GPU/VRAM/device policies |
+| [Official Comfy documentation](https://docs.comfy.org/) | API/workflow guidance; verify versioned behaviors |
+| [Repository tests and CI](https://github.com/Comfy-Org/ComfyUI/tree/258f880d0c026bfc22acab679858ab2e2c70573d/.github/workflows) | Versioning and validation patterns |
+
+**Workflow integration strategy:** a reviewed API-format graph + typed input binding → `POST /prompt` → `prompt_id` → WebSocket/progress/history lookup → controlled, validated and SHA-256-hashed artifact in our storage. Never allow user graph uploads/custom nodes without review. Remote host must be private and authenticated; global cancel/interrupt semantics require investigation. Neither a typed adapter stub nor mock transport is real inference.
+
+### FreeField — manifest and application pattern reference
+
+**Official:** [neuregex/freefield](https://github.com/neuregex/freefield). Snapshot SHA `f0c2358a46c7008ff8503d4324b6cc8bc7657e75` (2026-11-15 source inspection). MIT application source; attached models, weights, workflows and media require separate licensing.
+
+| Relevant official source | Why it matters |
+|---|---|
+| [LICENSE](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/LICENSE) | Verified MIT app-code license |
+| [schema/app.schema.json](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/schema/app.schema.json) | Manifest input schema, node-field bindings, model/output/VRAM metadata |
+| [apps/create-image/app.json](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/apps/create-image/app.json) | Manifest-specified UI, settings and workflow bindings |
+| [apps/cinema-studio/app.json](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/apps/cinema-studio/app.json) | Camera/lens/light controls converted to supported prompting |
+| [apps/cinema-video/workflow.api.json](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/apps/cinema-video/workflow.api.json) | Example ComfyUI API graph |
+| [server/registry.ts](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/server/registry.ts) | AJV schema and graph-binding validation |
+| [server/runner.ts](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/server/runner.ts) | Coercion, ranges, runtime workflow binding |
+| [server/history.ts](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/server/history.ts) | Generation history and media metadata |
+| [server/guard.ts](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/server/guard.ts) | Access gate/caps, not a universal production auth model |
+| [infra/gateway.py](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/infra/gateway.py) | Private ComfyUI gateway/model switching |
+| [tools/comfy_validate.py](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/tools/comfy_validate.py) | CPU graph acceptance checks without generation |
+| [tools/catalog.py](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/tools/catalog.py) | Generated model pack / VRAM estimates |
+| [lab/core.py](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/lab/core.py) | Benchmark/lab repeatability and memory metrics |
+| [.github/workflows/validate.yml](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/.github/workflows/validate.yml) | Validated manifests/tests/builds |
+| [test/runner.test.ts](https://github.com/neuregex/freefield/blob/f0c2358a46c7008ff8503d4324b6cc8bc7657e75/test/runner.test.ts) | Unit tests for workflow form and binding contracts |
+
+**Do not:** copy FreeField proprietary-looking product branding, media galleries, full codebase, or any unauthorized weights. Reimplement *our own* typed, allowlisted version of its useful manifest patterns after M0, not 120 speculative apps.
+
+## 3. Complete 54-repository historical catalog (clickable)
+
+This table is **generated from** the existing `docs/ALL_RECOMMENDED_REPOSITORIES.txt` in this repo. It intentionally lists candidates outside the two primary foundation studies; don't confuse presence with approval. The historical existence check said 53/54 resolved and the Montagio URL was unavailable at that time. Avoid assuming repositories are maintained today.
+
+| No. | Repository | Historical category | Adoption state |
+|---:|---|---|---|
+| 1 | [ComfyUI](https://github.com/Comfy-Org/ComfyUI) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 2 | [FreeField (neuregex)](https://github.com/neuregex/freefield) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 3 | [FreeField (droppedmyza)](https://github.com/droppedmyza/freefield) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 4 | [OpenField (wexloops)](https://github.com/wexloops/openfield) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 5 | [OpenField (VedSoni-dev)](https://github.com/VedSoni-dev/openfield) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 6 | [SwarmUI](https://github.com/mcmonkeyprojects/SwarmUI) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 7 | [Open Generative AI](https://github.com/Anil-matcha/Open-Generative-AI) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 8 | [EasyComfee](https://github.com/sintetizacom/easycomfee) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 9 | [Montagio](https://github.com/Jubzh-29/montagio) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 10 | [Hildegard](https://github.com/baney75/hildegard) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 11 | [Remiqora Video](https://github.com/inikolax/remiqora-video) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 12 | [NVAI-open](https://github.com/Mantux775/NVAI-open) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 13 | [Velorn](https://github.com/VelornLabs/velorn) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 14 | [Vanta](https://github.com/itsjwill/vanta) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 15 | [BeatDesign](https://github.com/BeatAPI/BeatDesign) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 16 | [OpenCut](https://github.com/opencutvideo/Opencut) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 17 | [OpenChatCut](https://github.com/0xsline/OpenChatCut) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 18 | [OpenMontage](https://github.com/bhakimi/openmontage) | CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES | STUDY ONLY — review exact license/model weights/version |
+| 19 | [Wan 2.2](https://github.com/Wan-Video/Wan2.2) | VIDEO AND AUDIO-VIDEO FOUNDATION MODELS | STUDY ONLY — review exact license/model weights/version |
+| 20 | [Wan 2.1](https://github.com/Wan-Video/Wan2.1) | VIDEO AND AUDIO-VIDEO FOUNDATION MODELS | STUDY ONLY — review exact license/model weights/version |
+| 21 | [LTX-2 family](https://github.com/Lightricks/LTX-2) | VIDEO AND AUDIO-VIDEO FOUNDATION MODELS | STUDY ONLY — review exact license/model weights/version |
+| 22 | [HunyuanVideo 1.5](https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5) | VIDEO AND AUDIO-VIDEO FOUNDATION MODELS | STUDY ONLY — review exact license/model weights/version |
+| 23 | [CogVideo](https://github.com/THUDM/CogVideo) | VIDEO AND AUDIO-VIDEO FOUNDATION MODELS | STUDY ONLY — review exact license/model weights/version |
+| 24 | [SkyReels V2](https://github.com/SkyworkAI/SkyReels-V2) | VIDEO AND AUDIO-VIDEO FOUNDATION MODELS | STUDY ONLY — review exact license/model weights/version |
+| 25 | [FramePack](https://github.com/lllyasviel/FramePack) | VIDEO AND AUDIO-VIDEO FOUNDATION MODELS | STUDY ONLY — review exact license/model weights/version |
+| 26 | [Wan2GP / WanGP](https://github.com/deepbeepmeep/Wan2GP) | VIDEO AND AUDIO-VIDEO FOUNDATION MODELS | STUDY ONLY — review exact license/model weights/version |
+| 27 | [MiniMax H3](https://github.com/MiniMax-AI/MiniMax-H3) | VIDEO AND AUDIO-VIDEO FOUNDATION MODELS | STUDY ONLY — review exact license/model weights/version |
+| 28 | [FLUX](https://github.com/black-forest-labs/flux) | IMAGE GENERATION AND EDITING | STUDY ONLY — review exact license/model weights/version |
+| 29 | [Qwen Image](https://github.com/QwenLM/Qwen-Image) | IMAGE GENERATION AND EDITING | STUDY ONLY — review exact license/model weights/version |
+| 30 | [Kokoro](https://github.com/hexgrad/kokoro) | SPEECH, MUSIC AND SOUND | STUDY ONLY — review exact license/model weights/version |
+| 31 | [VibeVoice](https://github.com/microsoft/VibeVoice) | SPEECH, MUSIC AND SOUND | STUDY ONLY — review exact license/model weights/version |
+| 32 | [ACE-Step 1.5](https://github.com/ace-step/ACE-Step-1.5) | SPEECH, MUSIC AND SOUND | STUDY ONLY — review exact license/model weights/version |
+| 33 | [MuseTalk](https://github.com/TMElyralab/MuseTalk) | SPEECH, MUSIC AND SOUND | STUDY ONLY — review exact license/model weights/version |
+| 34 | [faster-whisper](https://github.com/SYSTRAN/faster-whisper) | SPEECH, MUSIC AND SOUND | STUDY ONLY — review exact license/model weights/version |
+| 35 | [LightX2V](https://github.com/ModelTC/LightX2V) | OPTIMIZED INFERENCE / TRAINING | STUDY ONLY — review exact license/model weights/version |
+| 36 | [Cache-DiT](https://github.com/vipshop/cache-dit) | OPTIMIZED INFERENCE / TRAINING | STUDY ONLY — review exact license/model weights/version |
+| 37 | [Nunchaku](https://github.com/nunchaku-tech/nunchaku) | OPTIMIZED INFERENCE / TRAINING | STUDY ONLY — review exact license/model weights/version |
+| 38 | [FastVideo](https://github.com/hao-ai-lab/FastVideo) | OPTIMIZED INFERENCE / TRAINING | STUDY ONLY — review exact license/model weights/version |
+| 39 | [Musubi Tuner](https://github.com/kohya-ss/musubi-tuner) | OPTIMIZED INFERENCE / TRAINING | STUDY ONLY — review exact license/model weights/version |
+| 40 | [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio) | OPTIMIZED INFERENCE / TRAINING | STUDY ONLY — review exact license/model weights/version |
+| 41 | [FFmpeg](https://github.com/FFmpeg/FFmpeg) | VIDEO EDITING, RESTORATION, 3D AND MEDIA PIPELINE | STUDY ONLY — review exact license/model weights/version |
+| 42 | [Editly](https://github.com/mifi/editly) | VIDEO EDITING, RESTORATION, 3D AND MEDIA PIPELINE | STUDY ONLY — review exact license/model weights/version |
+| 43 | [SAM 2](https://github.com/facebookresearch/sam2) | VIDEO EDITING, RESTORATION, 3D AND MEDIA PIPELINE | STUDY ONLY — review exact license/model weights/version |
+| 44 | [rembg](https://github.com/danielgatis/rembg) | VIDEO EDITING, RESTORATION, 3D AND MEDIA PIPELINE | STUDY ONLY — review exact license/model weights/version |
+| 45 | [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) | VIDEO EDITING, RESTORATION, 3D AND MEDIA PIPELINE | STUDY ONLY — review exact license/model weights/version |
+| 46 | [Hunyuan3D 2](https://github.com/Tencent-Hunyuan/Hunyuan3D-2) | VIDEO EDITING, RESTORATION, 3D AND MEDIA PIPELINE | STUDY ONLY — review exact license/model weights/version |
+| 47 | [shadcn/ui](https://github.com/shadcn-ui/ui) | APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS | STUDY ONLY — review exact license/model weights/version |
+| 48 | [React Flow / xyflow](https://github.com/xyflow/xyflow) | APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS | STUDY ONLY — review exact license/model weights/version |
+| 49 | [LangGraph](https://github.com/langchain-ai/langgraph) | APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS | STUDY ONLY — review exact license/model weights/version |
+| 50 | [Keycloak](https://github.com/keycloak/keycloak) | APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS | STUDY ONLY — review exact license/model weights/version |
+| 51 | [Celery](https://github.com/celery/celery) | APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS | STUDY ONLY — review exact license/model weights/version |
+| 52 | [Valkey](https://github.com/valkey-io/valkey) | APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS | STUDY ONLY — review exact license/model weights/version |
+| 53 | [Yjs](https://github.com/yjs/yjs) | APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS | STUDY ONLY — review exact license/model weights/version |
+| 54 | [FastAPI](https://github.com/fastapi/fastapi) | APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS | STUDY ONLY — review exact license/model weights/version |
+
+## 4. Other relevant source and process links
+
+- [Open source stack and shortlisting](../OPEN_SOURCE_STACK.md)
+- [Dependency license register](../DEPENDENCY_REGISTER.csv) — main baseline may be behind PR #8 updates; see [PR dependency version](https://github.com/anneshabiswaas22-collab/video-gen/blob/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37/docs/DEPENDENCY_REGISTER.csv).
+- [Colab notebook](../../notebooks/colab/00_gpu_preflight.ipynb) and [GPU preflight script](../../scripts/gpu_preflight.py) — **hardware inspection only**, not inference proof.
+- [ComfyUI GitHub issue/security pages](https://github.com/Comfy-Org/ComfyUI/security)
+- [FreeField GitHub issue/security pages](https://github.com/neuregex/freefield/issues)
+- [FastAPI](https://github.com/fastapi/fastapi), [Next.js](https://github.com/vercel/next.js), [FFmpeg](https://github.com/FFmpeg/FFmpeg), [Wan2.2](https://github.com/Wan-Video/Wan2.2), [Kokoro](https://github.com/hexgrad/kokoro), [LightX2V](https://github.com/ModelTC/LightX2V)
+
+## 5. What must be rechecked when choosing a dependency
+
+For every component, log **official URL**, repo HEAD and *chosen immutable version*, code license, downstream package dependencies, any GPL/AGPL rights obligations, **model-weight license separately**, commercially permitted uses, uploaded user-data restrictions, downloaded size/checkpoint hash, GPU/VRAM, security advisories, capability coverage and a reproducible test. Label **VERIFIED/PENDING/BLOCKED**. Never choose a benchmark model solely based on README speed/VRAM marketing. Source linking is not a distribution license, and ComfyUI separated into a process doesn't automatically eliminate copyleft obligations.
+
+============================================================================================
+FILE: docs/memory/STATE_EVIDENCE_AND_OPEN_ISSUES.md
+============================================================================================
+# VideoGen — verified evidence, branch/PR state and open backlog
+
+**Observation date:** 2026-11-16 (Asia/Kolkata). GitHub may change after this snapshot. **Always re-fetch live branch refs, PRs, issues and Action runs before modifying code.** This document separates completed CPU work from planned GPU/product work.
+
+## GitHub state at observation
+
+| Object | Source / exact evidence | Status |
+|---|---|---|
+| Default branch | [main](https://github.com/anneshabiswaas22-collab/video-gen/tree/main) | Before new docs commits, `2a88181dc0408f6477dd52a6ed8ded762f149bcd`, documentation-only |
+| Feature branch | [feat/m0-2-mock-studio](https://github.com/anneshabiswaas22-collab/video-gen/tree/feat/m0-2-mock-studio) | Contains working M0.2 code |
+| Open PR | [#8](https://github.com/anneshabiswaas22-collab/video-gen/pull/8) | Open, **ready for review**, not merged at observation; mergeable state clean |
+| PR head commit | [ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37](https://github.com/anneshabiswaas22-collab/video-gen/commit/ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37) | Implementation/test/documentation snapshot |
+| Application CI | [run 43741390592](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390592) | **PASSED**, all jobs |
+| Documentation CI | [run 43741390571](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390571) | **PASSED** |
+| Prior main docs CI | [run 43719613690](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43719613690) | PASSED before M0.2 PR |
+| This documentation handoff | [PROJECT_MEMORY.md](../../PROJECT_MEMORY.md), [memory index](README.md) | Committed directly to main; check latest SHA in GitHub |
+
+**Do not say that PR #8 is merged or that real AI generation succeeded.** An updated `main` might now include handoff-only docs, not the application code. Update the ledger after a real merge, not before.
+
+## Verified implemented components on PR #8
+
+1. Original responsive Next.js/React/TS/Tailwind interface with create/select project, prompt box, mock model choice, real HTTP submit, progress, failure, history and downloadable receipt.
+2. FastAPI/Pydantic with health, models, workflows, project CRUD subset, jobs, events, artifact metadata/download endpoints; OpenAPI available locally.
+3. SQLite durability for projects, jobs, events, artifacts; generated stable IDs, scoped idempotency key and request fingerprint, 409 on conflicting payload.
+4. Executable mock worker (in-process local dev loop with separate test entrypoint) handles `QUEUED -> RUNNING -> SUCCEEDED/FAILED`, simulates failure, persists history and materializes a plain-text receipt.
+5. ComfyUI adapter typed interface and `httpx.MockTransport` tests for approve-only workflow submission; this adapter is **not invoked for real inference**.
+6. Local launch script, runbook and CI to check application + security dependencies.
+
+### Test matrix (latest confirmed PR head)
+
+| Test / operation | Evidence | Outcome |
+|---|---|---|
+| Python Ruff lint | [Application CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390592) | PASSED |
+| Python unit/API/adapter integration | Same run | **7 tests PASSED** |
+| CPU worker mock smoke | Same run | PASSED |
+| Node JavaScript client → live local FastAPI → SQLite → worker → downloaded artifact | Same run | PASSED |
+| Python installation/dependency consistency | Same run | PASSED |
+| Python vulnerability scan | Same run | PASSED for installed set |
+| TypeScript typecheck | Same run | PASSED |
+| ESLint | Same run | PASSED |
+| Frontend tests | Same run | PASSED |
+| Next.js production build | Same run | PASSED |
+| npm production dependency audit | Same run | PASSED |
+| Markdown/documentation integrity | [Docs CI](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390571) | PASSED |
+| Fresh clone on owner's local Windows environment | None | **NOT RUN** |
+| Actual Colab GPU/VRAM/torch/CUDA report | None | **NOT RUN** |
+| Genuine PNG decoded + SHA + actual hardware | None | **NOT RUN** |
+| Genuine MP4 encoded/decoded + frames/fps/codec/VRAM | None | **NOT RUN** |
+| Real voice/audio waveform and sync | None | **NOT RUN** |
+| Auth/multi-tenant security / production recovery | Not implemented | **PENDING** |
+
+Earlier CI had failures in Python import lint, React effect lint and outdated vulnerable dependencies; these were fixed before final green checks. The existence of old failed runs does not invalidate the passing PR-head run, nor does green CI prove the owner's Windows setup works.
+
+## Open issues (exact links)
+
+| Issue | Description | Next acceptance gate |
+|---|---|---|
+| [#1](https://github.com/anneshabiswaas22-collab/video-gen/issues/1) | M0.1 dependency, source/weights/commercial license review | Exact pinned licenses, model card, compatibility |
+| [#2](https://github.com/anneshabiswaas22-collab/video-gen/issues/2) | M0.2 original web/API/mock vertical slice | Review/merge PR #8 after latest CI/manual run |
+| [#3](https://github.com/anneshabiswaas22-collab/video-gen/issues/3) | M0.3 actual Colab hardware preflight | GPU name/VRAM/host RAM/disk/CUDA evidence |
+| [#4](https://github.com/anneshabiswaas22-collab/video-gen/issues/4) | M1 first real image | Approved checkpoint, PNG hash, latency and VRAM |
+| [#5](https://github.com/anneshabiswaas22-collab/video-gen/issues/5) | M2 Wan-compatible real image-to-video | Verified short MP4, real hardware metrics |
+| [#6](https://github.com/anneshabiswaas22-collab/video-gen/issues/6) | M3 Kokoro/FFmpeg speech and post-production | Valid voice+caption+video/audio output and sync |
+| [#7](https://github.com/anneshabiswaas22-collab/video-gen/issues/7) | M5 recurring-character continuity and editable takes | Coherent editable 60-second measured proof |
+
+### Highest priority outstanding tasks
+
+1. Verify latest CI/PR still clean; **human review and authorized merge** PR #8 (avoid changing unrelated code).
+2. Run a **fresh clone** on real Windows with documented commands; fix any reproducible install/runtime issues, pin and commit transitive npm lockfile; update tests and CI.
+3. Complete legal/source/weight license audit (#1), with the selected model's **specific** version and rights.
+4. Collect real hardware preflight (#3) in owner-controlled Colab. Do not invent VRAM.
+5. One genuine PNG through ComfyUI adapter (#4), with model/weights pin, seed/inputs, artifact SHA, decode check, latency, peak VRAM and cost.
+6. Only later real Wan video, Kokoro/FFmpeg and movie/continuity.
+
+## Explicitly deferred or risky areas
+
+- No real GPU adapter integration; allowlisted ComfyUI stub only.
+- No auth/quota/multitenant isolation. **Never publish M0 directly.**
+- No production cancellation/retries/distributed exactly-once scheduling.
+- SQLite + local text files are only the M0 environment; later migration and object storage required.
+- GPU checkpoints and legal commercialization clearance remain unverified.
+- No real user-level usability study and no benchmark results versus commercial competitors.
+
+## Post-change update instructions
+
+When PR #8 merges or a new feature ships, append the *new* branch/commit/PR/CI URLs, test outcomes and actual evidence. Mark earlier content as historical rather than silently overwriting it. New tasks must update [root handoff](../../PROJECT_MEMORY.md), [canon](PROJECT_CANONICAL_HANDOFF.md), [history](CONVERSATION_AND_DECISION_HISTORY.md) and [maintenance protocol](MAINTENANCE_PROTOCOL.md).
+
+============================================================================================
+FILE: docs/memory/DEVELOPER_CONTINUATION_GUIDE.md
+============================================================================================
+# VideoGen — copy-ready instructions for any new ChatGPT or Codex session
+
+This file solves the **long-chat context loss** problem. A developer or AI can resume entirely from GitHub. Start with the text below; it explicitly avoids unavailable prior conversation assumptions.
+
+## Master continuation prompt (copy and send)
+
+> You are the principal software architect, senior full-stack developer, AI-inference/GPU engineer, and reviewer for our original VideoGen AI Creative Studio.
+>
+> **Only active repository:** https://github.com/anneshabiswaas22-collab/video-gen
+>
+> **The original long chat may be unavailable. DO NOT ask me to repeat the project. Read GitHub first.** Start with the root `PROJECT_MEMORY.md`, `AGENTS.md`, `docs/memory/README.md`, `docs/memory/PROJECT_CANONICAL_HANDOFF.md`, `docs/memory/STATE_EVIDENCE_AND_OPEN_ISSUES.md`, `docs/memory/CONVERSATION_AND_DECISION_HISTORY.md`, `docs/memory/ARCHITECTURE_AND_WORKFLOW_DIAGRAMS.md`, `docs/memory/SOURCE_AND_REPOSITORY_LINKS.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md` and `docs/ALL_RECOMMENDED_REPOSITORIES.txt`. Existing documentation is the durable specification, not a substitute for checking code.
+>
+> Read **latest main, latest branches, open PRs/issues, recent commits and CI**. Check whether PR #8 has merged; do not confuse docs-only main with the M0.2 working feature branch. Preserve existing code and update your plan from live state. Record actual status, not imagined features.
+>
+> **Vision:** own a legal, commercial-quality, original image/video/audio/movie creative studio benchmarked against Higgsfield, Runway, Google Flow and Kling. Our differentiators: character continuity, human-reviewed AI direction, editable scene/shot/take history, camera controls supported by actual model, low-cost GPU selection and reproducible provenance.
+>
+> **Architecture:** owned Next.js/React/TS/Tailwind UI, FastAPI/Pydantic v1 API, versioned job/asset/model/workflow schemas, durable status and artifacts, CPU mock first; then a private ComfyUI inference adapter and approved checkpoint on an actual GPU; FFmpeg later for finishing. Start with SQLite and mock for M0. No wholesale source repo copying.
+>
+> **TWO primary research foundations:** ComfyUI (external GPL-3.0 workflow/inference engine) and FreeField (MIT source manifest/workflow design reference). The 54-repository catalog is a historical research list; other repos are secondary supporting candidates. Verify exact source/weight licenses and upstream HEAD before adoption.
+>
+> **Current known baseline:** PR #8 `feat/m0-2-mock-studio` at `ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37` passed Python/API/worker/live JS->API/frontend/build/audits/docs CI on 2026-11-15 and remained open and unmerged at that observation. This is real **CPU mock software** returning text receipts, not genuine AI media. Recheck current GitHub before deciding next work.
+>
+> **Development sequence:** (1) review/fix/merge existing M0.2 PR only with approval; (2) license issues #1; (3) actual Colab GPU preflight issue #3; (4) one genuine licensed model PNG issue #4; (5) Wan-compatible MP4 #5; (6) Kokoro speech/FFmpeg #6; (7) studio and recurring-character 60-second movie #7; (8) measured optimization/security/production.
+>
+> **Budget and security:** no paid APIs/GPU rentals without my approval; no giant weights in first phases, no secrets, untrusted custom ComfyUI nodes, arbitrary uploaded executable graphs or public unauthenticated inference endpoints. Do not assume Google Colab is an always-on production service. Do not implement other repositories or a separate YouTube-channel content project.
+>
+> **Working style:** research deeply when necessary but do not waste time/credits; implement the smallest useful verified vertical slice. Give real tests (PASSED/FAILED/NOT RUN), exact files, commands, version/weight licenses, commit SHAs, CI results, GPU proof when applicable, and a focused PR. Don't auto-merge without approval. Never pretend to have spent two hours thinking or generated output when you haven't.
+>
+> **MANDATORY END OF EVERY TASK:** update `PROJECT_MEMORY.md`, relevant `docs/memory/` files, `docs/STATUS.md`, decision/dependency registers and the task checklist with current evidence, next task, PR/commit/CI links, and dated uncertainties. The repo must remain self-contained for the next agent. Your final answer must contain the GitHub links to those changes.
+
+## Why these instructions matter
+
+Chat history can be inaccessible, truncated or unavailable to another model. GitHub code + dated tracked docs are durable across new chats. **Do not claim you accessed private chat transcripts you didn't actually retrieve.** This prompt provides all known, approved requirements as source material; inspect the GitHub repository to refresh current implementation truth.
+
+## Immediate local reviewer path (M0 branch until merged)
+
+```bash
+git clone https://github.com/anneshabiswaas22-collab/video-gen.git
+cd video-gen
+git switch feat/m0-2-mock-studio
+
+python -m venv .venv
+# Windows Git Bash:
+source .venv/Scripts/activate
+python -m pip install -e ".[dev]"
+npm install --prefix apps/web
+
+# Optional checks from repo root:
+ruff check services integrations tests scripts/smoke_mock.py
+pytest
+python -m scripts.smoke_mock
+npm run typecheck --prefix apps/web
+npm run lint --prefix apps/web
+npm run test --prefix apps/web
+npm run build --prefix apps/web
+
+# Starts local mock web + API:
+bash scripts/dev.sh
+```
+
+Open http://127.0.0.1:3000 (web) and http://127.0.0.1:8000/docs (FastAPI). Mock outputs are *text*, not real AI media. **Never bind the M0 API externally**.
+
+## Suggested next-agent first response structure
+
+1. **Live repo verified**: latest main SHA, branches, PR #8 status, required docs read, exact files, CI.
+2. **Scope**: one issue/milestone and its dependencies.
+3. **Technology reuse and license gate**: best existing solution and why, pinned source/code/weights.
+4. **Implementation**: actual files changed, functional behavior, no fabricated media.
+5. **Evidence**: tests with commands and log links; GPU hardware and decoded output when relevant.
+6. **GitHub**: feature branch, commit SHA, PR, no unapproved merge.
+7. **Memory updated**: links to current handoff and next task; no reliance on chat.
+
+## Reminder for advanced future features
+
+Do not start hundreds of model integrations, multi-gigabyte checkpoints, full movie editor, multi-tenant auth stack, billing or finetuning before the M0/M1 validation gates. First accepted 60-second recurring-character film is later; movies of 20–120 minutes will come from editable short shots and a timeline, not a single model call.
+
+============================================================================================
+FILE: docs/ALL_RECOMMENDED_REPOSITORIES.txt
+============================================================================================
+VIDEOGEN — PRIOR RECOMMENDED PUBLIC REPOSITORIES / STUDY CATALOG
+Destination: https://github.com/anneshabiswaas22-collab/video-gen
+Catalog prepared: 2026-11-15
+GitHub URL existence check: 53/54 repository URLs resolved on 2026-11-15; the historical Montagio URL returned 404. This checks repository availability only, NOT maintenance, license or model functionality.
+Purpose: one self-contained reference of repos previously suggested in our AI image/video/audio/movie studio discussions.
+
+IMPORTANT
+- This is a historical STUDY/INTEGRATION LIST, not proof every URL currently exists or remains actively maintained.
+- Verify actual upstream repository owner, latest branch/tag/commit, maintenance state, security, code LICENSE and model-weight LICENSE at implementation time.
+- Public code does not mean that hosted/proprietary model weights are downloadable or free to run. API wrappers may incur fees.
+- Never clone all repos into our monorepo. Build a proprietary/original product layer and integrate selected components as versioned dependencies/services.
+- FreeField/OpenField variants below are DISTINCT repositories and should not be conflated.
+- The original K 3.1 Pro name was ambiguous (Kling vs Kimi) and is NOT an approved open video model assumption.
+- No rankings, VRAM numbers, speed claims, commercial license clearance or GPU test results are guaranteed here.
+
+ARCHITECTURE PRIORITY: ComfyUI + optional FreeField workflows -> Wan 2.2 (video) + FLUX/Qwen (images) + Kokoro/ACE-Step (audio) + FFmpeg; LightX2V is a benchmark candidate. Our own frontend, API, job queue and movie workflow are the software we build.
+
+========================================================================
+A. CORE GENERATION PLATFORMS / HIGGSFIELD-STYLE STUDIO REFERENCES
+========================================================================
+01. ComfyUI
+    REPO: https://github.com/Comfy-Org/ComfyUI
+    STUDY: Primary workflow/inference engine; first-priority integration
+02. FreeField (neuregex)
+    REPO: https://github.com/neuregex/freefield
+    STUDY: Creative studio and ComfyUI workflows; reference/reuse selected workflows
+03. FreeField (droppedmyza)
+    REPO: https://github.com/droppedmyza/freefield
+    STUDY: Alternate FreeField project; investigate separately
+04. OpenField (wexloops)
+    REPO: https://github.com/wexloops/openfield
+    STUDY: Characters, camera, reference/movie tooling; study
+05. OpenField (VedSoni-dev)
+    REPO: https://github.com/VedSoni-dev/openfield
+    STUDY: Alternate OpenField; study, distinguish from wexloops
+06. SwarmUI
+    REPO: https://github.com/mcmonkeyprojects/SwarmUI
+    STUDY: Alternative self-hosted generation UI; study
+07. Open Generative AI
+    REPO: https://github.com/Anil-matcha/Open-Generative-AI
+    STUDY: Many hosted model APIs; API fees, not free weights
+08. EasyComfee
+    REPO: https://github.com/sintetizacom/easycomfee
+    STUDY: Higgsfield-style ComfyUI frontend reference
+09. Montagio
+    REPO: https://github.com/Jubzh-29/montagio
+    STUDY: Historical cinematic effects suggestion. URL returned 404 on 2026-11-15; NOT AVAILABLE / NOT APPROVED for integration.
+10. Hildegard
+    REPO: https://github.com/baney75/hildegard
+    STUDY: AI director, character/camera patterns; license check
+11. Remiqora Video
+    REPO: https://github.com/inikolax/remiqora-video
+    STUDY: Storyboarding and film assembly reference; experimental
+12. NVAI-open
+    REPO: https://github.com/Mantux775/NVAI-open
+    STUDY: Desktop multimedia creative studio reference
+13. Velorn
+    REPO: https://github.com/VelornLabs/velorn
+    STUDY: AI video editing / MCP integration patterns
+14. Vanta
+    REPO: https://github.com/itsjwill/vanta
+    STUDY: Programmatic video, speech, music and captions reference
+15. BeatDesign
+    REPO: https://github.com/BeatAPI/BeatDesign
+    STUDY: Infinite canvas and creative agent UX; may need API provider
+16. OpenCut
+    REPO: https://github.com/opencutvideo/Opencut
+    STUDY: Web video editor and timeline study; verify repo URL/current state
+17. OpenChatCut
+    REPO: https://github.com/0xsline/OpenChatCut
+    STUDY: AI-agent timeline editor and MCP; assess AGPL
+18. OpenMontage
+    REPO: https://github.com/bhakimi/openmontage
+    STUDY: Agent-run AI filmmaking orchestration ideas; verify maturity
+
+========================================================================
+B. VIDEO AND AUDIO-VIDEO FOUNDATION MODELS
+========================================================================
+19. Wan 2.2
+    REPO: https://github.com/Wan-Video/Wan2.2
+    STUDY: Primary video model candidate; select checkpoint after GPU preflight
+20. Wan 2.1
+    REPO: https://github.com/Wan-Video/Wan2.1
+    STUDY: Older/smaller checkpoint reference for constrained VRAM
+21. LTX-2 family
+    REPO: https://github.com/Lightricks/LTX-2
+    STUDY: Audio-video generation; exact version and weight license require confirmation
+22. HunyuanVideo 1.5
+    REPO: https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5
+    STUDY: High-quality video alternative; evaluate VRAM and commercial terms
+23. CogVideo
+    REPO: https://github.com/THUDM/CogVideo
+    STUDY: Open video model research and alternative inference
+24. SkyReels V2
+    REPO: https://github.com/SkyworkAI/SkyReels-V2
+    STUDY: Long video generation research
+25. FramePack
+    REPO: https://github.com/lllyasviel/FramePack
+    STUDY: Memory-conscious long-video workflow research
+26. Wan2GP / WanGP
+    REPO: https://github.com/deepbeepmeep/Wan2GP
+    STUDY: Optimized/multi-model lower-memory video inference
+27. MiniMax H3
+    REPO: https://github.com/MiniMax-AI/MiniMax-H3
+    STUDY: Previously discussed as a potential public model; CHECK official availability and rights, do not rely on prior claims
+
+========================================================================
+C. IMAGE GENERATION AND EDITING
+========================================================================
+28. FLUX
+    REPO: https://github.com/black-forest-labs/flux
+    STUDY: Image generation; choose permitted checkpoint (e.g. Schnell where appropriate)
+29. Qwen Image
+    REPO: https://github.com/QwenLM/Qwen-Image
+    STUDY: Text-image and image editing / character keyframes
+
+========================================================================
+D. SPEECH, MUSIC AND SOUND
+========================================================================
+30. Kokoro
+    REPO: https://github.com/hexgrad/kokoro
+    STUDY: Lightweight text-to-speech / narration
+31. VibeVoice
+    REPO: https://github.com/microsoft/VibeVoice
+    STUDY: Multi-speaker speech research; check variant/license
+32. ACE-Step 1.5
+    REPO: https://github.com/ace-step/ACE-Step-1.5
+    STUDY: Music generation candidate
+33. MuseTalk
+    REPO: https://github.com/TMElyralab/MuseTalk
+    STUDY: Speech-driven lip synchronization
+34. faster-whisper
+    REPO: https://github.com/SYSTRAN/faster-whisper
+    STUDY: Transcription, subtitles, alignment pipeline
+
+========================================================================
+E. OPTIMIZED INFERENCE / TRAINING
+========================================================================
+35. LightX2V
+    REPO: https://github.com/ModelTC/LightX2V
+    STUDY: Fast/optimized diffusion video inference; benchmark against baseline
+36. Cache-DiT
+    REPO: https://github.com/vipshop/cache-dit
+    STUDY: Caching and diffusion speed research; quality checks required
+37. Nunchaku
+    REPO: https://github.com/nunchaku-tech/nunchaku
+    STUDY: Quantized inference accelerator; compatibility check
+38. FastVideo
+    REPO: https://github.com/hao-ai-lab/FastVideo
+    STUDY: Video inference/training acceleration research
+39. Musubi Tuner
+    REPO: https://github.com/kohya-ss/musubi-tuner
+    STUDY: LoRA/fine-tuning when GPU and legal dataset available
+40. DiffSynth-Studio
+    REPO: https://github.com/modelscope/DiffSynth-Studio
+    STUDY: Training and inference framework reference
+
+========================================================================
+F. VIDEO EDITING, RESTORATION, 3D AND MEDIA PIPELINE
+========================================================================
+41. FFmpeg
+    REPO: https://github.com/FFmpeg/FFmpeg
+    STUDY: Essential video/audio encode, mix, mux, trim, export
+42. Editly
+    REPO: https://github.com/mifi/editly
+    STUDY: Programmatic media composition and transitions
+43. SAM 2
+    REPO: https://github.com/facebookresearch/sam2
+    STUDY: Image and video segmentation / masks
+44. rembg
+    REPO: https://github.com/danielgatis/rembg
+    STUDY: Background removal
+45. Real-ESRGAN
+    REPO: https://github.com/xinntao/Real-ESRGAN
+    STUDY: Enhancement and upscaling
+46. Hunyuan3D 2
+    REPO: https://github.com/Tencent-Hunyuan/Hunyuan3D-2
+    STUDY: Future image-to-3D and environment research
+
+========================================================================
+G. APP FRAMEWORK, WORKFLOW UI, JOBS, ACCOUNTS
+========================================================================
+47. shadcn/ui
+    REPO: https://github.com/shadcn-ui/ui
+    STUDY: Reusable UI components, avoid recreating widgets
+48. React Flow / xyflow
+    REPO: https://github.com/xyflow/xyflow
+    STUDY: Workflow node / visual editor
+49. LangGraph
+    REPO: https://github.com/langchain-ai/langgraph
+    STUDY: Director agents and stateful orchestration
+50. Keycloak
+    REPO: https://github.com/keycloak/keycloak
+    STUDY: Authentication/role management candidate
+51. Celery
+    REPO: https://github.com/celery/celery
+    STUDY: Asynchronous job scheduling, retry, worker tasks
+52. Valkey
+    REPO: https://github.com/valkey-io/valkey
+    STUDY: Queue/cache data store candidate
+53. Yjs
+    REPO: https://github.com/yjs/yjs
+    STUDY: Optional collaborative timeline/project editing
+54. FastAPI
+    REPO: https://github.com/fastapi/fastapi
+    STUDY: Python REST backend framework
+
+OTHER PRODUCTS/SERVICES PREVIOUSLY DISCUSSED (NOT OPEN SOURCE REPO ENGINES)
+- Higgsfield, Runway, Google Flow, Kling, Sora and Veo: competitive benchmarks; using APIs does not give ownership of underlying model weights.
+- Kaggle and Google Colab: managed experimentation/compute environments, NOT open-source video foundation models or production GPUs.
+- Tripo3D, Meshy and World Labs Marble: potential hosted 3D/scene tools; the service URLs alone do not supply reusable source repositories.
+- MiniMax H3 and Kimi/K3.1 were mentioned in earlier chat. Verify official repositories, checkpoint licensing and the exact intended model name before planning integration.
+
+IMPLEMENTATION ORDER
+M0: audit repo versions/licenses + scaffold API/frontend/mock worker.
+M1: first genuine PNG through a GPU-compatible image model.
+M2: first genuine video MP4 through compatible Wan checkpoint.
+M3: voice, subtitles, FFmpeg export.
+M4-M5: original editor/AI director, character identity, reshoots, timeline.
+M6-M7: optimization, benchmark, security, commercial deployment.
+
+TOTAL LISTED GITHUB REPOSITORIES: 54
+See docs/OPEN_SOURCE_STACK.md, docs/REUSE_FIRST.md, docs/LICENSE_SECURITY.md and docs/ROADMAP.md for authoritative selection policy.
