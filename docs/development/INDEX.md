@@ -9,3 +9,5 @@ Current status, task entrypoints, technical debt and continuation.
 - [WORK_PROGRESS.txt](WORK_PROGRESS.txt)
 
 See [project structure](../../PROJECT_STRUCTURE.md) and [all documentation](../README.md).
+
+- [Current implementation evidence](IMPLEMENTATION_PROGRESS.md)

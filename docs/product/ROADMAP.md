@@ -1,3 +1,10 @@
+> **Current delivery:** Original M0 CPU application recovered and extended with
+> the typed English-practice slice. See [implementation progress](../development/IMPLEMENTATION_PROGRESS.md)
+> and [test evidence](../quality/IMPLEMENTATION_VALIDATION.md). T0 is a bounded
+> developer-authored phrase prototype; educator review and general AI quality
+> remain pending. The original milestone definitions below are acceptance gates,
+> not claims that every item is completed.
+
 # Execution roadmap and measurable completion criteria
 
 Stages are dependency-ordered, **not time or cost promises**. Codex Cloud can write/test code; GPU verification is separate. Track each milestone with GitHub Issues and PRs.

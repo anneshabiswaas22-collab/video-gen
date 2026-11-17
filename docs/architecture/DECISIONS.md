@@ -70,3 +70,25 @@ install/compilation is run; link/path/import inspection is static only. See
 [the move record](../repository/FUNCTIONAL_REORGANIZATION.md) and
 [gallery provenance](../repository/GALLERY_CONSOLIDATION.md). Git history, all
 starting files and exact original import bytes remain recoverable.
+
+## ADR-015 — Recover the owned foundation and deliver English practice separately
+
+**ACCEPTED, 2026-11-17, owner authorized coding/tests.** The exact earlier owned
+M0 branch is accessible and was selectively recovered, with source hashes.
+Extend it in place: shared FastAPI/worker/Next entrypoints and feature-owned
+English behavior, routes, storage, UI and tests. Root npm workspaces prevent
+duplicate React copies for components outside apps/web. Root Python packaging
+explicitly maps the feature and its lesson resource; no archived engine imports.
+
+First delivery uses a finite original phrase set and optional protocol to an
+already-running local model. Reject unsupported text honestly; do not fabricate
+AI output, run paid APIs or download weights to make the demo look complete.
+Store practice text only on explicit save consent; cookie ownership, deletion,
+expiry, safe failures and replay behavior are tested. The creative API remains
+single-user localhost development; production authentication is still required.
+
+Alternatives rejected: rebuild the recovered studio, copy FreeField's entire UI,
+claim a rules engine is general AI, or install an unapproved large model.
+Teacher review, model quality, speech capture/live avatars and GPU media remain
+next independent gates. Current local evidence is in
+[IMPLEMENTATION_VALIDATION.md](../quality/IMPLEMENTATION_VALIDATION.md).

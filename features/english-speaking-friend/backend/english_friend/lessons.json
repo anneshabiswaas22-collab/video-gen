@@ -1,0 +1,191 @@
+{
+  "source_notice": "Original practice examples authored for this repository. They have not been independently reviewed by an English educator or evaluated as a teaching curriculum.",
+  "coverage_notice": "Bounded offline phrase matching, not a language model, general grammar checker, speech assessment, or general translator. Only listed scenario-specific inputs and suggested English retries are supported. Unicode canonical form, letter case and whitespace are normalized; punctuation and additional words are not inferred.",
+  "scenarios": [
+    {
+      "id": "everyday",
+      "title": "Everyday conversation",
+      "description": "Try a listed sentence about your day, family or English practice. Bangla support is limited to the authored examples.",
+      "starter": "Let's try a phrase together. Choose an example below, then try the English suggestion.",
+      "example_inputs": ["Yesterday I go market.", "I've got two brothers.", "আমি ইংরেজিতে কথা বলতে চাই।", "I am coming tomorrow yesterday."]
+    },
+    {
+      "id": "work",
+      "title": "At work",
+      "description": "Practice listed phrases about meetings, presentations and asking someone to slow down.",
+      "starter": "Choose a work example. You can edit it, but a changed sentence may be outside this small practice set.",
+      "example_inputs": ["Today office-e amar presentation ache, I am little tension.", "I have a meeting in Monday.", "আপনি কি একটু ধীরে বলবেন?", "আমি কাজটা শেষ করেছি।"]
+    },
+    {
+      "id": "travel",
+      "title": "Getting around",
+      "description": "Practice listed phrases about a station, the airport, a ticket and a polite request.",
+      "starter": "Let's practice a travel phrase. Choose one of the examples to begin.",
+      "example_inputs": ["Where is train station?", "I want go airport.", "এই বাস কি বিমানবন্দরে যায়?", "আমার একটি টিকিট লাগবে।", "Could you help me, please?"]
+    }
+  ],
+  "lessons": [
+    {
+      "scenario_id": "everyday",
+      "inputs": ["Yesterday I go market.", "Yesterday I go market"],
+      "kind": "correction",
+      "suggestions": ["I went to the market yesterday."],
+      "explanation": "For this past event, use 'went', the past form of 'go'. 'To the market' names the destination.",
+      "reply": "You could say, 'I went to the market yesterday.' Try the phrase if you would like.",
+      "next_question": "What did you buy at the market?"
+    },
+    {
+      "scenario_id": "everyday",
+      "inputs": ["He don't like tea.", "He don't like tea"],
+      "kind": "correction",
+      "suggestions": ["He doesn't like tea."],
+      "explanation": "In standard English for this example, use 'doesn't' with 'he'. The main verb stays 'like'.",
+      "reply": "For this practice sentence, you could say, 'He doesn't like tea.'",
+      "next_question": "What does he like to drink?"
+    },
+    {
+      "scenario_id": "everyday",
+      "inputs": ["I am agree.", "I am agree"],
+      "kind": "correction",
+      "suggestions": ["I agree."],
+      "explanation": "'Agree' is the verb in this sentence, so it does not need 'am'.",
+      "reply": "You could say, 'I agree.'",
+      "next_question": "What do you agree about?"
+    },
+    {
+      "scenario_id": "everyday",
+      "inputs": ["আমি ইংরেজিতে কথা বলতে চাই।", "আমি ইংরেজিতে কথা বলতে চাই", "Ami ingrejite kotha bolte chai.", "Ami ingrejite kotha bolte chai"],
+      "kind": "translation",
+      "suggestions": ["I want to speak English."],
+      "explanation": "This authored Bangla example expresses a wish to speak English. 'Want to' is followed by the verb 'speak'.",
+      "reply": "In English, you can say, 'I want to speak English.' We can practice one phrase at a time.",
+      "next_question": "What would you like to talk about in English?"
+    },
+    {
+      "scenario_id": "everyday",
+      "inputs": ["আমার মাথায় আসছে না কী বলব।", "আমার মাথায় আসছে না কী বলব", "Amar mathay aschhe na ki bolbo.", "Amar mathay aschhe na ki bolbo"],
+      "kind": "translation",
+      "suggestions": ["I can't think of what to say.", "I don't know what to say."],
+      "explanation": "These are natural expressions for this example's meaning. A word-for-word translation of 'মাথায় আসছে না' would sound unusual here.",
+      "reply": "You could say, 'I can't think of what to say.' Another option is, 'I don't know what to say.'",
+      "next_question": "Would you like to try the shorter phrase?"
+    },
+    {
+      "scenario_id": "everyday",
+      "inputs": ["আমি ইংরেজিতে কথা বলতে চাই, কিন্তু ভুল করলে লজ্জা লাগে।", "আমি ইংরেজিতে কথা বলতে চাই, কিন্তু ভুল করলে লজ্জা লাগে", "Ami ingrejite kotha bolte chai, kintu bhul korle lojja lage.", "Ami ingrejite kotha bolte chai, kintu bhul korle lojja lage"],
+      "kind": "translation",
+      "suggestions": ["I want to speak English, but I feel embarrassed when I make mistakes.", "I'm nervous about making mistakes when I speak English."],
+      "explanation": "The first option keeps both the wish to speak and the embarrassment about mistakes. The second is a shorter alternative focused on the worry.",
+      "reply": "You can say, 'I want to speak English, but I feel embarrassed when I make mistakes.' We can go slowly.",
+      "next_question": "Which of these phrases would you like to try?"
+    },
+    {
+      "scenario_id": "everyday",
+      "inputs": ["I've got two brothers.", "I've got two brothers", "I’ve got two brothers.", "I’ve got two brothers", "I have two brothers.", "I have two brothers"],
+      "kind": "accepted",
+      "suggestions": [],
+      "explanation": "'I've got two brothers' and 'I have two brothers' are both acceptable ways to express this meaning.",
+      "reply": "That is an acceptable English phrase. You do not need to change it for this practice example.",
+      "next_question": "Would you like to tell me about your family?"
+    },
+    {
+      "scenario_id": "everyday",
+      "inputs": ["I am coming tomorrow yesterday.", "I am coming tomorrow yesterday"],
+      "kind": "clarification",
+      "suggestions": [],
+      "explanation": "'Yesterday' and 'tomorrow' point to different times. I need your intended time before choosing an English expression.",
+      "reply": "Let's check what you mean before changing your sentence.",
+      "next_question": "Do you mean you came yesterday, or you will come tomorrow?"
+    },
+    {
+      "scenario_id": "work",
+      "inputs": ["Today office-e amar presentation ache, I am little tension.", "Today office-e amar presentation ache, I am little tension"],
+      "kind": "translation",
+      "suggestions": ["I have a presentation at work today, and I'm a little nervous."],
+      "explanation": "In this authored mixed Bangla-English example, the speaker has a presentation today and feels nervous. 'A little nervous' expresses that feeling naturally.",
+      "reply": "You could say, 'I have a presentation at work today, and I'm a little nervous.'",
+      "next_question": "Would you like to practice your opening?"
+    },
+    {
+      "scenario_id": "work",
+      "inputs": ["I have a meeting in Monday.", "I have a meeting in Monday"],
+      "kind": "correction",
+      "suggestions": ["I have a meeting on Monday."],
+      "explanation": "Use 'on' with a named day in this expression: 'on Monday'.",
+      "reply": "You could say, 'I have a meeting on Monday.'",
+      "next_question": "What is the meeting about?"
+    },
+    {
+      "scenario_id": "work",
+      "inputs": ["I am working here since two years.", "I am working here since two years"],
+      "kind": "correction",
+      "suggestions": ["I have been working here for two years."],
+      "explanation": "For work that started in the past and is still continuing, this expression uses 'have been working'. Use 'for' with the duration 'two years'.",
+      "reply": "You could say, 'I have been working here for two years.'",
+      "next_question": "What do you enjoy about your work?"
+    },
+    {
+      "scenario_id": "work",
+      "inputs": ["আপনি কি একটু ধীরে বলবেন?", "আপনি কি একটু ধীরে বলবেন", "Apni ki ektu dhire bolben?", "Apni ki ektu dhire bolben"],
+      "kind": "translation",
+      "suggestions": ["Could you speak a little more slowly?"],
+      "explanation": "This is a polite request to slow down. 'Could you' makes the request politely in this example.",
+      "reply": "You can say, 'Could you speak a little more slowly?'",
+      "next_question": "Would you like to try saying that request?"
+    },
+    {
+      "scenario_id": "work",
+      "inputs": ["আমি কাজটা শেষ করেছি।", "আমি কাজটা শেষ করেছি", "Ami kajta shesh korechi.", "Ami kajta shesh korechi"],
+      "kind": "translation",
+      "suggestions": ["I have finished the task."],
+      "explanation": "This authored phrase reports that the task is now complete. It does not add a new task, deadline or promise.",
+      "reply": "You can say, 'I have finished the task.'",
+      "next_question": "What would you like to do next?"
+    },
+    {
+      "scenario_id": "travel",
+      "inputs": ["Where is train station?", "Where is train station"],
+      "kind": "correction",
+      "suggestions": ["Where is the train station?"],
+      "explanation": "For this question about a particular station, use 'the train station'.",
+      "reply": "You could ask, 'Where is the train station?'",
+      "next_question": "Would you like to practice this question?"
+    },
+    {
+      "scenario_id": "travel",
+      "inputs": ["I want go airport.", "I want go airport"],
+      "kind": "correction",
+      "suggestions": ["I want to go to the airport."],
+      "explanation": "Use 'want to go'. 'To the airport' names the destination in this example.",
+      "reply": "You could say, 'I want to go to the airport.'",
+      "next_question": "How would you like to get there?"
+    },
+    {
+      "scenario_id": "travel",
+      "inputs": ["এই বাস কি বিমানবন্দরে যায়?", "এই বাস কি বিমানবন্দরে যায়", "Ei bus ki bimanbondore jay?", "Ei bus ki bimanbondore jay"],
+      "kind": "translation",
+      "suggestions": ["Does this bus go to the airport?"],
+      "explanation": "This asks about the bus route. It is not a claim that the bus actually goes to the airport.",
+      "reply": "You can ask, 'Does this bus go to the airport?'",
+      "next_question": "Would you like to try asking that question?"
+    },
+    {
+      "scenario_id": "travel",
+      "inputs": ["আমার একটি টিকিট লাগবে।", "আমার একটি টিকিট লাগবে", "Amar ekti ticket lagbe.", "Amar ekti ticket lagbe"],
+      "kind": "translation",
+      "suggestions": ["I need a ticket."],
+      "explanation": "This expresses a need for a ticket. The original phrase does not specify a destination or a one-way or return ticket, so neither is added.",
+      "reply": "You can say, 'I need a ticket.'",
+      "next_question": "Where would you like to travel?"
+    },
+    {
+      "scenario_id": "travel",
+      "inputs": ["Could you help me, please?", "Could you help me, please"],
+      "kind": "accepted",
+      "suggestions": [],
+      "explanation": "This is an acceptable polite request for help. No correction is needed for this practice example.",
+      "reply": "That is a polite English request. You can use it as it is.",
+      "next_question": "What kind of help would you like to ask for?"
+    }
+  ]
+}

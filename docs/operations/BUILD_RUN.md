@@ -1,3 +1,102 @@
+# Run the recovered studio and English companion
+
+This implementation supersedes the earlier documentation-only setup notes below.
+It is a local CPU prototype; neither server is intended for public deployment.
+Use the existing checkout rather than creating a worktree.
+
+## Install (Linux / WSL, Python 3.11+, Node 22+)
+
+From the repository root:
+
+```sh
+python -m venv .venv
+.venv/bin/python -m pip install --upgrade pip==26.2
+.venv/bin/python -m pip install -r requirements-dev.lock
+.venv/bin/python -m pip install --no-deps -e .
+npm ci --ignore-scripts --no-fund
+npm run dev
+```
+
+The root Python package maps `english_friend` to its feature-owned backend and
+includes `lessons.json`; root npm workspaces share React/Next between entrypoints
+and feature components. Locks pin the tested Python development environment and
+npm dependency graph. No archived engine, checkpoint or paid provider is installed.
+
+The launcher uses `.venv/bin/python`, loopback API port8001 and web port3000.
+Open the local web interface and choose English friend (`/practice`) or use the
+creative studio. A mock job returns a text receipt, never generated media.
+Shell variables `VIDEOGEN_API_PORT` and `VIDEOGEN_WEB_PORT` override ports; the
+launcher sets the matching API URL and CORS web origin. It checks API readiness
+and stops both processes when either exits. Stop with Ctrl-C.
+
+For a port conflict, for example:
+
+```sh
+VIDEOGEN_WEB_PORT=3002 npm run dev
+```
+
+Data defaults to ignored `.local/videogen/`; export `VIDEOGEN_DATA_DIR` for an
+isolated location. `.env.example` is documentation, not an automatically sourced
+shell file. Export needed variables explicitly. Do not commit data or secrets.
+
+## Optional existing local AI model
+
+Built-in practice works without model credentials. To use a model you already
+installed and started on loopback:
+
+```sh
+export VIDEOGEN_COACH_PROVIDER=ollama
+export OLLAMA_BASE_URL=http://127.0.0.1:11434
+export OLLAMA_MODEL=YOUR_EXISTING_LOCAL_MODEL
+npm run dev
+```
+
+The app never installs or starts a model. It rejects remote URLs and redirects,
+uses bounded structured output and displays explicit errors without switching
+providers silently. Configuration is not proof of model readiness or quality.
+No real model was queried in this delivery. Review model rights/hardware/costs
+before selecting or downloading weights. No paid-service use is authorized here.
+
+## Verification commands
+
+```sh
+.venv/bin/python -m pytest
+.venv/bin/ruff check services integrations tests features/english-speaking-friend/backend features/english-speaking-friend/tests scripts/development/smoke_mock.py
+.venv/bin/python -m scripts.development.smoke_mock
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npm audit --omit=dev --audit-level=high
+.venv/bin/python -m pip_audit --local
+python scripts/maintenance/check_docs.py
+python scripts/maintenance/check_structure.py
+```
+
+Run the live JavaScript contract test while the API is running:
+`node apps/web/test/live-api.mjs` (defaults to loopback8001).
+
+For browser tests, install the optional tool with
+`.venv/bin/python -m pip install -e '.[browser]'`, then use Playwright's supported
+Chromium install or an existing system Chromium. Start both servers with a fresh
+`VIDEOGEN_DATA_DIR` so tests do not alter personal projects/practice. Then:
+
+```sh
+VIDEOGEN_TEST_WEB_URL=http://127.0.0.1:3002 \
+VIDEOGEN_BROWSER_EXECUTABLE=/usr/bin/chromium \
+.venv/bin/python tests/browser/smoke.py
+```
+
+Omit the executable variable when using Playwright's bundled browser. Browser
+artifacts default to ignored `.local/browser/`. Test-generated projects use unique
+names; the practice sessions they create are deleted. Audio playback availability
+is checked, but no claim is made that a voice was heard or recording works.
+
+[Current evidence](../quality/IMPLEMENTATION_VALIDATION.md) distinguishes real CPU
+execution, mocked provider protocol and unrun model/hardware checks.
+
+## Historical setup records (preserved)
+
 # Path migration and current execution policy
 
 Read [PROJECT_STRUCTURE.md](../../PROJECT_STRUCTURE.md) for current homes.

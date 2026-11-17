@@ -56,3 +56,10 @@ Review model versions, upstream commit SHAs, licenses, hosted API pricing and GP
 - [Security findings and review limits](../AnalyseFuture/security-reports/SECURITY_AUDIT.txt)
 - [Validation outcomes](../AnalyseFuture/migration-history/TEST_AND_VALIDATION_REPORT.txt)
 - [Future product vision and roadmap](product/FUTURE_ROADMAP.txt)
+
+## Working application and implementation evidence
+
+- [Run the local application](operations/BUILD_RUN.md)
+- [Completed and remaining integrations](development/IMPLEMENTATION_PROGRESS.md)
+- [Current validation outcomes](quality/IMPLEMENTATION_VALIDATION.md)
+- [Recovered original source provenance](repository/RECOVERED_APPLICATION_SOURCE.json)

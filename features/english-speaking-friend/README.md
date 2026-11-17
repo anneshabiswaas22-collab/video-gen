@@ -1,23 +1,55 @@
-# English-speaking AI friend
+# English-speaking friend
 
-Practise English with a friendly speaking avatar. The learner can speak English, Bangla or another supported language, receive a natural English version of their intended meaning, hear gentle suggestions such as “You could say it this way,” and continue the conversation.
+A working local typed-practice prototype now lives in this feature folder.
+The [full project idea](PROJECT_IDEA.txt) remains the long-term specification.
 
-**Current status: IDEA.** This folder contains the feature brief and [detailed project idea](PROJECT_IDEA.txt). There is no implemented tutor, live avatar service, verified translation coverage or measured learning outcome in this checkout.
+| Folder | Responsibility |
+|---|---|
+| `backend/english_friend/coach.py`, `lessons.json` | 18 original examples across everyday/work/travel; Bangla, transliteration, code-switching, valid variants, ambiguity and accepted retries |
+| `backend/english_friend/providers.py` | Explicit offline mode or optional already-running local Ollama model; strict structured output and safe errors |
+| `backend/english_friend/routes.py`, `storage.py` | Owner-cookie scoped sessions, request idempotency, opt-in retention and deletion |
+| `web/` | Accessible practice room, illustrated characters, editable examples, suggestions, retry and saved-session resume |
+| `tests/` | Domain, provider-contract, privacy and HTTP/SQLite lifecycle tests |
 
-## Scope and first delivery
+The shared API registers this router; `apps/web/app/practice/page.tsx` registers
+the feature UI. Root Python packaging includes the feature and its lesson data;
+root npm workspaces share React/Next without copying code between feature folders.
 
-Start with text and push-to-talk, English and Bangla evaluation, editable transcripts, optional corrections, speech playback and a simple disclosed synthetic avatar. Let learners choose conversation-first, correction-after-turn or review-at-end modes. Ask about uncertain speech or meaning rather than confidently correcting a transcription error. Treat valid dialects and accents respectfully.
+## Use and limits
 
-Later features can include interruption handling, pronunciation practice, role-play scenarios, spaced review and richer avatar animation. Support for every language, flawless correction, human-equivalent friendship and low-cost photorealistic live video are not initial promises.
+Run the commands in [BUILD_RUN.md](../../docs/operations/BUILD_RUN.md), then open
+`/practice` through the local web application. Pick an example, edit it, send,
+and retry the suggested English. Unknown input is explicitly unassessed rather
+than being given an invented correction. These examples are developer-authored
+and still need independent Bengali-English educator review.
 
-## Relationship to the combined product
+Built-in practice is not general AI conversation, a grammar assessment or a
+universal translator. For an existing local model, explicitly export
+`VIDEOGEN_COACH_PROVIDER=ollama` and `OLLAMA_MODEL` before starting. No model is
+installed, downloaded or started automatically. Only loopback HTTP model servers
+are permitted; timeouts, invalid responses and service failures remain errors,
+with no hidden change back to offline practice. Real model quality is NOT RUN.
 
-The friend shares approved voice adapters from the [audio studio](../audio-studio/README.md), avatar assets from [image creation](../image-studio/README.md) and consented identity preferences from [character continuity](../character-continuity/README.md). Optional practice-scene exports can feed the [movie studio](../movie-studio/README.md).
+Optional speech uses the browser/device service only after clicking Play. Voice
+availability and processing depend on that service. Microphone recognition and
+real-time video are not implemented; the camera/microphone are never requested.
+The illustrated characters are original interface artwork, not live people.
 
-Conversation needs an interactive session path rather than waiting for asynchronous generated-video jobs. Share platform authentication, consent, cost limits and monitoring, while separating learning records from creative projects. Do not record the learner's camera or reuse conversations for training or asset creation by default.
+## Privacy and development boundary
 
-## Acceptance and next work
+Default sessions persist metadata and idempotency fingerprints, not phrases or
+responses. A bounded in-memory retry cache is cleared on restart/deletion/expiry.
+Only explicit Save consent stores transcript JSON; saved sessions can resume
+and be deleted. Default metadata expires after 24 hours, saved sessions after
+7 days; expired records are purged at initialization and session operations.
+Deletion removes child rows and clears the local write-ahead log; external
+backups/filesystem snapshots remain outside this prototype's control.
 
-Register a bounded learning-feature milestone alongside the existing [roadmap](../../docs/product/ROADMAP.md); review current ASR, translation, language-model, TTS and avatar candidates under the [reuse](../../docs/research/REUSE_FIRST.md) and [license/security](../../docs/security/LICENSE_SECURITY.md) rules before installation.
+A random HttpOnly SameSite cookie scopes practice records to a browser. This is
+local ownership isolation, not a production identity system. The creative studio
+is still a single-user local mock. Do not expose either service publicly.
 
-CPU checks should exercise transcript edits, meaning-preserving corrections, unsupported languages, consent/deletion and failure recovery. Human evaluation with Bangla-English speakers and an English educator should measure correction usefulness, meaning preservation and false corrections. Measure real turn latency and speech intelligibility on chosen hardware. Any numeric goals in the idea document are targets until measured. **Tutor behavior, language coverage, avatar rendering and hardware checks: NOT RUN.**
+Next integrations: teacher evaluation, a measured real local-model run, consented
+speech recognition, interruption handling and measured voice/avatar latency.
+See [progress](../../docs/development/IMPLEMENTATION_PROGRESS.md) and
+[test evidence](../../docs/quality/IMPLEMENTATION_VALIDATION.md).

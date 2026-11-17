@@ -2,7 +2,7 @@
 
 This repository combines the VideoGen creative studio and an English-speaking AI friend. Its files are grouped by feature or shared responsibility. The layout preserves previous project work and separates owned plans from imported reference material.
 
-This is a documentation-first project. Folder names describe responsibilities; they do not claim that a production application, generation service, live tutor or deployed backend exists.
+The recovered owned CPU studio now runs alongside a feature-owned English phrase-practice prototype. These are local development capabilities, not a production generation service or a verified general-AI tutor. See [implementation progress](docs/development/IMPLEMENTATION_PROGRESS.md) and [validation](docs/quality/IMPLEMENTATION_VALIDATION.md).
 
 ## Start here
 
@@ -25,7 +25,12 @@ video-gen/
 ├── CONTRIBUTING.md                Contributor workflow
 ├── .env.example                  Example configuration; no real credentials
 ├── .github/                      Repository automation and issue/PR templates
-├── features/                     User-facing feature specifications
+├── apps/web/                     Next.js entrypoints and creative studio
+├── services/                     Shared API and CPU mock worker
+├── integrations/                 Typed external-engine boundaries
+├── packages/schemas/             Shared creative contracts
+├── tests/                        Shared API/worker and browser checks
+├── features/                     Feature-owned behavior, UI and specifications
 ├── docs/                         Shared product and engineering knowledge
 ├── scripts/                      Maintenance and hardware utilities
 ├── notebooks/                    Interactive research notebooks
@@ -52,7 +57,10 @@ features/
 │   └── README.md
 └── english-speaking-friend/
     ├── README.md
-    └── PROJECT_IDEA.txt
+    ├── PROJECT_IDEA.txt
+    ├── backend/english_friend/    Coaching, provider, routes, consent-aware storage
+    ├── web/                      Practice UI, types and HTTP contract tests
+    └── tests/                    Domain, provider and API/privacy checks
 ```
 
 | Folder | Responsibility |
@@ -66,7 +74,7 @@ features/
 
 Features share proposed identity, consent, asset metadata, model capabilities and cost controls. Generated media uses asynchronous jobs. The English friend needs a separate interactive conversation path so a slow video render cannot block a speaking turn. Private learning recordings do not automatically become creative assets.
 
-Feature folders currently contain specifications and guides. Add implementation files only when a bounded implementation task creates them; do not populate empty application or service skeletons merely to make the tree look complete.
+The English feature now contains an implemented bounded prototype; the other feature folders remain plans. Shared API/worker entrypoints are in services, web routing in apps, and feature behavior stays in the feature folder. The original owned M0 code was recovered rather than rebuilding it or executing archived third-party engines.
 
 ## Shared documentation
 
@@ -131,8 +139,11 @@ scripts/
 ├── maintenance/
 │   ├── check_docs.py
 │   └── check_structure.py
-└── hardware/
-    └── gpu_preflight.py
+├── hardware/
+│   └── gpu_preflight.py
+└── development/
+    ├── dev.sh                    Start the local API and web app
+    └── smoke_mock.py             Executing CPU job/receipt check
 
 notebooks/
 └── colab/                        Existing Colab research material
@@ -177,6 +188,16 @@ Imported media remains reference material with its original provenance limitatio
 - Add runnable application boundaries only when the corresponding code actually exists.
 - Keep secrets, personal recordings, model weights and generated private media out of Git.
 
-## Verification status for this reorganization
+## Historical verification status for the sorting pass
 
 No tests were run for this reorganization, as requested. Directory, relocation and link review are static inspection; they do not establish runtime correctness. Earlier test results remain historical and must not be represented as tests of the new paths. Application startup, inference, live conversation, avatar rendering and new-environment restoration require separate validation when authorized.
+
+## Current implementation and source recovery
+
+The subsequent owner request authorized implementation and tests. Current results
+are in [IMPLEMENTATION_VALIDATION.md](docs/quality/IMPLEMENTATION_VALIDATION.md);
+the no-tests paragraph above remains the historical sorting record.
+[RECOVERED_APPLICATION_SOURCE.json](docs/repository/RECOVERED_APPLICATION_SOURCE.json)
+identifies the exact earlier owned source and its source blobs. `.npmrc`, root
+`package.json`/lock and `pyproject.toml`/development lock manage the active runtime.
+No archived engine is included in those workspace/package lists.

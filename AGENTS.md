@@ -1,9 +1,9 @@
 > **Current structure:** Read [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) and the
 > [file-placement ledger](docs/repository/FILE_PLACEMENT.json). Shared documents now
 > live in functional docs collections; repository scripts are in `scripts/maintenance/`
-> and GPU inspection in `scripts/hardware/`. The owner's current restructuring
-> instruction explicitly says **do not run tests**; this overrides the older
-> default testing instructions below for this task. Do not claim this move is tested.
+> and GPU inspection in `scripts/hardware/`. The owner has now authorized
+> implementation, incremental integration and tests. The earlier no-tests rule
+> applied only to the completed sorting task. Keep its historical evidence dated.
 
 # AGENTS.md — Instructions for Codex and all coding agents
 

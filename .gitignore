@@ -41,3 +41,9 @@ generated/
 .DS_Store
 .vscode/
 .idea/
+# Local app databases, receipt artifacts and editable-install metadata
+.local/
+*.egg-info/
+.ruff_cache/
+*.tsbuildinfo
+/apps/web/next-env.d.ts

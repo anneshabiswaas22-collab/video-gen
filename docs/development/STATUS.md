@@ -1,3 +1,19 @@
+# Current implementation status — 2026-11-17
+
+Owned code now exists: the historical M0 CPU studio was selectively recovered,
+then the English friend's typed practice feature was integrated in its own folder.
+The latest owner explicitly authorized implementation and tests; prior no-test
+sorting reports below are historical. See [implementation progress](IMPLEMENTATION_PROGRESS.md)
+for completed integrations and prioritized remaining work, and
+[validation evidence](../quality/IMPLEMENTATION_VALIDATION.md) for actual checks.
+
+Working: projects/jobs/receipts, bounded English/Bangla examples and retries,
+practice ownership/consent/resume/delete, responsive UI and optional device speech.
+Optional local-model protocol is tested with mocked HTTP; real model inference,
+ASR/live avatar video, educator review and genuine GPU media remain NOT RUN.
+
+## Historical status snapshots (preserved)
+
 # Current functional organization — 2026-11-17
 
 All existing files now have a collection in [PROJECT_STRUCTURE.md](../../PROJECT_STRUCTURE.md).

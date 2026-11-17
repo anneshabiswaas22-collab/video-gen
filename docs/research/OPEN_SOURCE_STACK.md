@@ -75,3 +75,26 @@ Kling Pro, Sora, Veo and Runway proprietary models: these are **competitive benc
 - EVALUATE AFTER MVP: LightX2V speed, FreeField workflows, additional image/video/audio models, MuseTalk, SAM2, editor integrations.
 - STUDY ONLY: early-stage film tools and proprietary API wrappers where compatibility/cost/license is unclear.
 - DEFER: full model training, multiple competing backend engines at once, public Colab production hosting.
+
+## Implemented reuse decision — M0 recovery and English T0
+
+Recovered the original owned application from exact historical source revision
+`ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37`; see
+[the provenance record](../repository/RECOVERED_APPLICATION_SOURCE.json). Reused
+its FastAPI/Pydantic/SQLite worker contracts, Next.js/React UI and shared types
+instead of creating another studio. Existing ComfyUI/FreeField archives remain
+unmodified references, outside both active package/workspace lists.
+
+Runtime direct pins: FastAPI0.163.0, Pydantic2.14.3, HTTPX0.28.1, Uvicorn0.38.0,
+Next16.4.6, React/ReactDOM19.3.0. Exact package availability was checked at official
+registries and installed with TLS/integrity checks. Python development and npm
+transitive locks are saved. Source licenses for these libraries are permissive
+(FastAPI/Pydantic/Next/React MIT, HTTPX/Uvicorn BSD); this is not a complete
+third-party legal clearance or a selected license for original project code.
+No model weights or external media are added.
+
+Build original bounded phrase content and the learner interaction; reuse HTTPX
+for the optional local Ollama protocol, browser speech for explicit playback,
+and Playwright1.62.0/system Chromium for browser evidence. Model execution,
+weight/voice rights and educator/learning validation remain separate gates.
+The offline phrase engine is deliberately not described as a language model.

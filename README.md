@@ -1,76 +1,79 @@
-> **Functional reorganization — 2026-11-17:** Start with [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md).
-> Every starting tracked file is assigned in [FILE_PLACEMENT.json](docs/repository/FILE_PLACEMENT.json).
-> This pass only sorts and repairs references; **no tests were run**, as requested.
+# VideoGen — Creative Studio + English Friend
 
-# VideoGen — Creative Studio + English AI Friend
+A local development application with two working paths:
 
-One proposed product for creating images, videos, voices and editable movies,
-and practising English with a friendly speaking avatar. The original studio
-vision remains; the English companion is now a first-class feature.
+- **Creative foundation:** projects, durable jobs, progress/history and downloadable
+  CPU mock receipts. Receipts are text, not generated images or videos.
+- **English practice:** three scenarios, 18 authored English/Bangla practice cases,
+  gentle suggestions and retries, two illustrated characters, optional browser
+  speech, and opt-in saved sessions with resume/delete.
 
-**Current state:** product plans, engineering handoffs and CPU-tested third-party
-references. This checkout has no owned production web/API stack, implemented
-English tutor or verified GPU generation. Feature folders describe responsibilities,
-not completed applications. Historical evidence from another repository is
-labeled separately in [docs/memory/PROJECT_MEMORY.md](docs/memory/PROJECT_MEMORY.md).
+Built-in phrase practice is a limited authored set, not general AI correction or
+translation. An optional Ollama adapter can use an already running local model;
+its protocol is tested, but no real model or learning quality has been verified.
+Microphone input, live avatar video and GPU media generation remain future work.
 
-Read or download the plain-text plans:
+## Run locally (Linux / WSL)
 
-- [Combined product idea — docs/product/PROJECT_IDEA.txt](docs/product/PROJECT_IDEA.txt)
-- [Detailed English AI friend idea](features/english-speaking-friend/PROJECT_IDEA.txt)
-- [Full future vision and multi-year roadmap](docs/product/FUTURE_ROADMAP.txt)
-
-## Find a feature
-
-| Feature folder | Intended outcome |
-|---|---|
-| [Image studio](features/image-studio/README.md) | Generate and edit images; prepare reference sheets |
-| [Video studio](features/video-studio/README.md) | Create and revise short clips with supported controls |
-| [Audio studio](features/audio-studio/README.md) | Speech, captions, music and sound |
-| [Movie studio](features/movie-studio/README.md) | Assemble versioned scenes, shots and takes |
-| [Character continuity](features/character-continuity/README.md) | Keep consented characters and environments reusable |
-| [English-speaking friend](features/english-speaking-friend/README.md) | Practise with an AI avatar; get gentle English corrections and multilingual help |
-
-[The feature map](features/README.md) explains shared services and development
-order. Creative rendering uses asynchronous jobs; conversation needs a separate
-interactive speech path. Private learning recordings do not become creative
-assets without explicit consent. Start with English/Bangla and a simple licensed
-avatar; universal languages and photorealistic live video are research goals.
-
-## Repository organization and preservation
-
-- `features/`: one guide per product feature, with status and acceptance criteria.
-- `docs/`: shared architecture, roadmap, feature registry, licensing and history.
-- `scripts/`, `notebooks/colab/`, `.github/`: shared validation, hardware inspection and CI.
-- [AnalyseFuture](AnalyseFuture/README.md): imported ComfyUI/FreeField sources, examples and recovery reports.
-
-All 2,131 bulk-import files are preserved byte-for-byte. Nothing was deduplicated
-or silently discarded. See [the inventory and findings](docs/repository/REPOSITORY_REORGANIZATION.md)
-and [relocation manifest](AnalyseFuture/repository-inventory/RELOCATION_MANIFEST.json). The
-[previous README](AnalyseFuture/project-history/README.before-reorganization.txt)
-is also preserved. Repository cleanup does not establish account security.
-
-## Develop and verify
-
-Read [AGENTS.md](AGENTS.md), [documentation index](docs/README.md),
-[build/run instructions](docs/operations/BUILD_RUN.md), [roadmap](docs/product/ROADMAP.md),
-[feature registry](docs/product/FEATURE_REGISTRY.md) and [current status](docs/development/STATUS.md).
-Root checks use Python's standard library:
+Use Node 22+ and Python 3.11+ from the existing checkout:
 
 ```sh
-python scripts/maintenance/check_docs.py
-python scripts/maintenance/check_structure.py
-python -m py_compile scripts/hardware/gpu_preflight.py scripts/maintenance/check_docs.py scripts/maintenance/check_structure.py
+python -m venv .venv
+.venv/bin/python -m pip install --upgrade pip==26.2
+.venv/bin/python -m pip install -r requirements-dev.lock
+.venv/bin/python -m pip install --no-deps -e .
+npm ci --ignore-scripts --no-fund
+npm run dev
 ```
 
-Introduce owned application code through bounded, tested milestones. Prefer
-maintained, pinned integrations over copying model repositories. Review source,
-model, voice and asset rights separately. No paid APIs, model downloads, training
-or GPU rental without owner budget approval. CPU mocks are separate from real
-hardware and media validation.
+The launcher binds the API to loopback port 8001 and the web interface to port
+3000. `/practice` opens the English companion. Set `VIDEOGEN_WEB_PORT` or
+`VIDEOGEN_API_PORT` if needed. This is a single-machine prototype; the creative
+API has no production account system. Keep it bound to localhost.
 
-Current repository: [sarfiaroui-oss/video-gen](https://github.com/sarfiaroui-oss/video-gen).
-Older `anneshabiswaas22-collab/video-gen` links remain historical provenance,
-not proof its unmerged application code exists here. The preserved
-[54-source catalog](docs/research/ALL_RECOMMENDED_REPOSITORIES.txt) remains research,
-not an installation list. Project plans do not imply frontier-model parity.
+See [setup and execution](docs/operations/BUILD_RUN.md),
+[implementation and remaining work](docs/development/IMPLEMENTATION_PROGRESS.md)
+and [API contracts](docs/architecture/API_CONTRACT.md).
+
+## Functional organization
+
+| Collection | Contents |
+|---|---|
+| `apps/web/` | Next.js entrypoints and recovered creative studio |
+| `services/api/`, `services/worker/` | Shared API, SQLite job state and CPU mock worker |
+| `features/english-speaking-friend/` | Feature-owned coaching, local-model adapter, API/storage, UI and tests |
+| `integrations/comfyui/` | Tested allowlisted adapter boundary; real inference not wired |
+| `packages/schemas/` | Shared typed creative contracts |
+| `docs/`, `scripts/`, `notebooks/` | Product knowledge, commands, maintenance and hardware research |
+| `AnalyseFuture/` | Preserved external engines, examples and historical evidence; no automatic execution |
+
+[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) explains each home. The
+[original placement ledger](docs/repository/FILE_PLACEMENT.json) and
+[recovered-source record](docs/repository/RECOVERED_APPLICATION_SOURCE.json)
+preserve provenance. Historical M0 code was recovered from the exact earlier
+revision rather than replaced with a second implementation. All 2,131 original
+imported files remain unchanged.
+
+## Tests
+
+```sh
+.venv/bin/python -m pytest
+.venv/bin/ruff check services integrations tests features/english-speaking-friend/backend features/english-speaking-friend/tests scripts/development/smoke_mock.py
+.venv/bin/python -m scripts.development.smoke_mock
+npm run typecheck
+npm run lint
+npm test
+npm run build
+python scripts/maintenance/check_docs.py
+python scripts/maintenance/check_structure.py
+```
+
+Browser instructions and actual outcomes are in
+[IMPLEMENTATION_VALIDATION.md](docs/quality/IMPLEMENTATION_VALIDATION.md). Tests
+are now authorized; earlier no-test sorting reports remain historical.
+
+The [combined idea](docs/product/PROJECT_IDEA.txt),
+[detailed English companion idea](features/english-speaking-friend/PROJECT_IDEA.txt)
+and [future roadmap](docs/product/FUTURE_ROADMAP.txt) remain intact. Source,
+weight, voice and media rights require separate review. No paid APIs, model
+weights, training or GPU rental were used for this milestone.

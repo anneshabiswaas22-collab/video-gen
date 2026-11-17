@@ -1,3 +1,11 @@
+LATEST IMPLEMENTATION UPDATE — 17 November 2026
+The missing ownedfoundation item below is now superseded: original M0 code was
+recovered and extended with bounded Englishpractice. Local tests/build/browser
+checks exist; see docs/quality/IMPLEMENTATION_VALIDATION.md. Still missing:
+teacher-reviewed curriculum, real localmodelquality, ASR/liveavatar, genuine GPU
+media, creative account/tenantisolation and productionhardening. No old test
+claim or a finite authoredphrase set establishes those capabilities.
+
 CURRENT PLACEMENT NOTE — 17 November 2026
 The gallery index and19 disjoint example folders have now been reunited with the
 reference's99 folders using unchanged original data. The old missing-index item

@@ -2,7 +2,7 @@
 
 VideoGen combines a creative studio with an English-speaking AI friend. Each folder below owns one feature's scope, development entry point and acceptance criteria. Shared architecture, licensing, operational rules and historical handoffs remain in [docs](../docs/README.md); preserved third-party imports remain in [AnalyseFuture](../AnalyseFuture/README.md).
 
-These are feature guides, not completed applications. This checkout has no owned production web/API stack and no verified GPU generation. A reference application's tests do not establish that these features work in VideoGen.
+The owned local API, CPU mock studio and English phrase-practice prototype now run here. Other feature domains remain plans. No GPU generation or production service is verified. See [implementation progress](../docs/development/IMPLEMENTATION_PROGRESS.md) for exact capabilities and remaining integrations.
 
 | Folder | User outcome | Existing roadmap / registry |
 |---|---|---|
@@ -11,7 +11,7 @@ These are feature guides, not completed applications. This checkout has no owned
 | [audio-studio](audio-studio/README.md) | Speech, captions, music and sound finishing | M3; AUD-01–04 |
 | [movie-studio](movie-studio/README.md) | Assemble versioned scenes and shots into films | M5; MOV-01–06, AI-01–03 |
 | [character-continuity](character-continuity/README.md) | Reuse consented characters, looks and environments | M5; IMG-05, MOV-02 |
-| [english-speaking-friend](english-speaking-friend/README.md) | Practise English with a friendly speaking avatar and multilingual help | New combined-product learning feature; IDEA |
+| [english-speaking-friend](english-speaking-friend/README.md) | Practise English with a friendly speaking avatar and multilingual help | ENG-01 / T0 bounded CPU prototype; real model/voice evaluation pending |
 
 ## How the features fit together
 

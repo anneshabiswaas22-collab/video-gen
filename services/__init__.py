@@ -1,0 +1,1 @@
+"""Owned VideoGen application services."""

@@ -1,3 +1,20 @@
+# Latest implementation milestone — 2026-11-17
+
+The owner now authorized coding and tests. Original M0 source at
+`ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37` was fetched and selectively recovered;
+[provenance](../repository/RECOVERED_APPLICATION_SOURCE.json) records each source blob.
+The working foundation is extended with the feature-owned English practice
+backend, optional local-model protocol, cookie/consent/session lifecycle and UI.
+See [current progress](../development/IMPLEMENTATION_PROGRESS.md),
+[setup](../operations/BUILD_RUN.md) and
+[validation evidence](../quality/IMPLEMENTATION_VALIDATION.md).
+
+The built-in engine is a finite phrase set; real model/voice/GPU quality and
+production readiness remain unverified. Earlier “no owned code” and “no tests”
+statements below describe their dated recovery/sorting snapshots, not this milestone.
+
+## Earlier project memory (preserved)
+
 # Latest repository structure — 2026-11-17
 
 The owner requested a complete functional sorting pass without tests. See

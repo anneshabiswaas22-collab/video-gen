@@ -1,3 +1,13 @@
+# Current local implementation evidence — 2026-11-17
+
+The historical source revision is now actually recovered in this checkout.
+Current results and limits are recorded in
+[IMPLEMENTATION_VALIDATION.md](../quality/IMPLEMENTATION_VALIDATION.md) and
+[IMPLEMENTATION_PROGRESS.md](../development/IMPLEMENTATION_PROGRESS.md).
+These are local checks; old hosted CI URLs below do not verify this new commit.
+
+## Historical evidence snapshots
+
 > **Current checkout note — 2026-11-17:** This is
 > `sarfiaroui-oss/video-gen`, with the feature map in
 > [features](../../features/README.md) and current

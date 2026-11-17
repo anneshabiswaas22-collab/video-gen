@@ -1,3 +1,10 @@
+> **Current implementation evidence:** See [IMPLEMENTATION_PROGRESS.md](../development/IMPLEMENTATION_PROGRESS.md).
+> Local creative SYS job/project/artifact foundations work with mock receipts;
+> ENG-01 is a bounded typed prototype, ENG-03 has illustrated UI and browser
+> playback controls, and ENG-04 has opt-in practice history/ownership/deletion.
+> This does not verify general AI, ASR, actual speech audio, GPU output or
+> production identity. Earlier IDEA tables below remain full target requirements.
+
 # Product feature registry
 
 **This is a requirements inventory, not a list of implemented features.** All below are IDEA/SPECIFIED only unless a tracked PR and real demonstration upgrades their status. Model-specific controls appear only for engines which truly support them.

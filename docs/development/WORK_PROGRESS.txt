@@ -1,3 +1,12 @@
+CURRENT IMPLEMENTATION MILESTONE — 17 November 2026
+Recovered30owned M0 sourcefiles from exact historicalae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37.
+Integrated original phrasepractice, optional localmodelcontract, sessionprivacy
+and feature-owned UI. Root workspaces/packaging and locks keep activecode
+separate from unchanged archivedengines. Testing is now explicitly authorized.
+Current verification/remainingwork: docs/quality/IMPLEMENTATION_VALIDATION.md
+and docs/development/IMPLEMENTATION_PROGRESS.md. Previous sortingrecords below
+remain historical. The final response and Git history record actual delivery.
+
 DELIVERY PREPARATION COMPLETE
 All2,206 starting files are mapped to2,222 final tracked entries;2,175 are moved.
 Static byte/index accounting preserves all2,131 import blobs/modes and the

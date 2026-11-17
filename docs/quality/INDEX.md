@@ -6,3 +6,5 @@ Future acceptance, evaluation and benchmark methodology; no tests run in this re
 - [TEST_PLAN.md](TEST_PLAN.md)
 
 See [project structure](../../PROJECT_STRUCTURE.md) and [all documentation](../README.md).
+
+- [Current implementation evidence](IMPLEMENTATION_VALIDATION.md)

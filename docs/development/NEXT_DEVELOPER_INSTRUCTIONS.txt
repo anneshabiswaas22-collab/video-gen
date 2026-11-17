@@ -1,3 +1,13 @@
+LATEST IMPLEMENTATION CONTINUATION — 17 November 2026
+The owner authorized coding/tests. M0 source was recovered, the English feature
+was implemented as bounded phrase practice, and the optional local-model HTTP
+contract was added. Start with docs/development/IMPLEMENTATION_PROGRESS.md and
+docs/quality/IMPLEMENTATION_VALIDATION.md; use docs/operations/BUILD_RUN.md.
+The earlier no-tests and no-owned-code notes below are historical. Do not treat
+CPU mock receipts, phrase matching or protocol tests as real GPU/model quality.
+Do not discard existing archives or repeat the M0 rewrite. No model downloads
+or paid providers without owner approval.
+
 CURRENT STRUCTURE AND NO-TEST INSTRUCTION — 17 November 2026
 Read PROJECT_STRUCTURE.md first. Source paths in old reports resolve through
 docs/repository/FILE_PLACEMENT.json. The current user requested categorization
