@@ -4,7 +4,7 @@
 
 ## Fast reading order
 
-1. **[Root project memory](../../PROJECT_MEMORY.md)** — essential executive summary, links, branch/PR truth and immediate next step. Read first.
+1. **[Root project memory](PROJECT_MEMORY.md)** — essential executive summary, links, branch/PR truth and immediate next step. Read first.
 2. **[Canonical handoff](PROJECT_CANONICAL_HANDOFF.md)** — detailed mission, features, user constraints, architecture, data model, model strategy and roadmap.
 3. **[Conversation and decision history](CONVERSATION_AND_DECISION_HISTORY.md)** — why decisions were made and which user demands must remain stable.
 4. **[Architecture and workflow charts](ARCHITECTURE_AND_WORKFLOW_DIAGRAMS.md)** — GitHub-rendered Mermaid diagrams covering architecture, job lifecycle, inference, continuity and roadmap.
@@ -18,23 +18,23 @@
 - [AGENTS.md](../../AGENTS.md)
 - [README](../../README.md)
 - [Documentation index](../README.md)
-- [Product charter](../PROJECT_CHARTER.md)
-- [Roadmap](../ROADMAP.md)
-- [Original architecture draft](../ARCHITECTURE.md)
-- [API contract](../API_CONTRACT.md)
-- [Data model](../DATA_MODEL.md)
-- [Feature inventory](../FEATURE_REGISTRY.md)
-- [Architecture decision record](../DECISIONS.md)
-- [Prior project history](../PROJECT_HISTORY.md)
-- [Reuse-first policy](../REUSE_FIRST.md)
-- [Open-source stack](../OPEN_SOURCE_STACK.md)
-- [54 study repositories](../ALL_RECOMMENDED_REPOSITORIES.txt)
-- [License/security checks](../LICENSE_SECURITY.md)
-- [GPU/Colab plan](../GPU_COLAB.md)
-- [Costs](../COST_PLAN.md)
-- [Movie studio](../MOVIE_STUDIO.md)
-- [Tests](../TEST_PLAN.md)
-- [Current formal status](../STATUS.md)
+- [Product charter](../product/PROJECT_CHARTER.md)
+- [Roadmap](../product/ROADMAP.md)
+- [Original architecture draft](../architecture/ARCHITECTURE.md)
+- [API contract](../architecture/API_CONTRACT.md)
+- [Data model](../architecture/DATA_MODEL.md)
+- [Feature inventory](../product/FEATURE_REGISTRY.md)
+- [Architecture decision record](../architecture/DECISIONS.md)
+- [Prior project history](PROJECT_HISTORY.md)
+- [Reuse-first policy](../research/REUSE_FIRST.md)
+- [Open-source stack](../research/OPEN_SOURCE_STACK.md)
+- [54 study repositories](../research/ALL_RECOMMENDED_REPOSITORIES.txt)
+- [License/security checks](../security/LICENSE_SECURITY.md)
+- [GPU/Colab plan](../operations/GPU_COLAB.md)
+- [Costs](../operations/COST_PLAN.md)
+- [Movie studio](../../features/movie-studio/DESIGN.md)
+- [Tests](../quality/TEST_PLAN.md)
+- [Current formal status](../development/STATUS.md)
 
 ### Source of truth and freshness
 

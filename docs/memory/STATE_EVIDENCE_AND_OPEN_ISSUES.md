@@ -1,3 +1,22 @@
+# Current local implementation evidence — 2026-11-17
+
+The historical source revision is now actually recovered in this checkout.
+Current results and limits are recorded in
+[IMPLEMENTATION_VALIDATION.md](../quality/IMPLEMENTATION_VALIDATION.md) and
+[IMPLEMENTATION_PROGRESS.md](../development/IMPLEMENTATION_PROGRESS.md).
+These are local checks; old hosted CI URLs below do not verify this new commit.
+
+## Historical evidence snapshots
+
+> **Current checkout note — 2026-11-17:** This is
+> `sarfiaroui-oss/video-gen`, with the feature map in
+> [features](../../features/README.md) and current
+> [validation report](../../AnalyseFuture/migration-history/TEST_AND_VALIDATION_REPORT.txt).
+> The source-repository PR/CI snapshot below is historical. It does not establish
+> that its application code is present here. The bulk imports were preserved,
+> and the English companion was added to product planning; no GPU inference or
+> tutor behavior is claimed. See [reorganization findings](../repository/REPOSITORY_REORGANIZATION.md).
+
 # VideoGen — verified evidence, branch/PR state and open backlog
 
 **Observation date:** 2026-11-16 (Asia/Kolkata). GitHub may change after this snapshot. **Always re-fetch live branch refs, PRs, issues and Action runs before modifying code.** This document separates completed CPU work from planned GPU/product work.
@@ -13,7 +32,7 @@
 | Application CI | [run 43741390592](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390592) | **PASSED**, all jobs |
 | Documentation CI | [run 43741390571](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43741390571) | **PASSED** |
 | Prior main docs CI | [run 43719613690](https://github.com/anneshabiswaas22-collab/video-gen/actions/runs/43719613690) | PASSED before M0.2 PR |
-| This documentation handoff | [PROJECT_MEMORY.md](../../PROJECT_MEMORY.md), [memory index](README.md) | Committed directly to main; check latest SHA in GitHub |
+| This documentation handoff | [docs/memory/PROJECT_MEMORY.md](PROJECT_MEMORY.md), [memory index](README.md) | Committed directly to main; check latest SHA in GitHub |
 
 **Do not say that PR #8 is merged or that real AI generation succeeded.** An updated `main` might now include handoff-only docs, not the application code. Update the ledger after a real merge, not before.
 
@@ -83,4 +102,4 @@ Earlier CI had failures in Python import lint, React effect lint and outdated vu
 
 ## Post-change update instructions
 
-When PR #8 merges or a new feature ships, append the *new* branch/commit/PR/CI URLs, test outcomes and actual evidence. Mark earlier content as historical rather than silently overwriting it. New tasks must update [root handoff](../../PROJECT_MEMORY.md), [canon](PROJECT_CANONICAL_HANDOFF.md), [history](CONVERSATION_AND_DECISION_HISTORY.md) and [maintenance protocol](MAINTENANCE_PROTOCOL.md).
+When PR #8 merges or a new feature ships, append the *new* branch/commit/PR/CI URLs, test outcomes and actual evidence. Mark earlier content as historical rather than silently overwriting it. New tasks must update [root handoff](PROJECT_MEMORY.md), [canon](PROJECT_CANONICAL_HANDOFF.md), [history](CONVERSATION_AND_DECISION_HISTORY.md) and [maintenance protocol](MAINTENANCE_PROTOCOL.md).

@@ -1,0 +1,279 @@
+VIDEOGEN — STATIC SECURITY AND PRESERVATION AUDIT
+Date: 17 November 2026 (Asia/Kolkata)
+Status: investigation notes; not a malware-free certification or account audit.
+
+1. WHAT THIS REVIEW ESTABLISHES
+
+The investigated import is commit
+f34553a3d2c2d68c15f4644520e65816f0d516f3, whose parent is the prior
+documentation/history state. The import adds 2,131 files. It does not modify
+or delete any of the 47 tracked files in that parent. In particular, the
+root AGENTS.md, .github configuration, .gitignore, README and project memory
+were not overwritten by that commit. This is consistent with a disruptive
+bulk import; it does not establish who performed it or whether they were
+authorized. The author label and commit message are not proof of identity.
+
+The files are now preserved under AnalyseFuture, with their original names
+and contents, rather than deleted. RELOCATION_MANIFEST.json records their
+original/new paths, byte sizes, SHA-256 values, modes and Git blob IDs.
+Use the structure checker for preservation verification. Hash agreement
+establishes unchanged bytes, not that those bytes are trustworthy.
+
+No specific malicious implant was confirmed in this review. That conclusion
+must not be paraphrased as "the account was not hacked" or "all code is safe."
+Account events, credentials, installed packages, external artifacts and
+unavailable branches are outside what these files can prove.
+
+2. STATIC REVIEW COVERAGE AND METHOD
+
+Reviewed without running imported application, installer, update, inference,
+deployment or model-download code:
+
+- Inventoried all 2,131 imported files (111,524,412 bytes), their paths and
+  recorded Git modes. All have mode 100644; no tracked executable modes,
+  symlinks or submodule/gitlink entries occur in the import. Python, shell,
+  batch and JavaScript files remain manually executable regardless of mode.
+- Scanned every imported file's bytes for selected recognizable private-key
+  and token formats: PEM private keys, GitHub tokens, AWS access-key IDs,
+  Google API keys, Hugging Face tokens, Slack tokens, Stripe live secret
+  keys, npm tokens, selected OpenAI/Anthropic key formats, Azure storage
+  connection keys and JWT-like triplets. No matches were found. Values
+  were not printed.
+  This cannot identify every possible credential, encrypted secret, short
+  token, custom format or secret that existed only in older history.
+- Checked credential/model-like filenames; no .env, private-key, credential
+  JSON, safetensors/ckpt/pt/pth/onnx/gguf checkpoint files were found among
+  the imported tracked files. Example environment files are templates.
+- Inspected binary magic: 477 JPEGs, 11 PNGs, one WebP, two MP3 files, two
+  WOFF fonts, and one tokenizer.model binary. No ELF, PE/DOS or ZIP magic
+  was found. The tokenizer binary is the 499,723-byte file at
+  upstream/ComfyUI-master/ComfyUI-master/comfy/text_encoders/
+  t5_pile_tokenizer/tokenizer.model. File signatures cannot exclude hidden
+  payloads, unsafe parsers or misleading extensions; media was not decoded.
+- Inventoried all 30 tracked imported workflow files; inspected privilege,
+  event, action-version, secret-reference, install, download and launch
+  patterns, and read the higher-privilege workflow paths described below.
+- Reviewed npm manifest/lock metadata, Python requirement files, shell
+  installers, local/Modal launch paths, gateway/web authentication, dynamic
+  custom-node loading, checkpoint loading and network/download boundaries.
+- Ran Git's read-only object connectivity check successfully. This checks
+  referenced-object connectivity, not signed authorship, upstream identity,
+  commit legitimacy, complete history integrity or account security.
+
+This is a broad static triage with manual review of security-sensitive
+paths, not a formal line-by-line audit of roughly two million imported
+source/data lines. No current vulnerability-database audit, antivirus
+sandbox, upstream byte comparison or production penetration test was run.
+Ignored node_modules, virtual environments, credentials outside Git and
+previously installed artifacts are not covered by the preservation scan.
+
+3. PRESENT CONTAINMENT BOUNDARY
+
+The active root is the owned VideoGen documentation, project plans,
+notebooks and explicitly selected repository checking scripts. There is
+no root npm package or Python application installation target at the time
+of review. The root workflow invokes owned documentation/checking code;
+it does not install or launch the archived engines.
+
+GitHub loads workflows from the repository root .github/workflows.
+The imported workflows now below AnalyseFuture/upstream/.../.github/
+workflows are inactive as GitHub workflows. Do not copy them into the root
+or dispatch/reuse them without a separate review.
+
+AnalyseFuture is an organizational quarantine, not an operating-system
+sandbox. Imports can still execute if someone explicitly launches them,
+adds their paths to Python/Node discovery, changes the working directory,
+uses recursive package tooling or copies their workflows to the root.
+Keep root installation/startup instructions from invoking them by default.
+The byte-preservation checker reads them; it does not import their modules.
+Do not treat an archived AGENTS.md as instructions for the owned product.
+
+4. FREEFIELD: OBSERVED SECURITY-RELEVANT BEHAVIOR
+
+Base path: AnalyseFuture/upstream/freefield-main/
+
+Package metadata
+- package.json defines validate, apps, app, serve, test and typecheck.
+  No preinstall, install, postinstall or prepare lifecycle hook is declared.
+- package-lock.json records 32 non-root package entries, all with integrity
+  metadata and HTTPS registry.npmjs.org resolved URLs; none is flagged
+  hasInstallScript. Integrity fields protect against mismatched downloads
+  when the package manager enforces them. They do not prove the package
+  itself is benign, vulnerability-free or identical to a trusted release.
+- Existing third-party dependencies and transitive packages still need a
+  fresh provenance and advisory review before promotion to the product.
+
+Network service and secrets
+- server/server.ts defaults to 127.0.0.1. FREEFIELD_HOST can broaden this.
+  server/guard.ts admits requests without a passcode when none is set.
+  Its Host/origin checks are useful browser protections, not authorization
+  for a publicly reachable multi-user service. Do not expose it on a public
+  interface merely because it has an origin check.
+- Passcode mode uses timing-safe comparisons and an HMAC cookie; visitor
+  history filtering and hosted-route restrictions are present. This is a
+  shared-demo access scheme, not a fully audited production identity system.
+  Its optional ?key= entry path can expose a passcode to logs or browser
+  history before the redirect removes it. Prefer reviewed authenticated
+  sessions if building a public product.
+- server/runner.ts reads COMFY_BASE_URL and FREEFIELD_TOKEN server-side and
+  forwards bearer authorization to the configured backend. Endpoint
+  configuration is therefore a credential trust boundary: only use the
+  expected destination, verify TLS, and never let an ordinary user choose
+  a credential-bearing backend URL.
+- infra/gateway.py refuses an empty token by default and uses constant-time
+  comparison, but FREEFIELD_ALLOW_OPEN=1 bypasses that protection. Its
+  wildcard proxy forwards routes to the configured PROXY_URL; it is not a
+  per-operation authorization boundary. Keep inference services private.
+  Its 1 GiB request limit and indefinite streaming timeout also need
+  resource limits/review before public deployment.
+
+Installers, downloads and paid-compute paths
+- tools/ci_comfyui.sh clones ComfyUI, checks a configured commit, installs
+  Python requirements, clones manifest-listed custom nodes, installs their
+  requirements and starts ComfyUI. tools/local_backend.py does similar work.
+  These are real code installation/execution paths, not passive validators.
+  Pinned source commits help reproducibility; unpinned transitive Python
+  dependencies remain a supply-chain risk.
+- infra/common.py build_image constructs shell command strings using
+  repository/commit values from pack manifests. Those manifests are trusted
+  code/configuration in this design. If an attacker can modify them, shell
+  metacharacters or substituted repositories can become a code-execution
+  path during image building. Do not accept arbitrary uploaded manifests
+  as if they were harmless data; validate allowlisted sources or use an
+  independently reviewed installation layer.
+- Model download helpers in infra/common.py and tools/local_backend.py
+  use Hugging Face repository/file identifiers without an explicit model
+  revision/content hash in the download call. This allows upstream content
+  to change independently of the app commit. Existing nonempty model files
+  are accepted without local hash verification. Require pinned revisions,
+  recorded expected digests and validated file formats before real use.
+- infra/modal_app.py, infra/web_app.py and lab code define deployment/GPU
+  workflows and refer to platform secrets. Running the examples may create
+  resources, download large files, expose endpoints or incur charges.
+  Comments with credential placeholders do not establish leaked secrets.
+  Do not launch these paths under the restructuring task.
+
+5. COMFYUI: OBSERVED SECURITY-RELEVANT BEHAVIOR
+
+Base path: AnalyseFuture/upstream/ComfyUI-master/ComfyUI-master/
+
+Custom code and model trust
+- hook_breaker_ac10a0.py has an unusual filename, so its contents and all
+  references were inspected explicitly. It stores/restores the cast_to
+  function on comfy.model_management; main.py invokes it around custom-node
+  loading and cleanup. No network, subprocess, filesystem or credential
+  operation appears in that small helper. Its name alone is not evidence
+  of a malicious hook. Exact upstream authenticity remains unverified.
+- main.py execute_prestartup_script and nodes.py load_custom_node execute
+  Python from custom-node directories through importlib loaders. This is
+  expected plugin behavior, but gives installed nodes the process's access
+  to files, environment, network and credentials. Workflow JSON must never
+  be treated as safe merely because it is JSON; its selected nodes can
+  execute installed code. Use isolated workers, reviewed nodes and least
+  privilege. --disable-all-custom-nodes exists, with whitelist exceptions.
+- app/governance.py has optional signed-policy/pack-digest checks, but its
+  GOVERNANCE_REQUIRED default is False. Pack hashes cover selected source/native/web
+  extensions; the code explicitly excludes other executable forms such as
+  shell scripts, suffixless executables, .exe, .wasm and .cjs. These checks
+  are neither always-on enforcement nor a sandbox for already loaded code.
+  Do not infer complete package integrity or execution isolation from them.
+- comfy/utils.py load_torch_file uses safetensors paths and torch.load with
+  weights_only=True in the inspected central loader. utils/extra_config.py
+  uses yaml.safe_load. These are positive controls, not a guarantee that all
+  custom nodes or every downstream model loader preserve those controls.
+  Never assume arbitrary checkpoints or Python-bearing model repositories
+  are safe. Keep security fixes in the selected PyTorch/parser versions.
+- .ci/update_windows/update.py fetches/merges upstream, stashes work, changes
+  branches, may replace its updater and installs changed requirements. It
+  also disables pygit2 owner validation. This is an explicit updater with
+  broad filesystem/network authority; do not run it against the owned
+  repository or use it as a restoration command.
+
+Server exposure and external calls
+- comfy/cli_args.py defaults to localhost, but --listen without an address
+  selects all interfaces; optional CORS can be wildcarded. --multi-user
+  storage does not by itself establish secure production tenant isolation.
+  Direct public exposure requires a separately reviewed auth/network design.
+- comfy_api_nodes includes third-party/API requests, while helper code has
+  connectivity probes and configured API-base handling. Paid/API nodes
+  must stay disabled or unconfigured until an owner explicitly approves
+  credentials, permitted destinations and spending limits.
+- A text scan flagged ssl.CERT_NONE in server.py start_multi_address. Manual
+  inspection shows a TLS SERVER context loading its certificate/key, not
+  an outbound client disabling server-certificate verification. It does
+  not request client certificates, so it does not provide mutual-TLS client
+  authentication. Do not report this occurrence as evidence of a TLS-bypass
+  backdoor. No other selected TLS-disable patterns matched imported code.
+
+Requirements and provenance
+- requirements.txt pins some first-party distribution packages, but many
+  runtime/transitive requirements are unpinned or lower-bounded. Separate
+  manager and agent requirement files can install further code. A future
+  integration needs trusted package sources, an approved lock/resolution,
+  provenance/advisory review and a controlled build. The imported snapshot
+  was not compared byte-for-byte against an authenticated upstream release.
+
+6. ARCHIVED WORKFLOW REVIEW
+
+There are 29 ComfyUI workflow files and one FreeField workflow, all nested
+inside the archive and therefore inactive at the root today.
+
+ComfyUI examples that require care if ever promoted:
+- .github/workflows/pullrequest-ci-run.yml uses pull_request_target with a
+  maintainer label gate, self-hosted runners, a mutable action reference
+  comfy-org/comfy-action@main and a secret input. A trusted maintainer
+  label does not make arbitrary PR code safe on a credentialed runner.
+- cla.yml and api-node-template.yml also use pull_request_target. The
+  template workflow reads the base-branch template and edits a PR body;
+  this is different from automatically executing contributor code. Review
+  each workflow's actual trust boundary rather than treating the event
+  name alone as proof of a vulnerability.
+- Release/update/backport/webhook workflows reference secrets, push refs,
+  use reusable workflows or send network notifications. Some actions are
+  pinned to commit SHAs, others to version tags or main. Never transplant
+  this vendor automation into the owned repository with its credentials.
+- FreeField validate.yml installs dependencies and calls ci_comfyui.sh,
+  which executes the dependency/custom-node paths described above.
+
+The inventory covered all workflow texts, with manual attention to higher-
+privilege patterns; referenced remote actions and reusable workflows were
+not fetched or audited. None of these archived workflows was dispatched.
+
+7. LICENSES AND ASSET TRUST
+
+The preserved FreeField source contains an MIT license; ComfyUI contains
+GPL version 3. Preserve their copyright and license notices. Archiving
+does not convert their code into owned original code or remove obligations
+for redistribution/combination. Source-code, model-weight, custom-node,
+media, font, training-data and commercial-use terms are separate checks.
+Loose media and its index remain together in imported-examples; duplication
+or public availability does not establish provenance or consent.
+
+8. ACCOUNT ACTIONS THAT REPOSITORY EDITING CANNOT COMPLETE
+
+If the owner suspects GitHub account compromise, use GitHub's own security
+and organization settings to review security/audit logs around the import,
+active sessions, recent logins, collaborators/teams, installed GitHub/OAuth
+apps, deploy keys, SSH keys, personal access tokens, Actions/environment
+secrets, webhooks, branch rules and changes to repository access. Revoke
+unrecognized sessions/credentials, rotate credentials that may have been
+exposed, enable strong multifactor authentication/passkeys and preserve
+relevant evidence. Never put replacement secret values into this report,
+chat, commits or repository files. Contact GitHub Support if ownership or
+unauthorized access cannot be resolved through the account controls.
+
+Those account-level actions were not performed here. A normal Git push
+proves only that this task's scoped credentials permit that push; it does
+not establish that other attackers or integrations have lost access.
+
+9. PROMOTION GATE FOR ANY ARCHIVED COMPONENT
+
+Before future execution or reuse: establish its exact upstream provenance;
+review the selected code and dependencies; pin and verify downloaded
+artifacts; keep TLS/checksum verification enabled; check code/model/media
+rights; use a private isolated worker with no unrelated credentials; limit
+filesystem/network/CPU/GPU access; approve costs explicitly; then test a
+small representative workflow and report measured results honestly.
+
+Preserve the archive while those decisions remain open. Do not automatically
+delete it, automatically install it, or promise the whole import is safe.

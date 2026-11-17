@@ -1,0 +1,264 @@
+CURRENT LOCATION NOTE: repository-relative paths follow PROJECT_STRUCTURE.md.
+This functional sorting pass did not run tests or implement the product. Earlier
+evidence is historical; the full English companion concept remains in its feature.
+
+VIDEOGEN — COMBINED PROJECT VISION AND FUTURE ROADMAP
+Creative studio + consistent characters + an English-speaking AI friend
+
+Document date: 17 November 2026 (Asia/Kolkata)
+Status: detailed product proposal and conditional research roadmap.
+This is not a statement that the described product has been implemented.
+
+1. THE PROJECT WE WANT TO BUILD
+
+Build an original, ownable creative workspace where people can create and edit images, make short videos, prepare speech and sound, maintain consistent characters, assemble scenes into movies, and practice English with a friendly speaking AI character. These capabilities belong to one understandable product, with a folder and a clear responsibility for each feature. They should share infrastructure when useful without becoming one enormous, inseparable technical dependency.
+
+The creative experience is: describe an idea, prepare references, generate or edit a result, compare takes, keep what works, add sound, assemble a scene, and export with its provenance. The learning experience is: choose a character, speak naturally, receive a helpful English expression, try again, and continue a friendly conversation. A shared character may appear in both experiences when its rights permit that use. Neither experience should require the user to understand inference engines or workflow files.
+
+The ambition is a dependable tool that helps people express themselves. Competitive quality must be demonstrated through usable outputs and reproducible comparisons. A large feature list, a convincing interface, or imported examples do not establish that quality.
+
+2. RESPECT AND PRESERVE WHAT ALREADY EXISTS
+
+The existing VideoGen charter, architecture, feature registry, roadmap, data model, licensing requirements, GPU guidance, benchmarks, and project-memory bundle are foundations. They should be read before a new implementation begins. Relevant starting points are README.md, docs/memory/PROJECT_MEMORY.md, docs/README.md, docs/product/ROADMAP.md, docs/product/FEATURE_REGISTRY.md, and docs/memory/STATE_EVIDENCE_AND_OPEN_ISSUES.md. This document complements them rather than replacing the historical record.
+
+The earlier roadmap remains useful: M0 audit/scaffold, M1 genuine image, M2 genuine video, M3 voice/media finishing, M4 creator experience, M5 continuity/movie tools, M6 measured optimization, and M7 production hardening. English-speaking friend adds a first-class learning track with its own pedagogy and conversation acceptance criteria. It does not erase the creative studio.
+
+Prior handoffs describe an owned CPU mock implementation on an earlier repository/PR, with recorded commit and CI links. Historical evidence must remain labeled as historical until the actual code and current remote state are checked. An old handoff is not proof that this checkout contains that implementation, that a PR was merged, or that the earlier repository is still the current origin.
+
+Preserved third-party imports and examples belong under AnalyseFuture for study. Keep their licenses and relative internal structure. Being outside active feature folders does not make them worthless or malicious; being preserved does not make them approved production dependencies. No file should be discarded merely because its purpose is unclear. A relocation manifest should make the old and new locations and content identity reviewable.
+
+3. HONEST STATUS LANGUAGE AND THE CURRENT BASELINE
+
+Use the following labels consistently:
+
+VERIFIED: a named operation actually ran on a specified revision and environment, with evidence and its scope stated. A reference-app unit test verifies that test, not an owned generation feature.
+
+UNTESTED / NOT RUN: no relevant completed check exists here. GPU generation, live speech quality, avatar rendering, learning outcomes, and a production deployment must keep this label until exercised.
+
+BROKEN: a reproducible expected behavior fails, with an identified command/input and relevant output. A missing planned feature is unimplemented, not automatically a confirmed bug.
+
+NO CONFIRMED BUG: no defect has been demonstrated in the stated scope. This is weaker than “bug-free” and does not establish that all dependencies or imported code are safe.
+
+FEASIBLE WITH EXISTING APPROACHES: a plausible bounded integration exists, but it still needs selected versions, rights review, implementation, validation, and operating resources.
+
+RESOURCE-DEPENDENT: possible progress depends on approved hardware, engineering time, data, service access, rights, or budget. Resource availability is not permission to spend it.
+
+EXPERIMENTAL: a bounded approach is worth measuring, with a hypothesis, failure conditions, and a decision gate.
+
+SPECULATIVE: a long-range idea whose quality, cost, or practical viability is unknown. A future date does not convert speculation into a commitment.
+
+UNSUPPORTED / NOT PROMISED: claims we cannot justify, such as guaranteed perfect characters or reliable support for every language. Do not expose them as working features.
+
+At the time of drafting, this checkout has no verified owned production frontend/API/worker service. The feature folders contain scope and acceptance guides. Preserved FreeField is a separate reference application. During initial onboarding before relocation, its manifest validation, type check, all 50 Node tests, importer checks, gateway check, and local UI/catalog requests passed; the root documentation check also passed. Those results are VERIFIED PRE-RELOCATION ONLY. They do not establish readiness after files move. The final restructuring report and verification ledger must record the actual post-relocation runs; this document does not predict their outcome.
+
+No confirmed application bug is established by those passing checks, and untested paths remain unknown. No real generated PNG/MP4/WAV, hardware inference, live tutor, perfect translation coverage, learning improvement, or public deployment is verified by that baseline. Repository inspection alone cannot prove or disprove the user's report of a GitHub account compromise.
+
+4. FEATURE MAP: EACH FOLDER HAS A PURPOSE
+
+features/image-studio/ — create and edit still images and reference sheets.
+features/video-studio/ — generate and revise short clips.
+features/audio-studio/ — speech, transcription, captions, sound and music finishing.
+features/character-continuity/ — approved character identities, looks, voices and environments.
+features/movie-studio/ — scripts, scenes, shots, takes, timeline and export.
+features/english-speaking-friend/ — friendly English conversation, multilingual help and practice.
+
+Each feature guide should say what it owns, its dependencies, its status, and its first meaningful acceptance test. Folder names describe product responsibilities, not a promise that runnable services already exist. Shared authentication, consent, projects, assets, capability descriptions, storage, budget limits, and observability belong behind explicit shared contracts. Do not copy infrastructure six times or create empty services solely to match a diagram.
+
+5. IMAGE STUDIO: FROM AN IDEA TO AN APPROVED REFERENCE
+
+User outcome: create a useful still image or edit a region without losing previous versions. Initial workflow: prompt, permitted model choice, supported settings, queued job, genuine image preview, save or revise. Preserve the prompt, seed, engine/workflow/model revision, input rights, output checksum, runtime and relevant device measurements.
+
+Start with one text-to-image path. Add image-to-image, inpainting, outpainting, background removal, reference sheets, and restoration incrementally. Do not show a camera or identity control unless the chosen engine actually supports it. Model differences should be explained in terms users can act on: fit, expected wait, limitations, and cost.
+
+Reuse the proposed ComfyUI adapter and existing maintained image tools after separate code/weight/commercial-rights review. FLUX, Qwen and other names in the historical registry are candidates, not approved fixed checkpoints. Select an exact artifact only after real hardware and license checks.
+
+Acceptance: open and validate a genuine PNG, verify dimensions and provenance, repeat the instructions, and exercise unsupported controls and recoverable failure. A text mock receipt is not an image. Current status: SPECIFIED, FEASIBLE IN A BOUNDED SCOPE, RESOURCE-DEPENDENT; GPU validation NOT RUN.
+
+Meaningful later improvement: an assistant that helps turn a rough idea into a reference sheet while preserving the user's intention, explains model limits, and proposes a small number of editable variants. Compare usefulness and revision time against a baseline rather than advertising “best images”.
+
+6. VIDEO STUDIO: SHORT, REVIEWABLE, REPLACEABLE CLIPS
+
+User outcome: turn text or a permitted image reference into a short clip, compare takes, revise a shot, and keep the result. Begin with one image-to-video workflow suitable for the available GPU. Keep source references and exact generation metadata. Expose duration, dimensions and supported controls with honest capability gating.
+
+Later candidates include text-to-video, first/last-frame conditioning, supported camera/motion controls, clip extension, loops, interpolation, and targeted reshoots. Arbitrary instructions are not guaranteed to be obeyed. Repeated retries may cost more without solving drift; show this rather than silently looping.
+
+Wan and other earlier engine suggestions require an exact variant, artifact license, expected memory footprint, trusted download, and hardware test. Reuse established inference rather than training a new video foundation model. CPU tests should validate idempotency, state transitions, cancellation, permissions, OOM handling, and missing references.
+
+Acceptance: a decodable MP4 with verified codec, frame count, duration, resolution, inputs, settings, runtime and peak VRAM. Current status: PLANNED, FEASIBLE FOR A NARROW APPROVED WORKFLOW, RESOURCE-DEPENDENT; genuine video validation NOT RUN.
+
+Meaningful later improvement: choose the cheapest suitable workflow for a requested shot, suggest a smaller test render before an expensive job, and retain prior takes. Frame-perfect control and arbitrary long coherent scenes remain EXPERIMENTAL rather than normal product promises.
+
+7. AUDIO STUDIO: SPEECH AND SOUND THAT FIT THE SCENE
+
+User outcome: create intelligible narration, align captions, add cleared sound/music, and produce a playable mix. Start with one evaluated, legally usable text-to-speech voice and subtitle/media assembly. Preserve original and revised tracks and record voice rights and settings.
+
+Add transcription, alignment, multi-speaker dialogue, dubbing, music and SFX through individually reviewed integrations. Speech used for an English conversation needs different latency and privacy handling from an offline movie render. Share provider adapters when appropriate, not private recordings or an assumption that one voice supports every language.
+
+Kokoro, faster-whisper, FFmpeg and other historical suggestions are candidates to inspect at exact versions. Source licenses, speech weights, voices, music rights, codecs, and redistribution terms are separate questions. Possession of a voice recording is not permission to clone or impersonate its speaker.
+
+Acceptance: audible, decodable speech, meaningful intelligibility review, correct caption timings, a playable mixed export, and failure recovery. Measure transcription with representative accents and devices. Current status: PLANNED, FEASIBLE AS STAGED INTEGRATIONS, RESOURCE-DEPENDENT; model/audio acceptance NOT RUN.
+
+Meaningful later improvement: let a creator change a line while retaining surrounding timing, flag clipping or missing captions, and compare mixes. Accent removal, perfect emotional speech control, and universal song-generation rights must not be assumed. Voice cloning stays outside the initial scope.
+
+8. CHARACTER CONTINUITY: KNOW WHAT SHOULD STAY THE SAME
+
+User outcome: carry approved identity, wardrobe, voice and environment choices across images, shots, scenes, and optional learning avatars. Start with a versioned character bible and reference sheet: names, appearance, approved assets, consent, usage limits, wardrobe variations, scene context and chosen voice. Link each shot to the reference version used.
+
+This is both a data and a model-control problem. A library of pictures alone cannot guarantee that generation preserves a face, clothing, proportions, lighting, or props. Keep intended changes distinct from accidental drift. Let people accept or reject a take and explain the reason.
+
+Reuse asset/version/consent infrastructure and evaluate model-specific reference-conditioning methods. Retain human review for permissions and identity. A chosen character can be an English partner without needing a photorealistic face. Sharing a synthetic avatar does not allow publishing private learning sessions.
+
+Acceptance: reproducible reference links, working revisions and revocation behavior, then a fixed multi-shot set reviewed for identity, wardrobe and environment drift. Do not reduce identity to a single automated similarity score. Current status: SPECIFIED DIFFERENTIATION; metadata work FEASIBLE, visual continuity EXPERIMENTAL, hardware evaluation NOT RUN.
+
+Meaningful later improvement: a continuity assistant that identifies likely conflicts and proposes targeted repairs while showing uncertainty. Perfect identity across arbitrary viewpoints, ages, action and long stories is UNSUPPORTED.
+
+9. MOVIE STUDIO: A FILM IS AN EDITABLE PROJECT
+
+User outcome: turn an idea or script into a storyboard, plan shots, approve takes, organize sound and assemble a coherent sequence. The unit of revision is a shot or line, not the entire movie. Keep scene/shot/take versions so a failed regeneration never destroys an accepted edit.
+
+Begin with a short sequence and serializable timeline. Reuse existing editing and media components after review. The assistant may suggest a shot list, continuity note, transition, or missing establishing shot. A suggestion does not authorize paid rendering, arbitrary executable graphs, scraping, or publishing.
+
+The shared platform supplies jobs, assets, capability information, and cost limits. Movie assembly combines approved image/video/audio results and continuity records. The English friend may export an explicitly selected practice scene into a creative project; it must not silently copy private transcripts or raw voice.
+
+Acceptance: a playable 60-second demonstration with repeat characters, individually replaceable shots, subtitles, saved provenance, and a reviewed continuity assessment. Current status: SPECIFIED, orchestration/editing FEASIBLE, reliable generated coherence EXPERIMENTAL; end-to-end demonstration NOT RUN.
+
+Longer 20–120 minute projects may be assembled through many approved clips and substantial editing. A single prompt reliably producing an excellent coherent feature film is UNSUPPORTED. More runtime is not evidence of better storytelling.
+
+10. ENGLISH-SPEAKING FRIEND: SAY WHAT YOU MEAN WITH CONFIDENCE
+
+User outcome: speak with a patient AI partner on a video-call-style screen, make mistakes without embarrassment, and learn a natural English expression. Offer an adult man, woman or neutral stylized character and suitable cleared voices. Clearly disclose that the partner is AI. The learner's camera is optional and off by default; a visible avatar does not require collecting user video.
+
+Begin with Bengali-speaking adults, English practice, typed conversation and push-to-talk. Show the recognized transcript and let the learner edit it. Offer conversation-first, correction-after-turn and review-at-end modes. Never treat a recognition failure as a proven grammar mistake. Provide readable captions, replay, slower speech, keyboard access, and a text fallback.
+
+A good loop is: hear the meaning, respond to it, offer “You could say it this way”, give an optional brief explanation, invite a retry, and continue the conversation. Save two or three useful phrases if the learner chooses. Allow skip, ask-why, forget and delete. Do not make every turn a grammar lecture.
+
+Example — a gentle correction:
+Learner: “Yesterday I go market.”
+AI: “What did you buy? You can say, ‘I went to the market yesterday.’ Because you're talking about yesterday, use ‘went’. Want to try it once?”
+Learner: “I went to the market yesterday.”
+AI: “That's clear. What did you buy there?”
+
+Example — Bangla to natural English:
+Learner: “আমি ইংরেজিতে কথা বলতে চাই, কিন্তু ভুল করলে লজ্জা লাগে।”
+Transliteration: “Ami ingrejite kotha bolte chai, kintu bhul korle lojja lage.”
+AI: “You can say, ‘I want to speak English, but I feel embarrassed when I make mistakes.’ Another way is, ‘I'm nervous about making mistakes when I speak English.’ দুটোই বলা যায়। ধীরে ধীরে অনুশীলন করি। [Both are possible. Let's practice gradually.] Which feels easier?”
+
+Example — code-switching:
+Learner: “Today office-e amar presentation ache, I am little tension.”
+AI: “You could say, ‘I have a presentation at work today, and I'm a little nervous.’ Would you like to practice the opening?”
+
+Example — uncertainty:
+Learner: “I am coming tomorrow yesterday.”
+AI: “Do you mean you came yesterday, or you'll come tomorrow?”
+Do not silently guess a meaning and confidently correct to the wrong one.
+
+Example — valid alternatives:
+“I've got two brothers” and “I have two brothers” can both be acceptable. Label optional style choices as choices. A Bengali accent is not automatically an error. Pronunciation guidance should concern intelligibility and the learner's chosen goals, not compulsory identity removal.
+
+A language marked “multilingual” does not prove support for every dialect or code-switch pattern. Expand beyond English/Bangla only with qualified reviewers and representative examples. Do not promise fluent conversation in every language. The avatar should encourage practice without pretending to have human feelings or creating emotional dependence.
+
+Acceptance: teacher-reviewed meaning preservation, useful corrections, low false-correction rates on valid speech, understandable explanations, usable fallback, consent/deletion checks, and real turn-latency tests. A mock response proves only UI/contracts. Current status: IDEA, text/short-turn voice/simple avatar FEASIBLE TO PROTOTYPE; language coverage, speech, learning outcomes and rendering NOT RUN.
+
+11. HOW THE PRODUCT FITS TOGETHER TECHNICALLY
+
+Use an owned interface and application layer, with external inference engines accessed through typed, versioned adapters. Do not treat the imported ComfyUI and FreeField trees as the owned product or mandatory parallel backends. The historical preference is a managed ComfyUI inference adapter and FreeField as a workflow/reference study source, subject to license review.
+
+For creative generation: interface -> authenticated API -> project/job/asset records -> queue -> authorized worker -> reviewed workflow/model -> validated artifact -> user review. Include idempotent creation, observable states, cancellation, bounded retries, durable metadata, and explicit errors.
+
+For English conversation: interface -> authenticated interactive session -> transcript/clarification -> teaching response -> speech output -> avatar/captions. Start turn-based. Later streaming recognition and barge-in need turn IDs, cancellation and synchronized playback, so a stopped answer does not continue talking over the learner. A slow movie job must not block an interactive turn.
+
+The teaching response should identify the understood meaning, uncertainty, optional improvement, a short explanation, and a next question. Validate schemas and reject unsupported actions. A model's self-reported confidence is not a calibrated correctness score.
+
+Share consent-aware asset references, not unrestricted data access. Private learning records must remain separate from creative projects, public galleries, and training data. Ask for explicit preview/approval when exporting a selected practice scene. Shared login alone does not authorize reuse.
+
+12. REUSE, RIGHTS, TRUST AND RESOURCES
+
+Inspect official current sources before selecting tools. Candidates include maintained image/video engines, speech recognition such as Whisper/faster-whisper, appropriate language models, TTS such as Kokoro where its actual voices/languages fit, established browser audio components, WebRTC infrastructure if justified, and standard animation/editing tooling. These names are research directions, not newly approved dependencies or verified release recommendations.
+
+For every integration, pin a version or revision and record source license, weights, voices/assets, commercial terms, maintenance, security, dependencies, hardware requirements and tested limitations separately. Preserve package signatures, checksums and TLS verification. Public GitHub access is not permission to use every model or media item commercially. Copyleft or unclear rights need appropriate review rather than assumptions.
+
+Use Codex Cloud for CPU implementation/tests. Real inference needs suitable approved hardware. Choose the model after a GPU/VRAM/RAM/disk preflight, start with one active small-GPU job, and measure actual memory/runtime. No paid APIs, large model downloads, rented GPUs or training are approved merely by this roadmap. Colab may support permitted interactive experiments; do not use it to work around hosting, quota or session restrictions.
+
+Bound job/session duration, upload size, model context, retries, concurrency and spend. Keep credentials server-side, isolate workers and tenants, restrict paths/URLs/file types, and treat uploaded media, workflows and model output as untrusted. A prompt must never execute arbitrary code or grant spending permission.
+
+13. EVALUATION: TEST THE OUTCOME, NOT JUST THE INTERFACE
+
+Creative checks need genuine files that decode correctly, provenance, repeatable settings, and named hardware. Distinguish unit tests, CPU mocks, hardware inference, user acceptance and deployment. Use fixed evaluation prompts/scenes and compare latency, success rate, peak VRAM, actual cost, and blinded human preference where practical. Record failures, not only the best samples.
+
+Continuity evaluation needs a fixed set of character views/actions and a human rubric that separates intended wardrobe/scene changes from drift. Movie evaluation needs a decodable sequence and a practical revision task. Count how long it takes to replace a shot without damaging the timeline.
+
+Learning evaluation needs consented adult examples reviewed by Bengali-English educators, covering valid variants, common errors, ambiguous intent, Romanized Bangla, regional accents, noise and code-switching. Keep speakers/scenarios separate from development examples. Preserve reviewer disagreements instead of treating one sentence as the only possible answer.
+
+Possible pilot targets, NOT measured results: at least 90% acceptable meaning-preserving corrections on a fixed reviewed clear-meaning set; fewer than 5% false mandatory corrections on already-acceptable utterances; at least 95% completion of fixed pilot scenarios without blocking application errors. A possible short-turn latency target is a median first audible response within three seconds, with the 95th percentile separately reported. Refine targets after profiling actual devices, network and hardware; do not advertise them as achieved.
+
+For learning progress, evaluate voluntary baseline/follow-up speaking tasks and transfer to unseen scenarios. Engagement, streaks and satisfaction do not prove better English. Do not promise a proficiency level or exam score without an appropriate study. All results need sample sizes, conditions, known gaps and evidence links.
+
+14. YEAR 1: SMALL WORKING PATHS AND AN HONEST ADULT PILOT
+
+This is an ambition for roughly the first year of funded execution, not a release-date commitment. Actual sequencing depends on the starting code, people, rights and budget.
+
+A. Finish preservation, audit, clear setup, feature ownership and a verified owned CPU mock path. Review prior work before rebuilding it. Keep the distinction between active product and reference imports visible.
+B. Complete one genuine permitted image path, then a short video path only when the GPU and rights gates pass. Capture evidence and recoverable errors before adding many models.
+C. Add one speech/caption/media-finishing path and a basic continuity ledger. Assemble a small sequence rather than attempting a feature film.
+D. In a bounded parallel learning track, test a teacher-reviewed text loop, then push-to-talk and one or two simple synthetic avatars. No photorealistic video dependency is needed.
+E. Pilot with consenting adults and a small scenario set. Evaluate correction usefulness, interruptions, latency, data controls, and cost before broad marketing.
+
+Roles: owner/product lead controls scope and budget; a full-stack engineer owns the usable slice; an inference/speech engineer owns measured adapters; a Bengali-English educator owns teaching review; a designer/researcher tests real workflows; a security/privacy reviewer checks release boundaries. One person can cover several roles, but AI-assisted coding does not replace qualified educational review or rights decisions.
+
+Exit when narrow paths actually work, limitations are documented, recurring cost is understood, and one small group can complete the intended tasks. A calendar anniversary is not an acceptance test.
+
+15. YEAR 2: BETTER CONTROL, PRACTICE AND REVISION
+
+Proceed only if the earlier paths produce useful results within budget. Improve character references, selective shot regeneration, timeline revision and audio alignment. Build a real user task around each improvement and measure saved time or reduced failure.
+
+For English practice, investigate streaming speech, reliable interruption handling, spaced retrieval, practical roleplays and goal-specific plans. Add one support language at a time with reviewers and evaluated data. Improve a 2D/3D avatar's speech timing only if it helps users and fits the latency budget.
+
+Improve capability-based model recommendations, first with clear rules and measured benchmarks. Test whether an optional language-model planner adds value. Keep human approval for scripts, sensitive assets, exports and expensive jobs. A teacher-assisted view may be useful only when the learner controls sharing.
+
+Required contributors grow toward media/inference specialists, speech engineers, educators, accessibility researchers, operations/security and appropriate legal review. Growth is conditional on demand and funding. None of this guarantees human-equivalent conversation or fully coherent autonomous movies.
+
+16. YEARS 3–5: A RESEARCH PORTFOLIO, NOT A PROMISE LIST
+
+Research private on-device speech, low-bandwidth practice, richer consented avatar behavior, more dialects, better scene-level reshoots, stronger continuity and collaborative editing. Investigate long-form assembly as an editable production pipeline with human review, not a single magic generation.
+
+Use an explicit experiment card: user benefit, hypothesis, reused approach, rights, evaluation data, hardware/budget cap, success threshold, failure threshold, evidence, and ship/pause/reject decision. Keep a useful text/audio tutor and a small creative workflow available even if ambitious video research fails.
+
+Universities or legitimate research partners may help with speech/dialect evaluation, learning studies and continuity methods. Teachers, native-language reviewers, accessibility specialists, avatar engineers and privacy experts should have real input. These are proposed responsibilities; this document does not claim a partnership or predict who will solve the problem first.
+
+Potential collaboration between features includes teacher-authored scenario clips, consistent fictional characters across practice scenes, user-approved learner storytelling, and editable dialogue rehearsal. Private conversations must not become training examples or public films without separate informed consent.
+
+17. WHAT SHOULD NOT BE PURSUED AS AN INITIAL PRODUCT
+
+Do not train a new image/video/language foundation model from scratch. Do not automatically adopt all 54 historical research repositories, copy proprietary branding, or assume all imported files are safe and licensed. Do not build a second studio by indiscriminately combining third-party application trees.
+
+Do not promise unlimited free inference, zero-cost photorealistic live video, perfect translation for all languages, correct feedback on every sentence, guaranteed fluency, real-human emotional understanding, flawless visual continuity, reliable 120-minute single-prompt films, or universal superiority over proprietary competitors.
+
+Do not infer honesty, intelligence, diagnosis or emotion from a face or accent. Do not launch unsupervised child accounts or high-stakes certification as a shortcut from an adult practice prototype. Do not implement voice cloning/real-person impersonation without a separate justified scope and clear rights. Do not make hidden recording, training-data collection or emotional dependence part of the business model.
+
+If a feature requires unavailable permission, evidence or budget, pause that feature and continue independent work. A future year is not evidence that its constraints will disappear.
+
+18. WHERE AI CAN IMPROVE THE PRODUCT MEANINGFULLY
+
+Useful AI assistance reduces revision effort: clarify a prompt, propose a small shot plan, explain why a model lacks a control, notice a likely continuity conflict, suggest a cheaper preview, identify a missing caption, or provide two natural English alternatives without changing intent.
+
+Prefer assistance with reversible decisions and inspectable suggestions. Let users approve, edit or reject. Log authorized actions and actual cost without exposing private content. Separate generated suggestions from verified facts. Never let an assistant turn a learner's private sentence into a public asset or an arbitrary paid tool call.
+
+The prospective advantage is the combination of transparent control, reusable cleared characters, scene/shot history, measured costs, and patient bilingual learning. Competitors may already offer portions of this experience; no uniqueness claim is established here. Earn a defensible advantage through useful workflows, licensed assets, independent evaluation, reliability, trust and a growing body of consented product feedback, rather than more unchecked model names.
+
+19. PRIVACY, BUSINESS AND OPERATING GATES
+
+Default to no retained raw learner audio/video. Document temporary buffers, provider retention and backup behavior. Separate service consent, optional saved practice history, optional research and optional training consent. Provide export, deletion, access isolation, consent revocation, and incident handling. Never print secrets or private content in routine logs. An avatar needs cleared rights; a learner's photo is not blanket permission for likeness reuse.
+
+Possible commercial models include capped creative usage, capped adult conversation subscriptions, and institution-sponsored practice. Test demand before expensive rendering or broad infrastructure. No fixed price or profitability is asserted.
+
+Measure the full cost: model compute, recognition minutes, language-model tokens, synthesized speech, render time, retries, idle hardware, storage, bandwidth, support, payments and applicable taxes. Record cost per completed task or useful practice session. Set an approved cap and stop condition before each paid experiment.
+
+Before public release, verify authentication, tenant boundaries, rate limits, backup/restore, monitoring, legal/rights documentation, support paths and tested capacity. A localhost demo or passing tests is not a production launch.
+
+20. THE NEXT CONCRETE DECISION
+
+Finish the restructuring as a preserved, reviewable change, rerun the affected checks, and keep exact results in the verification ledger. This document deliberately does not assume those final runs passed or that a remote push succeeded; the final commit and remote read-back are separate evidence.
+
+Then select one bounded implementation slice. Respect prior owned work and investigate whether it can be recovered/reused before scaffolding duplicates. For the studio, prioritize a genuine permitted image and a functioning job/artifact path. For learning, begin with reviewed bilingual examples and a text correction loop, then add measured speech. Every slice needs its own acceptance criteria, evidence and resource approval.
+
+The final ambition is broad; each delivery must be small enough to verify. Success means people can create, revise, learn and communicate with confidence, with useful files and understandable feedback under their control. The strongest proof is a completed user task and honest evidence, not a claim that every possible AI feature is already solved.

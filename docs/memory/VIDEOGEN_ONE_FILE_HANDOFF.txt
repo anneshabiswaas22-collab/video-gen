@@ -1,3 +1,13 @@
+CURRENT RELOCATION NOTE — 17 November 2026
+This portable handoff preserves historical text and evidence, including its old
+paths and source URLs. For current homes read PROJECT_STRUCTURE.md and
+docs/repository/FILE_PLACEMENT.json; current memory is docs/memory/PROJECT_MEMORY.md.
+The English-speaking companion is now combined with VideoGen; see
+features/english-speaking-friend/PROJECT_IDEA.txt. No tests ran during the latest
+functional sorting. Historical test instructions below do not override the user.
+
+PRESERVED HISTORICAL HANDOFF
+
 VIDEOGEN — ONE-FILE PORTABLE RESEARCH, CHAT HISTORY & ENGINEERING HANDOFF
 ============================================================================================
 Generated: 2026-11-16

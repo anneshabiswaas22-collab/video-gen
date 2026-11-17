@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "run_id": "20261117T065618Z-a697c35d",
+  "started_at_utc": "2026-11-17T06:56:18.637745+00:00",
+  "finished_at_utc": "2026-11-17T06:56:57.402504+00:00",
+  "finished_at_india": "2026-11-17 12:26:57 +05:30",
+  "source_baseline_commit": "53aae94eed524b25f4eed5a7ad3e92dd80138286",
+  "tested_uncommitted_changes": true,
+  "source_note": "Run tested the owned working-tree changes delivered with this evidence. Subsequent edits were documentation, guides and evidence only. Owned executable/config digests below bind the tested source; original imported blobs have their separate preservation manifest.",
+  "command": "npm run verify -- --output /tmp/videogen-combined-verification",
+  "overall": "PASSED",
+  "elapsed_seconds": 38.765,
+  "owned_python": {
+    "tests_passed": 155,
+    "subtests_passed": 66,
+    "junit_total": 221,
+    "failed": 0,
+    "skipped": 0
+  },
+  "frontend": {
+    "numTotalTests": 27,
+    "numPassedTests": 27,
+    "numFailedTests": 0,
+    "numPendingTests": 0
+  },
+  "reference_node_tests": {
+    "passed": 50,
+    "failed": 0,
+    "skipped": 0
+  },
+  "checks": [
+    {
+      "name": "python-dependencies",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.215
+    },
+    {
+      "name": "python-tests",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 4.131
+    },
+    {
+      "name": "python-lint",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.016
+    },
+    {
+      "name": "mock-smoke",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.666
+    },
+    {
+      "name": "docs",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.465
+    },
+    {
+      "name": "preservation",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.77
+    },
+    {
+      "name": "web-dependencies",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.517
+    },
+    {
+      "name": "web-types",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 2.329
+    },
+    {
+      "name": "web-lint",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 2.589
+    },
+    {
+      "name": "web-tests",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.72
+    },
+    {
+      "name": "python-audit",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 2.331
+    },
+    {
+      "name": "web-audit-production",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.622
+    },
+    {
+      "name": "web-audit-all",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.616
+    },
+    {
+      "name": "wheel",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 2.389
+    },
+    {
+      "name": "wheel-contents",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.033
+    },
+    {
+      "name": "reference-validate",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.469
+    },
+    {
+      "name": "reference-types",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.416
+    },
+    {
+      "name": "reference-tests",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 7.165
+    },
+    {
+      "name": "reference-importer",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.767
+    },
+    {
+      "name": "reference-gateway",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.215
+    },
+    {
+      "name": "production-build",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 3.298
+    },
+    {
+      "name": "live-node",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 0.315
+    },
+    {
+      "name": "browser-smoke",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 3.432
+    },
+    {
+      "name": "browser-regression",
+      "status": "PASSED",
+      "exit_code": 0,
+      "seconds": 3.542
+    }
+  ],
+  "original_imported_files_preserved": 2131,
+  "source_files_explained": 2291,
+  "source_directories_explained": 570,
+  "warnings": [
+    "Starlette TestClient warns that HTTPX support is deprecated in favor of HTTPX2; tests pass and the warning is visible.",
+    "pip-audit disables its unwritable default cache; audit succeeds and skips only the owned unpublished package, whose source is covered by local checks."
+  ],
+  "unrun_gates": [
+    "Real Ollama/model quality: no configured running model verified; no model download/startup.",
+    "GPU inference, ComfyUI/custom-node runtime: required hardware/dependencies/approved weights unavailable.",
+    "Actual speech audio, microphone, camera, lip sync and learning efficacy: not verified.",
+    "Hosted CI, public production deployment, Windows/Python3.11 execution and continuous PR monitoring: not established."
+  ],
+  "validated_owned_file_sha256": {
+    ".github/workflows/application-ci.yml": "1e940916a1be98e516086fa560529d7d6bc6d91c0a9353344b4bd6bdeda635e6",
+    ".github/workflows/docs-check.yml": "669f8c128343411568ff76c86ffeab88640e009b91ac44ed2c0bce94748fa2fa",
+    "apps/web/app/globals.css": "74be101e0fa79133b0ac5428abc3e002907dcb8281f81f42139b48c81e542ff6",
+    "apps/web/app/layout.tsx": "d047fc21d07acd58859e0cd992e99301237578057e0ceaac13343ec6cf891000",
+    "apps/web/app/page.tsx": "7cf5aaba15b270789fb847087c859d3f442261b86074faac5b80813ecd2ec7f4",
+    "apps/web/app/practice/page.tsx": "a7fde2f9a5ed46f46931d45f37b62aa6b2001642761f6478b7eeb269e25fedaf",
+    "apps/web/eslint.config.mjs": "d6616fd94ba408a47c21197dde10cd9d475831d021cd5e741ef3644043bdc6ee",
+    "apps/web/lib/api.test.ts": "f31995ac5a5af020da83b617d517e06ce335aab3d1004ddbd975a9e93eb4eb92",
+    "apps/web/lib/api.ts": "c99a1e00736309822220a6c2a26482ba0cdd94f555829fd6998560efcee99e12",
+    "apps/web/next.config.ts": "53e0cba540dcead087db8d0fc5f0bb59c9c369e1dc1c5f2e6209ecf44504764b",
+    "apps/web/package.json": "56753a6a3e3eaeab99d2305373f8f52cbd58f0525ff4a95702f084e1c2c2c178",
+    "apps/web/postcss.config.mjs": "b783348d5618047d0f37e12acd15c5a2c5f02809d8711e0764c9cea52750346c",
+    "apps/web/test/live-api.mjs": "f29807a0768ab915b223092b8b77ba9440327ce03571cd6e79973cdac3a4d2ad",
+    "apps/web/tsconfig.json": "c516369547aa489e43e9eb14bb8b5336ee0a120ef85e0b95f109fd0b993f6a0c",
+    "apps/web/vitest.config.mts": "649251349a41177e06238320f99035243f21047905d3ea5e4db85b254a42ec3c",
+    "eslint.config.mjs": "69b6cac3b183fefac2ff93d3a32b6886581c9796886eddd44db1f35a7b716e2d",
+    "features/english-speaking-friend/backend/english_friend/__init__.py": "6ee307f5bed6d908a0ac4367eac1bcb57ae43de7cd403d39e0cedd355e3dc4d5",
+    "features/english-speaking-friend/backend/english_friend/coach.py": "75322fb3031297b9e0c850b5d637e3b96deaa2434307e8c22c83d1f46c65e2ea",
+    "features/english-speaking-friend/backend/english_friend/lessons.json": "d9e22e000f3e0e35582751447e3c59cc07c2175af0600043c253e7e7f8e74239",
+    "features/english-speaking-friend/backend/english_friend/providers.py": "d6b32be2f7be46ccc1bb6e076f45b05fc3e835c4012f9867e7f62aa2bcca66a1",
+    "features/english-speaking-friend/backend/english_friend/routes.py": "0917c92b81210318b8671da8fee40c61fa7e3f3e2ccd85d13c181e2b77b433a0",
+    "features/english-speaking-friend/backend/english_friend/storage.py": "20e0a2e0b209ac85dbce9990834a8c671144c475f8cc7ebaf626be40e060abd6",
+    "features/english-speaking-friend/tests/test_coach.py": "438f7e19e3046c2d8493fd3ddf7dcb331d9cff2ed77a6774597eff182e623b58",
+    "features/english-speaking-friend/tests/test_content_and_provider_matrix.py": "f9efde2f74ec1b33962f094cd98451a333996b99f221af6f8ef2308245f70c73",
+    "features/english-speaking-friend/tests/test_providers.py": "59e53837ef3d1611dda9c6ea3748eddce166db5c114bcf3713d7b6b09e04111c",
+    "features/english-speaking-friend/tests/test_session_adversarial.py": "dd26886a7c9d1846f9ad57bcc784a4e52ab513b4fef024ab3769069eadc0e136",
+    "features/english-speaking-friend/tests/test_sessions.py": "9e507bac353d0e85515e319a6ac1fa0683f4e72b40b515ce6d9cacad2a6adc16",
+    "features/english-speaking-friend/web/PracticeRoom.tsx": "6c71c05d968d863a45ecb3ef2cc6bb9291401fb7036b37fd62f560ffc02797ce",
+    "features/english-speaking-friend/web/api.test.ts": "9af6eefd95e83a100eb4c9943ac6b10829834a7718d851f5bbd01fd7d9067bb9",
+    "features/english-speaking-friend/web/api.ts": "17b682765fc150227eff0a527e552c806a623598d05a355a52d0e1e9202babe3",
+    "features/english-speaking-friend/web/practice.css": "b1510bd9c9e070ef3ff8ed9d3a92be09621d11ff591d9d34dca7be4ecf4933ba",
+    "features/english-speaking-friend/web/types.ts": "57cef03a7245851fbce19bd2a9d2717c49ca898d38e5b4a761a8b637645007ed",
+    "integrations/__init__.py": "4fedaccc5a92605b1cdaaa726554703dcadbfe7356b7cbf877ef85133d1fc001",
+    "integrations/comfyui/__init__.py": "42a0414e0cce22e0af7d90dbeb0a0167ab71ee993c0fcfed578388a31723d7f5",
+    "integrations/comfyui/adapter.py": "6dff5455167ed4ef1adf5484a6f9b4f686f6326ef8eff7b736d980b8818d4d6e",
+    "package-lock.json": "a9cb4e42d30fc11b70c10bb235ca34494a205a112d08ffe76b1302b4da472bc1",
+    "package.json": "79e2d07dc6bc93698bf397fc1389b00753c7839d1a72651c2b6f603190ac8b58",
+    "packages/schemas/src/types.ts": "be3239947f9a86bd3a8e2c64636501c097071feb58da1a717bf08f310d03679b",
+    "pyproject.toml": "5e1d42f08de9d260c8905070fbe6459489e66dbd45082089aad99bf20016d895",
+    "requirements-dev.lock": "58cf9bd477e7f1f0ff95a7cd79e48d8d53271d3453d48192582d326addb547fd",
+    "scripts/development/dev.sh": "879a859c5e069ed5dc24ebfafa6c64ee6b3dde41ce621f3955a0aac2f4aca36c",
+    "scripts/development/smoke_mock.py": "5c6d01b1f917d2c73dda26f2e85ab8c931effcdee94bb771a2ad9ff65af083e3",
+    "scripts/hardware/gpu_preflight.py": "1466db6f89ac03afedbdc217492609d8f50b572be525f75108cadcedfea6ce45",
+    "scripts/maintenance/check_docs.py": "b6de69ca35990b65b6bb66d6e81eee5d8ad9f50b2d014475bf131f8a22341071",
+    "scripts/maintenance/check_structure.py": "96214d18f0bc69b3ab0e70054a5d16c66adadb4db33eab79d7d27d854fb1e227",
+    "scripts/quality/verify.py": "ab342298338927acae21e3e68809de8494bca4392e29eb5c0cdd85a910067edd",
+    "services/__init__.py": "54e2be07ffc2d5d65ca1c1f7b92677679497f70c5b108f149bd7298a75e51a9d",
+    "services/api/__init__.py": "d968b5d02045f2005ca7eb5f1f1b071e1f044cb7c39806dc92f01d25242e51b4",
+    "services/api/contracts.py": "fbde9e11c2d7e9ad637f5c285e4b73b266acdd7168874493f5a653b3b4376172",
+    "services/api/main.py": "bd0c1a0fac4925f64d618e138a7fbe6d6e9343989f2786d2f00c73f2e41f1ecf",
+    "services/api/storage.py": "521b423cb61724548e4077146a38a52ed3e585a2da1c88516dbe5a1271d9ab43",
+    "services/worker/__init__.py": "aeab281c4d43ef1cd0157716740a813c9ae30a0ce38463754d131142b0865b33",
+    "services/worker/mock.py": "a44be9cd433fdb6beddab58168d57fd2f6073e2a77793f1941d82ac8ae37c11f",
+    "tests/browser/regression.py": "6d1cdfdd7ba9b5adcc16ea2d206ec62485c81dd3ace6ce893475620ff5a8fb22",
+    "tests/browser/smoke.py": "f08181b51fc2e35aff54679da3f0dea0e2660a82ecaec52c0cacf551de351b60",
+    "tests/conftest.py": "648c39f5a1c854463c197cc8e645ffd905a6ea8e413210456850d100b7c992ad",
+    "tests/test_adapter.py": "f57a2d0bf39105e0c78bf11bd9486d66aeec32f67affd269099b48e40abea26a",
+    "tests/test_api.py": "1bf5724ee5fd8e170a0c4def45985e943ae09931ad55519201686252f5e05361",
+    "tests/test_creative_regressions.py": "d45e3adaf156f39de864c78e19650893d23c221462e75e6b835b9fe0f95273cb",
+    "tests/test_http_boundaries.py": "525b2366825ee6e1db6f300d93f5ab02efb7d66cd2802ea7fad7eb64a104efe6"
+  },
+  "raw_log_location": "Local-only /tmp/videogen-combined-verification/20261117T065618Z-a697c35d/; not portable or committed. Rerun npm run verify to regenerate logs."
+}

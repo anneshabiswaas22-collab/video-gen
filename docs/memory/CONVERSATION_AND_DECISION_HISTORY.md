@@ -10,14 +10,14 @@
 | 2026-11-12 | Asked which public video-generation repos surpass FreeField, FreeField vs Wan, MiniMax source availability, and Colab/Kaggle model/GPU feasibility | Distinguish application stack from model inference; verify source and checkpoints, do not assume proprietary code is public | Context available |
 | 2026-11-12 to 2026-11-13 | Wants a competitor to best user-facing creative platforms, as many useful features as lawful and economically sustainable, minimal wasted Codex credits; single vs combined repo question | One owned monorepo + best specialized engines through adapters, not a giant merged source repository | Context available |
 | 2026-11-13 | Requested all research, product vision, priorities, architecture, developer guide in `video-gen` so any new AI/developer can contribute without the chat | Initial charter, roadmap, AGENTS, docs, issue list, CI, Colab preflight committed to main | Previously reported + current GitHub verified |
-| 2026-11-13 to 2026-11-15 | Asked for catalog of all repositories studied and a `.txt` file in GitHub | `docs/ALL_RECOMMENDED_REPOSITORIES.txt` lists 54 historical candidates, grouped by category | Live file verified |
+| 2026-11-13 to 2026-11-15 | Asked for catalog of all repositories studied and a `.txt` file in GitHub | `docs/research/ALL_RECOMMENDED_REPOSITORIES.txt` lists 54 historical candidates, grouped by category | Live file verified |
 | 2026-11-15 | Asked to check GitHub PRs and merge where appropriate; open VideoGen PR list was initially empty | PR policy: inspect branches/CI, don't overwrite; avoid merging unreviewed changes | Live check |
 | 2026-11-15 | Supplied detailed Master Development Prompt (principal engineer; study **exactly two** primary repos ComfyUI + FreeField; implement Issue #2 end-to-end mock rather than documentation only) | M0.2 chosen before real inference; strict legal/security/budget and verification requirements; branch+review PR | User directive available |
 | 2026-11-15 | Live repo main inspected, starting `2a88181dc0408f6477dd52a6ed8ded762f149bcd`: documentation-only; first checks pass for docs | No false claims of existing generation backend; preserve original docs | Live evidence |
 | 2026-11-15 | ComfyUI master source `258f880d...` and FreeField main `f0c2358a...` inspected, licenses checked | ComfyUI GPL external engine; FreeField MIT source manifest reference; third-party assets/weights pending | Live GitHub source code/license review |
 | 2026-11-15 | Implemented API/web/SQLite/mock worker and scoped ComfyUI HTTP adapter in `feat/m0-2-mock-studio`; tested/iteratively fixed CI | Working **CPU mock** implementation lives in PR #8; do not label as GPU inference | GitHub commits/CI |
 | 2026-11-15 | Final M0 PR #8 commit `ae953a3...`, Python 7 tests, lint, live JS->FastAPI smoke, frontend tests/types/build, npm+pip audits, docs CI passed | PR ready for review, left unmerged; M1 remains not run | GitHub actions |
-| 2026-11-16 | Wants **all project details, research, charts, links, history, decisions, tasks and future-agent instructions pushed to GitHub**, because long ChatGPT chats fail to load | This self-contained permanent `PROJECT_MEMORY.md` + `docs/memory/` archive is the handoff path | Current user directive |
+| 2026-11-16 | Wants **all project details, research, charts, links, history, decisions, tasks and future-agent instructions pushed to GitHub**, because long ChatGPT chats fail to load | This self-contained permanent `docs/memory/PROJECT_MEMORY.md` + `docs/memory/` archive is the handoff path | Current user directive |
 
 ## User's stable requirements — MUST preserve
 
@@ -53,3 +53,11 @@ A previously discussed American-English-learning 3D family video series needs 15
 ## Caveats: what cannot be restored
 
 This archive does **not** preserve all exact user/assistant messages, full model reasoning, expired external pages, or every unverified suggestion in earlier chats. It preserves decisions, substantive requirements, research sources, evidence, links and workflow. To add a full verbatim conversation export later, verify rights/privacy and explicitly mark provenance/date; never claim the missing text was recovered.
+# Latest continuation instruction — 2026-11-17
+
+The owner requested comprehensive testing/fixes, then deferred GitHub issue creation.
+No new issues were created. The current request is a root Markdown continuation
+manual explaining goals, implemented features, each source file/folder and detailed
+remaining tasks for other AI tools to work through PRs. See
+[PROJECT_HANDOFF.md](../../PROJECT_HANDOFF.md). Current review is on demand;
+continuous monitoring requires a separately configured service/workflow.

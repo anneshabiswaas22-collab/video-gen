@@ -1,0 +1,51 @@
+MIGRATION SUMMARY — 17 November 2026
+
+Repository: https://github.com/sarfiaroui-oss/video-gen
+Starting HEAD/main: f34553a3d2c2d68c15f4644520e65816f0d516f3
+Recoverable local branch: recovery/before-feature-reorganization-20261117
+User authorized normal direct delivery to main without a PR. No reset, remote
+branch deletion, force push or branch-protection bypass is part of this work.
+
+Original files: 2,178. Bulk-import files moved and archived: 2,131.
+Prior project files: 47, retained with targeted current-status/documentation/CI
+updates. Source implementations merged/deduplicated: 0. Product feature domains:
+6; original registry33 + new tutor5 =38 planned requirements. Reference apps120
+are counted separately, not as completed owned features.
+
+Moves: ComfyUI-master/ -> AnalyseFuture/upstream/ComfyUI-master/
+freefield-main/ -> AnalyseFuture/upstream/freefield-main/
+index.json + 19 loose example dirs -> AnalyseFuture/imported-examples/
+Original README copied exactly -> AnalyseFuture/project-history/README.before-reorganization.txt
+All imported bytes/modes/licenses remain unchanged. See complete manifests.
+
+Architecture: features/{image-studio,video-studio,audio-studio,movie-studio,
+character-continuity,english-speaking-friend}; shared docs/scripts/notebooks/CI;
+AnalyseFuture contains cohesive reference trees and all requested recovery reports.
+English companion: detailed idea in features/english-speaking-friend/PROJECT_IDEA.txt;
+combined overview at PROJECT_IDEA.txt; full roadmap at
+AnalyseFuture/PROJECT_VISION_AND_FUTURE_ROADMAP.txt.
+
+Current validation and scope limits: TEST_AND_VALIDATION_REPORT.txt.
+Account compromise not established or cleared; see SECURITY_AUDIT.txt.
+API permission/protection preflight was Forbidden; normal Git reads/fetch work.
+The final delivery commit will contain this report. Its hash cannot be embedded
+in itself; obtain it with git log -1 and compare git ls-remote origin refs/heads/main.
+The final chat reports whether push and remote read-back actually succeeded.
+No GitHub-hosted CI success or environment publication is claimed in advance.
+
+Final index review:2131 exact renames,11 existing-file edits,28 new files;2206
+tracked paths. Original code/workflows/assets/locks in the import are unchanged.
+Root preservation/links/compilation and scoped whitespace checks passed. The
+historical README snapshot intentionally retains its original hard-break spaces.
+The complete inventory includes every original path and a final authored-file list.
+Reusable environment draft: obsolete automatic reference install cleared; current
+start instructions saved, with no default archived-service startup. Requires
+owner review/save and publication in environment settings to activate a snapshot.
+
+VERIFIED DELIVERY
+Implementation commit: 8e421f19060b5b086beb71b16d5739cd5e2ff553
+Ordinary git push origin HEAD:refs/heads/main succeeded. Remote git ls-remote
+read-back returned that exact SHA for main. No PR, force push or protection
+bypass was used. The working tree was clean after delivery. This follow-up
+record documents that observed delivery; its own commit hash is reported in
+the final user response rather than embedded recursively in this file.

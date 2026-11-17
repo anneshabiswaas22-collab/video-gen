@@ -1,0 +1,19 @@
+{
+  "name": "videogen-workspace",
+  "version": "0.3.0",
+  "private": true,
+  "workspaces": [
+    "apps/web"
+  ],
+  "engines": {
+    "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
+  },
+  "scripts": {
+    "dev": "bash scripts/development/dev.sh",
+    "build": "npm run build --workspace @videogen/web",
+    "typecheck": "npm run typecheck --workspace @videogen/web",
+    "lint": "eslint apps/web features/english-speaking-friend/web",
+    "test": "npm run test --workspace @videogen/web",
+    "verify": "python scripts/quality/verify.py"
+  }
+}

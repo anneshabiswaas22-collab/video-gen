@@ -1,0 +1,62 @@
+LATEST IMPLEMENTATION CONTINUATION — 17 November 2026
+The owner authorized coding/tests. M0 source was recovered, the English feature
+was implemented as bounded phrase practice, and the optional local-model HTTP
+contract was added. Start with docs/development/IMPLEMENTATION_PROGRESS.md and
+docs/quality/IMPLEMENTATION_VALIDATION.md; use docs/operations/BUILD_RUN.md.
+The earlier no-tests and no-owned-code notes below are historical. Do not treat
+CPU mock receipts, phrase matching or protocol tests as real GPU/model quality.
+Do not discard existing archives or repeat the M0 rewrite. No model downloads
+or paid providers without owner approval.
+
+CURRENT STRUCTURE AND NO-TEST INSTRUCTION — 17 November 2026
+Read PROJECT_STRUCTURE.md first. Source paths in old reports resolve through
+docs/repository/FILE_PLACEMENT.json. The current user requested categorization
+and reference repair only, explicitly without tests. Do not automatically run
+validation/startup/install commands from the older instructions below as part
+of this task. Later authorized runtime work must use the new paths.
+The gallery index now has its proper home in archived FreeField web/examples;
+all118 app folders exist, but162 referenced MP4s are inherited missing data.
+See docs/repository/GALLERY_CONSOLIDATION.md; do not claim a complete gallery.
+Moved ignored .venv files may retain old absolute launcher paths. Regenerate
+only when runtime validation is resumed; no environment tooling was executed here.
+
+HISTORICAL CONTINUATION NOTES
+
+NEXT DEVELOPER / CODING AGENT INSTRUCTIONS — 17 November 2026
+
+1. Use the existing isolated /workspace/video-gen checkout; do not create a worktree
+   unless asked. Read AGENTS.md, README.md, features/README.md, docs/memory/PROJECT_MEMORY.md,
+   docs/README.md and AnalyseFuture/analysis/REPOSITORY_AUDIT.txt. Check git status and current remote refs.
+   The user's direct-main/no-PR authorization applies to this recovery task; do not
+   assume it authorizes all later unrelated changes or paid services.
+2. Starting commit f34553a3d2c2d68c15f4644520e65816f0d516f3 remains in history and
+   local recovery/before-feature-reorganization-20261117. Never reset/force shared
+   branches or delete evidence to make an audit look clean.
+3. Use AnalyseFuture/repository-inventory/COMPLETE_FILE_INVENTORY.txt and AnalyseFuture/analysis/FEATURE_INVENTORY.txt to locate source.
+   Six owned feature domains are guides/plans, not functioning services. Historical
+   anneshabiswaas22-collab PR8/CI are not local implementation proof.
+4. Root checks: python scripts/maintenance/check_docs.py; python scripts/maintenance/check_structure.py;
+   python -m py_compile scripts/maintenance/check_docs.py scripts/maintenance/check_structure.py scripts/hardware/gpu_preflight.py.
+   Structure checks hash all 2,131 archived files against original Git identities.
+   Do not edit those bytes merely to fix a test. Investigate mismatches first.
+5. Review AnalyseFuture/security-reports/SECURITY_AUDIT.txt before reference execution. Active CI does not install
+   or run archived apps. Do not add a recursive build/import that sweeps them in.
+   Reference Node tests from AnalyseFuture/references/workflow-studio/freefield: npm ls --all,
+   npm run validate, npm run typecheck, npm test. Node24/Python3.12 were used.
+   Root docs/operations/BUILD_RUN.md has explicit opt-in server/Python fake-backend steps.
+   A new npm install can use npm ci --ignore-scripts --no-audit --no-fund. Preserve
+   lockfiles and integrity verification. No model download is needed for unit tests.
+6. Reference server readiness: use a free loopback port, check HTML, 120-app catalog,
+   JSON history, configured:false GPU status without backend, and a workflow download.
+   Port3000 was already occupied during revalidation; port3001 worked. Check first;
+   don't kill unrelated processes or give user localhost preview links.
+7. Original upstream/gallery relative paths stay intact. Don't install the loose
+   index into web/examples: assets are incomplete. Don't split entire frameworks
+   across owned feature folders. Integrate small reviewed adapters later.
+8. Pick a bounded next task: recover/implement owned M0 foundation, or teacher-led
+   typed English/Bangla T0. No speculative model training, paid APIs, huge checkpoint
+   downloads or GPU rental without owner approval. Real media and teaching effects
+   require real tests beyond mocks. Keep learner data private by default.
+9. Update current status and evidence when meaningful behavior changes. Distinguish
+   passed, failed, skipped and unrun. Keep WORK_PROGRESS.txt useful and factual.
+   Environment draft saving, publication, Git push and CI execution are separate.

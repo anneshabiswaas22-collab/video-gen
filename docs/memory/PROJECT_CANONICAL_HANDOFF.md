@@ -1,6 +1,6 @@
 # VideoGen — complete canonical product and engineering handoff
 
-**Recorded:** 2026-11-16. Read [PROJECT_MEMORY.md](../../PROJECT_MEMORY.md) first. This document is intended to answer **what, why, how, current state, and next action** without an old chat.
+**Recorded:** 2026-11-16. Read [docs/memory/PROJECT_MEMORY.md](PROJECT_MEMORY.md) first. This document is intended to answer **what, why, how, current state, and next action** without an old chat.
 
 ## 1. Mission, owner requirements and position
 
@@ -91,7 +91,7 @@ States: `QUEUED -> RUNNING -> SUCCEEDED | FAILED` for local mock. Error response
 
 **FreeField:** [official GitHub](https://github.com/neuregex/freefield), inspected at `f0c2358a46c7008ff8503d4324b6cc8bc7657e75`. MIT source; inspect `schema/app.schema.json`, `apps/*/app.json`, `apps/*/workflow.api.json`, `server/registry.ts`, `server/runner.ts`, `server/history.ts`, `server/guard.ts`, `tools/comfy_validate.py`, `tools/catalog.py`, `infra/gateway.py`, `lab/core.py`, `.github/workflows/validate.yml`. Use patterns for generated forms, input-to-node binding checks, model license/VRAM manifests, provenance and lab cases; do NOT clone the entire product or its visual branding. Upstream GPU example counts are not our benchmarks.
 
-Wan2.2 is the preferred first **video candidate after GPU preflight**, not a promise any particular checkpoint fits Colab. FLUX/Qwen for licensed compatible first image candidate. Kokoro speech in M3, FFmpeg assembly in M3, LightX2V optimization only in M6. The [complete catalog](../ALL_RECOMMENDED_REPOSITORIES.txt) lists 54 studies, not adopted dependencies.
+Wan2.2 is the preferred first **video candidate after GPU preflight**, not a promise any particular checkpoint fits Colab. FLUX/Qwen for licensed compatible first image candidate. Kokoro speech in M3, FFmpeg assembly in M3, LightX2V optimization only in M6. The [complete catalog](../research/ALL_RECOMMENDED_REPOSITORIES.txt) lists 54 studies, not adopted dependencies.
 
 ## 7. Milestones and acceptance
 
@@ -151,6 +151,6 @@ Open local web `http://127.0.0.1:3000`, FastAPI docs `http://127.0.0.1:8000/docs
 2. Finish **source+weight+commercial licensing register** (#1). Decide owned application source license.
 3. Execute **real Colab hardware preflight** (#3) and archive non-sensitive measurements.
 4. Then implement **one** licensed real image workflow (#4); stop and verify the artifact before pursuing video.
-5. For every completed task update [canonical memory](../../PROJECT_MEMORY.md), [state ledger](STATE_EVIDENCE_AND_OPEN_ISSUES.md), [history](CONVERSATION_AND_DECISION_HISTORY.md), source/version register, ADR, and task checklist.
+5. For every completed task update [canonical memory](PROJECT_MEMORY.md), [state ledger](STATE_EVIDENCE_AND_OPEN_ISSUES.md), [history](CONVERSATION_AND_DECISION_HISTORY.md), source/version register, ADR, and task checklist.
 
 **This document is deliberately readable standalone.** The memory archive index links to detailed charts, source URLs, chronological rationale, the copy-ready continuation prompt, and maintenance protocol.

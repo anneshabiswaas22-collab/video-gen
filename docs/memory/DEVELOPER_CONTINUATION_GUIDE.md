@@ -8,7 +8,7 @@ This file solves the **long-chat context loss** problem. A developer or AI can r
 >
 > **Only active repository:** https://github.com/anneshabiswaas22-collab/video-gen
 >
-> **The original long chat may be unavailable. DO NOT ask me to repeat the project. Read GitHub first.** Start with the root `PROJECT_MEMORY.md`, `AGENTS.md`, `docs/memory/README.md`, `docs/memory/PROJECT_CANONICAL_HANDOFF.md`, `docs/memory/STATE_EVIDENCE_AND_OPEN_ISSUES.md`, `docs/memory/CONVERSATION_AND_DECISION_HISTORY.md`, `docs/memory/ARCHITECTURE_AND_WORKFLOW_DIAGRAMS.md`, `docs/memory/SOURCE_AND_REPOSITORY_LINKS.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md` and `docs/ALL_RECOMMENDED_REPOSITORIES.txt`. Existing documentation is the durable specification, not a substitute for checking code.
+> **The original long chat may be unavailable. DO NOT ask me to repeat the project. Read GitHub first.** Start with the root `docs/memory/PROJECT_MEMORY.md`, `AGENTS.md`, `docs/memory/README.md`, `docs/memory/PROJECT_CANONICAL_HANDOFF.md`, `docs/memory/STATE_EVIDENCE_AND_OPEN_ISSUES.md`, `docs/memory/CONVERSATION_AND_DECISION_HISTORY.md`, `docs/memory/ARCHITECTURE_AND_WORKFLOW_DIAGRAMS.md`, `docs/memory/SOURCE_AND_REPOSITORY_LINKS.md`, `docs/architecture/DECISIONS.md`, `docs/product/ROADMAP.md` and `docs/research/ALL_RECOMMENDED_REPOSITORIES.txt`. Existing documentation is the durable specification, not a substitute for checking code.
 >
 > Read **latest main, latest branches, open PRs/issues, recent commits and CI**. Check whether PR #8 has merged; do not confuse docs-only main with the M0.2 working feature branch. Preserve existing code and update your plan from live state. Record actual status, not imagined features.
 >
@@ -26,7 +26,7 @@ This file solves the **long-chat context loss** problem. A developer or AI can r
 >
 > **Working style:** research deeply when necessary but do not waste time/credits; implement the smallest useful verified vertical slice. Give real tests (PASSED/FAILED/NOT RUN), exact files, commands, version/weight licenses, commit SHAs, CI results, GPU proof when applicable, and a focused PR. Don't auto-merge without approval. Never pretend to have spent two hours thinking or generated output when you haven't.
 >
-> **MANDATORY END OF EVERY TASK:** update `PROJECT_MEMORY.md`, relevant `docs/memory/` files, `docs/STATUS.md`, decision/dependency registers and the task checklist with current evidence, next task, PR/commit/CI links, and dated uncertainties. The repo must remain self-contained for the next agent. Your final answer must contain the GitHub links to those changes.
+> **MANDATORY END OF EVERY TASK:** update `docs/memory/PROJECT_MEMORY.md`, relevant `docs/memory/` files, `docs/development/STATUS.md`, decision/dependency registers and the task checklist with current evidence, next task, PR/commit/CI links, and dated uncertainties. The repo must remain self-contained for the next agent. Your final answer must contain the GitHub links to those changes.
 
 ## Why these instructions matter
 

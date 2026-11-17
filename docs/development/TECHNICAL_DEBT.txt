@@ -1,0 +1,63 @@
+LATEST IMPLEMENTATION UPDATE — 17 November 2026
+The missing ownedfoundation item below is now superseded: original M0 code was
+recovered and extended with bounded Englishpractice. Local tests/build/browser
+checks exist; see docs/quality/IMPLEMENTATION_VALIDATION.md. Still missing:
+teacher-reviewed curriculum, real localmodelquality, ASR/liveavatar, genuine GPU
+media, creative account/tenantisolation and productionhardening. No old test
+claim or a finite authoredphrase set establishes those capabilities.
+
+CURRENT PLACEMENT NOTE — 17 November 2026
+The gallery index and19 disjoint example folders have now been reunited with the
+reference's99 folders using unchanged original data. The old missing-index item
+below is superseded;162 indexed MP4 files remain absent. Static catalog details:
+docs/repository/GALLERY_CONSOLIDATION.md. No tests ran for these changes. All
+older paths in quoted evidence resolve through docs/repository/FILE_PLACEMENT.json.
+
+HISTORICAL DEBT RECORD (retain unresolved items)
+
+TECHNICAL DEBT AND REMAINING WORK — 17 November 2026
+
+P0 SECURITY / PROVENANCE
+- Owner must investigate alleged unauthorized account access in GitHub security
+  settings; no repo-only operation proves the account secure. Review sessions,
+  collaborators, keys, apps and tokens; rotate affected secrets securely.
+- GitHub API protection/permission metadata was Forbidden; respect normal push
+  enforcement and do not weaken protection to deliver this change.
+- Complete source/weight/custom-node/voice/media license review before promotion.
+  Archived GPL/MIT notices do not license every example or model for all uses.
+- Static scans are bounded. No formal dependency vulnerability review or complete
+  malware analysis was run. Keep unknown installers and public binds disabled.
+
+P1 OWNED FOUNDATION
+- Current checkout lacks the original owned web/API/worker implementation. Verify
+  the historical source-repository PR before a separately scoped recovery, or
+  implement a minimal owned M0 slice without pretending mocks are generated media.
+- Define authentication, access isolation, consent, artifact metadata, job contracts,
+  idempotency, cancellation, error handling and cost ceilings before public use.
+- Pin approved dependencies and exact versions; don't promote wholesale imports.
+
+P1 FIRST PRODUCT PROOFS
+- Select one image model only after suitable GPU preflight, budget and licenses.
+- Validate one real image/clip/export on named hardware with metrics and files.
+- Tutor T0: recruit a Bengali-English educator, review example corrections and
+  ambiguity/valid-dialect cases, build the typed loop before speech integration.
+- Tutor T1: evaluate ASR/TTS and simple avatar rights, privacy/deletion, fallbacks,
+  turn latency and learning usefulness on consented adult pilot data.
+
+P2 REFERENCE GAPS / OPERATIONS
+- FreeField lacks web/examples/index.json in the imported source. Loose root
+  metadata references 118 apps while only 19 loose example dirs exist. Don't
+  treat the reference gallery as complete or merge metadata blindly.
+- Missing Russian music.credits translation is an inherited English fallback,
+  not a Node test failure. Preserve until a scoped upstream/reference edit.
+- Full ComfyUI/custom-node/model compatibility remains untested. Imported engine
+  is not necessarily the exact revision pinned by FreeField. Verify before use.
+- No owned production build/deploy/migrations exist; no production readiness claim.
+- Environment draft updates require owner review/save/publication; fresh-task
+  restoration and post-push GitHub Actions execution must be observed separately.
+
+P3 CONDITIONAL RESEARCH
+Longer movies, stronger identity consistency, streaming/interruptible tutor speech,
+additional evaluated languages, richer avatars and on-device/offline operation.
+Give each experiment an owner, benchmark, approved budget and stop condition;
+never make advancing AI a promised delivery dependency.

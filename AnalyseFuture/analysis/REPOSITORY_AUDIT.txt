@@ -1,0 +1,85 @@
+REPOSITORY AUDIT — 17 November 2026 (Asia/Kolkata)
+
+Repository: sarfiaroui-oss/video-gen
+URL: https://github.com/sarfiaroui-oss/video-gen
+Default branch: main, confirmed by Git's advertised symbolic HEAD.
+Starting commit: f34553a3d2c2d68c15f4644520e65816f0d516f3
+Prior commit: fcad35485521c311cf727b53d5abe1a9f2a7b9f3
+Local recovery ref: recovery/before-feature-reorganization-20261117
+The ref preserves the starting commit and its reachable history. It is local,
+not a separate remote backup or evidence that GitHub account access is secure.
+
+AUTHORITY AND SCOPE
+The owner requested restructuring, preserving uncertain material in AnalyseFuture,
+a combined studio/English-friend plan, and an ordinary direct push to main without
+a PR. The uploaded master instructions add full inventories and recovery reports.
+No force push, hard reset, deletion, paid inference or foundation-model training
+is authorized by or used for this change.
+
+DISCOVERY
+All 2,178 starting tracked files are inventoried in COMPLETE_FILE_INVENTORY.txt.
+The 47 prior project files comprise 6 root configuration/guides, 4 GitHub
+workflow/templates, 33 docs/memory files, 2 notebook files and 2 scripts.
+The latest commit added 2,131 files and changed/deleted none of the prior 47:
+1,306 ComfyUI files, 764 FreeField files, 61 loose example/index files.
+The 61 consist of an index plus 60 assets in 19 folders. All are retained.
+
+All available branch heads/tags were fetched without a reset or forced remote
+update. The remote advertised main only, with no tags or additional branches.
+Historical PR #8 refers to anneshabiswaas22-collab/video-gen, not the current
+origin. Its application implementation is not present on accessible current
+refs; it was not copied or falsely declared recovered. No Git submodule,
+tracked symlink or gitlink was found in the starting tree. No tracked .gitattributes
+or LFS pointer relationship was found by inventory. Imported roots have no
+nested .git checkout. Git object connectivity passed.
+
+SOURCE AND FEATURE REVIEW
+Automated path/type/hash inventories cover every original file. Syntax/data
+inspection and focused deep reading cover source boundaries, package/lockfiles,
+server/runner/history/guard, workflow bindings, model packs, runtime/download
+scripts, tests, CI and security-sensitive engine entrypoints. Classification is
+not a formal line-by-line audit of all upstream code. See SECURITY_AUDIT.txt
+for scope, conditional risks and limits; do not claim the absence of malware.
+
+Six owned product domains are planned: image, video, audio, movies, continuity,
+and English friend. The old registry has 33 requirements; ENG-01 through ENG-05
+add 5 more. These 38 requirement rows are not 38 completed implementations.
+The preserved FreeField reference separately has 120 app manifests, not 120
+owned product features. FEATURE_INVENTORY.txt traces inherited capabilities,
+files, dependencies, tests and missing integration.
+
+CONSOLIDATION DECISIONS
+No competing owned web/API service implementations exist in current refs.
+Do not create or claim code merges where none exist. Consolidate feature
+navigation/specifications, preserve common docs, and archive whole upstream
+systems intact. Splitting ComfyUI core nodes or FreeField server/assets across
+owned feature folders would break their dependency graph and obscure licensing.
+Archive them as cohesive references; integrate selected interfaces in later tasks.
+
+The root loose index is not an approved replacement for the missing FreeField
+web/examples/index.json. It describes more examples than the loose files contain.
+The reference tolerates a missing gallery index. Do not manufacture coverage by
+copying incomplete examples into it. Duplicate content is preserved independently.
+
+DEPENDENCY MAP
+Root checks -> Python standard library; no root app package/workspace/deploy.
+Feature guides -> shared docs and each other; no runtime imports.
+FreeField web -> Node HTTP server -> registry/runner/history/guard/flags.
+Runner -> @comfyorg/sdk -> optional gateway/proxy/ComfyUI.
+Gateway test -> aiohttp + local fake proxy; no live provider credentials.
+ComfyUI -> Python/Torch and optional frontend/custom nodes/model weights.
+Tutor -> proposed session/ASR/teaching/TTS/avatar adapters, not implemented.
+Movie editing -> proposed accepted media/provenance/FFmpeg, not implemented.
+No archived tree is imported, packaged or deployed by the root workflow.
+
+GITHUB ACCESS
+Existing HTTPS Git authentication supports read/fetch. GitHub API requests for
+repository permission and main protection metadata returned Forbidden. Therefore
+protection and token scopes could not be pre-inspected. Do not assume protection
+is disabled or ask for a token merely because the API differs from Git access.
+An ordinary push respects the server's restrictions; never bypass a rejection.
+Delivery and exact commit verification are recorded in MIGRATION_SUMMARY.txt
+and the final user report. Saving environment instructions is not publication.
+
+See also REPOSITORY_REORGANIZATION.md in docs/, the path manifests, current
+validation report, technical debt and continuation instructions.
