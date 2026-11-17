@@ -1,3 +1,6 @@
+> **Start here:** [Complete project handoff, implemented features and 104 ordered remaining tasks](PROJECT_HANDOFF.md).
+> Other AI tools should take one ready task on a branch and submit a PR for review. No GitHub issues are being created.
+
 # VideoGen — Creative Studio + English Friend
 
 A local development application with two working paths:
@@ -15,7 +18,7 @@ Microphone input, live avatar video and GPU media generation remain future work.
 
 ## Run locally (Linux / WSL)
 
-Use Node 22+ and Python 3.11+ from the existing checkout:
+Use Node 22.12+, 24.x or 26+ (see `package.json`) and Python 3.11+ from the existing checkout:
 
 ```sh
 python -m venv .venv
@@ -56,6 +59,17 @@ imported files remain unchanged.
 
 ## Tests
 
+Run the combined checks, including production browser flows, from the repository root:
+
+```sh
+npm run verify
+```
+
+See [the setup guide](docs/operations/BUILD_RUN.md) for browser/reference prerequisites
+and explicit reduced-scope options. Results and individual logs are saved under
+ignored `.local/verification/`. The verifier uses isolated synthetic data and stops
+the test servers it starts. Individual checks remain available:
+
 ```sh
 .venv/bin/python -m pytest
 .venv/bin/ruff check services integrations tests features/english-speaking-friend/backend features/english-speaking-friend/tests scripts/development/smoke_mock.py
@@ -68,8 +82,8 @@ python scripts/maintenance/check_docs.py
 python scripts/maintenance/check_structure.py
 ```
 
-Browser instructions and actual outcomes are in
-[IMPLEMENTATION_VALIDATION.md](docs/quality/IMPLEMENTATION_VALIDATION.md). Tests
+Browser instructions and current outcomes are in
+[COMPREHENSIVE_VALIDATION.md](docs/quality/COMPREHENSIVE_VALIDATION.md). Tests
 are now authorized; earlier no-test sorting reports remain historical.
 
 The [combined idea](docs/product/PROJECT_IDEA.txt),

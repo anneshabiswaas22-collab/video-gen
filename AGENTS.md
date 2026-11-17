@@ -1,4 +1,5 @@
 > **Current structure:** Read [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) and the
+> [current task handoff](PROJECT_HANDOFF.md), then the
 > [file-placement ledger](docs/repository/FILE_PLACEMENT.json). Shared documents now
 > live in functional docs collections; repository scripts are in `scripts/maintenance/`
 > and GPU inspection in `scripts/hardware/`. The owner has now authorized

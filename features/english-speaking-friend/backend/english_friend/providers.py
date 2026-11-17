@@ -189,6 +189,15 @@ def _system_prompt(scenario: dict) -> str:
     )
 
 
+def _unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("Ambiguous duplicate JSON field")
+        result[key] = value
+    return result
+
+
 async def _ollama(text: str, scenario: dict, settings: _Settings, client: httpx.AsyncClient) -> dict:
     # An injected client is a trusted testing/integration seam, not a user option.
     # Requiring this explicitly prevents accidental use of proxy-held credentials.
@@ -219,8 +228,8 @@ async def _ollama(text: str, scenario: dict, settings: _Settings, client: httpx.
                 if size > _MAX_RESPONSE_BYTES:
                     raise ProviderUnavailable("PROVIDER_OUTPUT_INVALID")
                 chunks.append(chunk)
-        envelope = json.loads(b"".join(chunks))
-        if not isinstance(envelope, dict) or envelope.get("done", True) is not True:
+        envelope = json.loads(b"".join(chunks), object_pairs_hook=_unique_object)
+        if not isinstance(envelope, dict) or envelope.get("done") is not True:
             raise ProviderUnavailable("PROVIDER_OUTPUT_INVALID")
         message = envelope.get("message")
         if not isinstance(message, dict) or message.get("tool_calls"):
@@ -228,7 +237,7 @@ async def _ollama(text: str, scenario: dict, settings: _Settings, client: httpx.
         content = message.get("content")
         if not isinstance(content, str):
             raise ProviderUnavailable("PROVIDER_OUTPUT_INVALID")
-        return _validated_output(json.loads(content))
+        return _validated_output(json.loads(content, object_pairs_hook=_unique_object))
     except httpx.TimeoutException:
         raise ProviderUnavailable("PROVIDER_TIMEOUT") from None
     except httpx.RequestError:

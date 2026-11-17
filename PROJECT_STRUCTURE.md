@@ -201,3 +201,11 @@ the no-tests paragraph above remains the historical sorting record.
 identifies the exact earlier owned source and its source blobs. `.npmrc`, root
 `package.json`/lock and `pyproject.toml`/development lock manage the active runtime.
 No archived engine is included in those workspace/package lists.
+
+## Complete handoff and per-file guide
+
+[PROJECT_HANDOFF.md](PROJECT_HANDOFF.md) is the current homepage task/status manual.
+[FILE_GUIDE.md](docs/repository/FILE_GUIDE.md) explains every source path, including
+deep archive modules. [FOLDER_GUIDE.md](docs/repository/FOLDER_GUIDE.md) covers each
+source directory and its responsibility. Other tools should work in scoped branches and request PR
+review; this documentation does not run continuous background monitoring.

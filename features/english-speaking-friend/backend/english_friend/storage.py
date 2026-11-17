@@ -220,6 +220,7 @@ def reserve_turn(session_id: str, owner: str, key: str, text: str):
 
 
 def finish_turn(turn: dict, owner: str, response: dict):
+    purge_expired()
     with connection() as db:
         db.execute("BEGIN IMMEDIATE")
         session = _owned(db, turn["session_id"], owner)
@@ -244,3 +245,26 @@ def abort_turn(turn: dict):
     """A known failed provider call can be retried; it did not complete a turn."""
     with connection() as db:
         db.execute("DELETE FROM english_turns WHERE id=? AND state='pending'", (turn["id"],))
+
+
+def interrupt_request(session_id: str, owner: str, key: str):
+    """Keep an indeterminate key without reserving a permanently pending quota slot."""
+    with connection() as db:
+        db.execute(
+            "UPDATE english_turns SET state='interrupted' WHERE session_id=? "
+            "AND request_key=? AND state='pending' AND session_id IN "
+            "(SELECT id FROM english_sessions WHERE owner=?)", (session_id, key, owner),
+        )
+
+
+def clear_owner_sessions(owner: str):
+    """Explicitly clear even default-session metadata whose browser page was lost."""
+    with connection() as db:
+        db.execute("BEGIN IMMEDIATE")
+        ids = [row['id'] for row in db.execute(
+            'SELECT id FROM english_sessions WHERE owner=?', (owner,)
+        )]
+        db.execute('DELETE FROM english_sessions WHERE owner=?', (owner,))
+    _forget(ids)
+    with connection() as db:
+        db.execute('PRAGMA wal_checkpoint(TRUNCATE)')

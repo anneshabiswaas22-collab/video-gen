@@ -27,9 +27,13 @@ def data_dir() -> Path:
 def connection():
     conn = sqlite3.connect(data_dir() / "studio.sqlite3", timeout=15)
     conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys=ON")
     try:
         yield conn
         conn.commit()
+    except BaseException:
+        conn.rollback()
+        raise
     finally:
         conn.close()
 
@@ -178,23 +182,28 @@ def claim_job() -> dict | None:
     with connection() as db:
         db.execute("BEGIN IMMEDIATE")
         row = db.execute(
-            "SELECT * FROM jobs WHERE state='QUEUED' ORDER BY created_at LIMIT 1"
+            "SELECT * FROM jobs WHERE state='QUEUED' ORDER BY created_at,rowid LIMIT 1"
         ).fetchone()
         if row is not None:
             _transition(db, row["id"], "RUNNING", 15)
-        return _row(row)
+            return _row(db.execute("SELECT * FROM jobs WHERE id=?", (row["id"],)).fetchone())
+        return None
 
 
 def progress_job(job_id: str, value: int) -> None:
+    if type(value) is not int or not 0 <= value < 100:
+        raise ValueError("INVALID_RUNNING_PROGRESS")
     with connection() as db:
+        db.execute("BEGIN IMMEDIATE")
         if db.execute(
-            "SELECT 1 FROM jobs WHERE id=? AND state='RUNNING'", (job_id,)
+            "SELECT 1 FROM jobs WHERE id=? AND state='RUNNING' AND progress<?", (job_id, value)
         ).fetchone():
             _transition(db, job_id, "RUNNING", value)
 
 
 def fail_job(job_id: str, code: str) -> None:
     with connection() as db:
+        db.execute("BEGIN IMMEDIATE")
         if db.execute(
             "SELECT 1 FROM jobs WHERE id=? AND state='RUNNING'", (job_id,)
         ).fetchone():
@@ -202,41 +211,49 @@ def fail_job(job_id: str, code: str) -> None:
 
 
 def recover_interrupted() -> None:
-    """Local worker restart marks abandoned jobs failed (no speculative re-execution)."""
+    """Fail abandoned work without letting a late worker revive terminal jobs."""
     with connection() as db:
+        db.execute("BEGIN IMMEDIATE")
         rows = db.execute("SELECT id FROM jobs WHERE state='RUNNING'").fetchall()
         for row in rows:
             _transition(db, row["id"], "FAILED", 100, error="WORKER_LOST")
 
 
 def complete_job(request: dict, body: bytes) -> dict:
+    """Commit one running task, cleaning generated files after failed writes/transactions."""
     artifact_id = f"art_{uuid.uuid4().hex}"
     folder = data_dir() / "artifacts"
-    folder.mkdir(parents=True, exist_ok=True)
     target = folder / f"{artifact_id}.txt"
     temp = folder / f".{artifact_id}.tmp"
-    temp.write_bytes(body)
-    os.replace(temp, target)
-    artifact = {
-        "id": artifact_id,
-        "job_id": request["id"],
-        "project_id": request["project_id"],
-        "model_id": request["model_id"],
-        "sha256": hashlib.sha256(body).hexdigest(),
-        "mime_type": "text/plain",
-        "bytes": len(body),
-        "workflow_version": WORKFLOW_VERSION,
-        "created_at": _utc(),
-    }
-    with connection() as db:
-        db.execute(
-            """INSERT INTO artifacts
-            (id,job_id,project_id,model_id,sha256,mime_type,bytes,workflow_version,created_at)
-            VALUES (:id,:job_id,:project_id,:model_id,:sha256,:mime_type,:bytes,
-                    :workflow_version,:created_at)""",
-            artifact,
-        )
-        _transition(db, request["id"], "SUCCEEDED", 100, artifact_id=artifact_id)
+    try:
+        with connection() as db:
+            db.execute("BEGIN IMMEDIATE")
+            task = db.execute(
+                "SELECT * FROM jobs WHERE id=? AND state='RUNNING'", (request["id"],)
+            ).fetchone()
+            if task is None:
+                raise ValueError("JOB_NOT_RUNNING")
+            folder.mkdir(parents=True, exist_ok=True)
+            temp.write_bytes(body)
+            os.replace(temp, target)
+            artifact = {
+                "id": artifact_id, "job_id": task["id"], "project_id": task["project_id"],
+                "model_id": task["model_id"], "sha256": hashlib.sha256(body).hexdigest(),
+                "mime_type": "text/plain", "bytes": len(body),
+                "workflow_version": task["workflow_version"], "created_at": _utc(),
+            }
+            db.execute(
+                """INSERT INTO artifacts
+                (id,job_id,project_id,model_id,sha256,mime_type,bytes,workflow_version,created_at)
+                VALUES (:id,:job_id,:project_id,:model_id,:sha256,:mime_type,:bytes,
+                        :workflow_version,:created_at)""", artifact,
+            )
+            _transition(db, task["id"], "SUCCEEDED", 100, artifact_id=artifact_id)
+    except BaseException:
+        # Only these server-generated files from this attempted completion are removed.
+        temp.unlink(missing_ok=True)
+        target.unlink(missing_ok=True)
+        raise
     return artifact
 
 

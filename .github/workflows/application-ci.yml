@@ -27,7 +27,7 @@ jobs:
       - name: Dependency consistency
         run: python -m pip check
       - name: Lint Python
-        run: ruff check services integrations tests features/english-speaking-friend/backend features/english-speaking-friend/tests scripts/development/smoke_mock.py tests/browser/smoke.py
+        run: ruff check services integrations tests features/english-speaking-friend/backend features/english-speaking-friend/tests scripts/development scripts/quality scripts/maintenance
       - name: Python unit and integration tests
         run: pytest
       - name: CPU end-to-end mock smoke
@@ -61,6 +61,8 @@ jobs:
           key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install pinned direct dependencies
         run: npm ci --ignore-scripts --no-fund
+      - name: Dependency graph consistency
+        run: npm ls --all
       - name: Typecheck
         run: npm run typecheck
       - name: Lint
@@ -71,3 +73,5 @@ jobs:
         run: npm run build
       - name: Production dependency audit
         run: npm audit --omit=dev --audit-level=high
+      - name: Development and production dependency audit
+        run: npm audit --audit-level=moderate

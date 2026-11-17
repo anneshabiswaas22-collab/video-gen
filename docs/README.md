@@ -1,5 +1,11 @@
 # Functional documentation collections
 
+**Current continuation guide:** [PROJECT_HANDOFF.md](../PROJECT_HANDOFF.md) records
+implemented features, limits and 104 remaining local tasks. The
+[file guide](repository/FILE_GUIDE.md) and [folder guide](repository/FOLDER_GUIDE.md)
+cover the complete source tree. [Current validation](quality/COMPREHENSIVE_VALIDATION.md)
+records actual checks. Earlier snapshots below remain historical.
+
 Choose by responsibility: [product](product/INDEX.md), [architecture](architecture/INDEX.md), [operations](operations/INDEX.md), [research](research/INDEX.md), [quality](quality/INDEX.md), [security](security/INDEX.md), [design](design/INDEX.md), [development](development/INDEX.md), [repository](repository/INDEX.md), [memory](memory/INDEX.md).
 
 See [the complete structure](../PROJECT_STRUCTURE.md). All files below have been moved into these collections; the earlier reading list remains with repaired links.

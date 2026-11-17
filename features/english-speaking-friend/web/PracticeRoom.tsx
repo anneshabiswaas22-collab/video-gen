@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { createSession, deleteSession, listSavedSessions, loadScenarios, readSession, submitTurn } from "./api";
+import { createSession, deleteAllSessions, deleteSession, listSavedSessions, loadScenarios, readSession, submitTurn } from "./api";
 import type { PracticeSession, PracticeTurn, ScenarioCatalog } from "./types";
 import "./practice.css";
 
@@ -200,6 +200,25 @@ export default function PracticeRoom() {
     }
   }
 
+  async function forgetAllSessions() {
+    if (busy || !catalog || !window.confirm("Delete all your saved and unsaved practice sessions on this server? This cannot be undone.")) return;
+    const currentEpoch = ++epoch.current;
+    requestRef.current?.abort();
+    const controller = new AbortController();
+    requestRef.current = controller;
+    stopSpeaking(); setBusy(true); setError("");
+    try {
+      await deleteAllSessions(controller.signal);
+      if (controller.signal.aborted || currentEpoch !== epoch.current) return;
+      setSession(null); setTurns([]); setSavedSessions([]); setSavedId("");
+      setText(""); setSaveHistory(false); replay.current = null;
+    } catch (error) {
+      if (!controller.signal.aborted && currentEpoch === epoch.current) setError((error as Error).message);
+    } finally {
+      if (currentEpoch === epoch.current) setBusy(false);
+    }
+  }
+
   async function resumeSession() {
     if (!savedId || busy) return;
     const currentEpoch = ++epoch.current;
@@ -327,6 +346,8 @@ export default function PracticeRoom() {
             {savedSessions.map((item) => <option value={item.id} key={item.id}>{catalog?.scenarios.find((entry) => entry.id === item.scenario_id)?.title || item.scenario_id} · {new Date(item.created_at).toLocaleString()} · {item.turn_count} {item.turn_count === 1 ? "turn" : "turns"}</option>)}
           </select><button type="button" onClick={() => void resumeSession()} disabled={!savedId || busy}>Resume session</button></div> : <p className="pr-small">No saved sessions in this browser yet.</p>}
           {savedError && <p role="status" className="pr-small">{savedError}</p>}
+          <div><button type="button" className="pr-delete" disabled={busy || !catalog} onClick={() => void forgetAllSessions()}>Delete all practice data</button>
+            <p className="pr-small">Also clears default-session metadata left after closing a page. Only this browser’s practice data is affected.</p></div>
         </section>
         <footer className="pr-footer"><span>Small steps. Clearer conversations.</span><span>English + listed Bangla examples · T0 prototype</span></footer>
       </div>

@@ -1,5 +1,13 @@
 # Latest implementation milestone — 2026-11-17
 
+**Current continuation:** [root project handoff](../../PROJECT_HANDOFF.md),
+[complete file guide](../repository/FILE_GUIDE.md),
+[complete folder guide](../repository/FOLDER_GUIDE.md), and
+[comprehensive QA evidence](../quality/COMPREHENSIVE_VALIDATION.md).
+The owner deferred GitHub issues and requested detailed local handoff tasks instead.
+There are 104 remaining task IDs, with prerequisites and completion evidence;
+future tools should branch and request PR review. No unattended PR monitor runs.
+
 The owner now authorized coding and tests. Original M0 source at
 `ae953a3e5e2c82e5c2ee639d0f0b07403e8f3d37` was fetched and selectively recovered;
 [provenance](../repository/RECOVERED_APPLICATION_SOURCE.json) records each source blob.

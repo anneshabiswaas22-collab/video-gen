@@ -10,3 +10,6 @@ Current file placement, gallery consolidation and restructuring records.
 See [project structure](../../PROJECT_STRUCTURE.md) and [all documentation](../README.md).
 
 - [Current functional sorting record](FUNCTIONAL_REORGANIZATION.md)
+- [Every source file and its purpose](FILE_GUIDE.md)
+- [Every source directory and its responsibility](FOLDER_GUIDE.md)
+- [Recovered owned application provenance](RECOVERED_APPLICATION_SOURCE.json)

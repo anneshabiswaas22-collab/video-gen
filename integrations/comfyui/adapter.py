@@ -1,4 +1,5 @@
 """Typed future ComfyUI boundary. Not connected to API until M1 license/GPU gate."""
+import json
 from dataclasses import dataclass
 from enum import StrEnum
 from typing import Mapping
@@ -30,16 +31,32 @@ class ComfyUIAdapter:
 
     def __init__(self, client: httpx.AsyncClient, allowed_workflows: Mapping[str, dict]):
         self.client = client
-        self.allowed_workflows = dict(allowed_workflows)
+        try:
+            self.allowed_workflows = json.loads(json.dumps(dict(allowed_workflows), allow_nan=False))
+            if any(not isinstance(graph, dict) or not graph for graph in self.allowed_workflows.values()):
+                raise ValueError("Invalid graph")
+        except (ValueError, TypeError):
+            raise AdapterError(AdapterErrorCode.INVALID_WORKFLOW, "Invalid approved graph") from None
 
     def capabilities(self) -> list[str]:
         return ["workflow_submission"] if self.allowed_workflows else []
 
+    async def _request(self, method: str, path: str, **kwargs):
+        async with self.client.stream(method, path, follow_redirects=False, **kwargs) as response:
+            response.raise_for_status()
+            body = bytearray()
+            async for chunk in response.aiter_bytes():
+                body.extend(chunk)
+                if len(body) > 256 * 1024:
+                    raise ValueError("Engine response exceeded limit")
+        return json.loads(body)
+
     async def health(self) -> bool:
         try:
-            result = await self.client.get("/queue")
-            return result.status_code == 200
-        except httpx.HTTPError:
+            result = await self._request("GET", "/queue")
+            return (isinstance(result, dict) and isinstance(result.get("queue_running"), list)
+                    and isinstance(result.get("queue_pending"), list))
+        except (httpx.HTTPError, ValueError, TypeError):
             return False
 
     async def estimate(self, workflow_id: str) -> Estimate:
@@ -52,17 +69,19 @@ class ComfyUIAdapter:
         if graph is None:
             raise AdapterError(AdapterErrorCode.INVALID_WORKFLOW, "Unapproved workflow")
         try:
-            response = await self.client.post("/prompt", json={
-                "prompt": graph,
-                "client_id": client_id,
+            data = await self._request("POST", "/prompt", json={
+                "prompt": graph, "client_id": client_id,
             })
-            response.raise_for_status()
-            data = response.json()
-        except (httpx.HTTPError, ValueError) as exc:
-            raise AdapterError(AdapterErrorCode.UNAVAILABLE, "ComfyUI API error") from exc
-        if not isinstance(data, dict) or not isinstance(data.get("prompt_id"), str):
+        except httpx.HTTPError:
+            raise AdapterError(AdapterErrorCode.UNAVAILABLE, "ComfyUI API error") from None
+        except (ValueError, TypeError):
+            raise AdapterError(AdapterErrorCode.REMOTE_REJECTED, "Invalid engine response") from None
+        prompt_id = data.get("prompt_id") if isinstance(data, dict) else None
+        if (not isinstance(prompt_id, str) or not 1 <= len(prompt_id) <= 256
+                or any(ord(char) <= 32 or ord(char) == 127 for char in prompt_id)
+                or data.get("error") or data.get("node_errors")):
             raise AdapterError(AdapterErrorCode.REMOTE_REJECTED, "ComfyUI refused workflow")
-        return data["prompt_id"]
+        return prompt_id
 
     async def cancel(self, _prompt_id: str) -> None:
         # /interrupt is global on some engines. Never interrupt unrelated tenants.

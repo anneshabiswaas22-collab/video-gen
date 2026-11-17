@@ -1,5 +1,13 @@
 # Implementation and remaining integrations
 
+The current continuation plan is [PROJECT_HANDOFF.md](../../PROJECT_HANDOFF.md):
+104 local tasks with exact homes, dependencies and acceptance evidence. Other tools
+should use branches/PRs for reviewed contributions. Issue creation is deferred.
+[Comprehensive validation](../quality/COMPREHENSIVE_VALIDATION.md) supersedes earlier
+test counts. This pass hardens cancellation/expiry/database failures, replay,
+job transitions, receipt integrity, provider responses, browser recovery and
+owner-scoped delete-all. It does not add real model/GPU/voice generation.
+
 The owner authorized implementation and tests after the completed sorting pass.
 The first delivered slice restores M0 and implements bounded ENG-01 / T0 practice.
 
@@ -49,6 +57,6 @@ cannot establish GPU generation, learning effectiveness or production security.
 ## Run and verify
 
 [BUILD_RUN.md](../operations/BUILD_RUN.md) contains complete commands.
-[IMPLEMENTATION_VALIDATION.md](../quality/IMPLEMENTATION_VALIDATION.md) records
+[COMPREHENSIVE_VALIDATION.md](../quality/COMPREHENSIVE_VALIDATION.md) records
 actual checks and limitations. The earlier no-tests instruction applied to the
 sorting task; it does not block the current owner-authorized test work.

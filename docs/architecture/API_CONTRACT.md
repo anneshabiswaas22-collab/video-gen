@@ -16,6 +16,7 @@ configuration is reported separately by `/v1/english/scenarios`.
 | GET | `/v1/english/scenarios` | Supported examples, configuration-only provider facts and owner cookie |
 | POST | `/v1/english/sessions` | `{scenario_id,save_history:false}`; strict explicit Boolean consent |
 | GET | `/v1/english/sessions` | Owner's saved-session metadata only; no transcript in list |
+| DELETE | `/v1/english/sessions` | Clear all sessions/metadata for this owner, including unsaved sessions; 204, other owners unaffected |
 | GET/DELETE | `/v1/english/sessions/{id}` | Owner-scoped resume or deletion |
 | POST | `/v1/english/sessions/{id}/turns` | `{text,idempotency_key}`; typed feedback, replay-safe requests |
 
@@ -35,6 +36,12 @@ returns the prior reply; a changed phrase conflicts409. After restart, unsaved
 replies are unavailable and replay returns409 rather than rerunning a model.
 Provider failures return503 with safe codes, not raw model/network details. Failed
 turns do not count as completed; deletion removes rows/caches and checkpoints WAL.
+Cancelled or storage-interrupted requests retain an interrupted idempotency key
+without reserving a pending quota slot; the same key is not speculatively run again.
+Storage faults return a safe503. Expiry/deletion while a provider runs prevents a
+late result from restoring the session. The practice UI confirms owner-scoped
+delete-all so abandoned default metadata does not permanently exhaust the10-session
+limit after page reloads. Full production identity and scheduled retention remain future work.
 
 No creative cancellation, asset upload, timeline, real inference or streaming
 conversation endpoint is implemented. Earlier routes below remain design proposals.

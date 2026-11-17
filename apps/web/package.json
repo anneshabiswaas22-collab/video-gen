@@ -2,7 +2,9 @@
   "name": "@videogen/web",
   "version": "0.3.0",
   "private": true,
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -27,6 +29,6 @@
     "jsdom": "27.0.1",
     "tailwindcss": "4.1.16",
     "typescript": "5.9.3",
-    "vitest": "3.2.4"
+    "vitest": "5.1.0"
   }
 }

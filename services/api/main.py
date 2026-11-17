@@ -1,6 +1,9 @@
 """VideoGen M0: localhost-only development API and CPU mock-worker integration."""
 import asyncio
+import hashlib
 import os
+import sqlite3
+import stat
 from contextlib import asynccontextmanager
 
 from english_friend.routes import initialize as initialize_english
@@ -8,7 +11,7 @@ from english_friend.routes import router as english_router
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import JSONResponse, Response
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from services.api import storage
@@ -99,6 +102,13 @@ async def invalid_request(_request, exc: RequestValidationError):
                            "details": [{"loc": list(item["loc"]), "type": item["type"],
                                         "message": item["msg"]} for item in exc.errors()]}},
     )
+
+
+@app.exception_handler(sqlite3.Error)
+async def database_unavailable(_request, _exc):
+    return JSONResponse(status_code=503, content={"error": {
+        "code": "STORAGE_UNAVAILABLE", "message": "Local storage is temporarily unavailable."
+    }})
 
 
 def _not_found(resource: str) -> HTTPException:
@@ -212,12 +222,25 @@ def download_artifact(artifact_id: str):
         raise _not_found("ARTIFACT")
     # The path is derived from a server-generated ID, not untrusted request path segments.
     target = storage.data_dir() / "artifacts" / f"{result['id']}.txt"
-    if not target.is_file():
-        raise HTTPException(503, detail={"code": "ARTIFACT_MISSING",
-                                         "message": "Stored result is unavailable"})
-    return FileResponse(
-        target,
+    try:
+        # Open without following a symlink and serve the bytes that were verified,
+        # rather than re-opening a path after a time-of-check/time-of-use gap.
+        if not 0 <= result["bytes"] <= 65536:
+            raise OSError("Mock receipt exceeds limit")
+        fd = os.open(target, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0))
+        with os.fdopen(fd, "rb") as stream:
+            info = os.fstat(stream.fileno())
+            if target.is_symlink() or not stat.S_ISREG(info.st_mode) or info.st_size != result["bytes"]:
+                raise OSError("Stored artifact differs from metadata")
+            body = stream.read(result["bytes"] + 1)
+        if len(body) != result["bytes"] or hashlib.sha256(body).hexdigest() != result["sha256"]:
+            raise OSError("Stored artifact differs from metadata")
+    except OSError:
+        raise HTTPException(503, detail={"code": "ARTIFACT_UNAVAILABLE",
+                                         "message": "Stored result is unavailable"}) from None
+    return Response(
+        body,
         media_type="text/plain",
-        filename=f"{artifact_id}-MOCK.txt",
-        headers={"X-Content-Type-Options": "nosniff", "Content-Security-Policy": "sandbox"},
+        headers={"Content-Disposition": f'attachment; filename="{result["id"]}-MOCK.txt"',
+                 "X-Content-Type-Options": "nosniff", "Content-Security-Policy": "sandbox"},
     )

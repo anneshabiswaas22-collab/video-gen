@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Verify required handoff docs and relative markdown links. No dependencies."""
-from pathlib import Path
 import re
 import sys
+from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[2]
 REQUIRED = [
-    "README.md", "PROJECT_STRUCTURE.md", "AGENTS.md", "CONTRIBUTING.md",
+    "README.md", "PROJECT_STRUCTURE.md", "PROJECT_HANDOFF.md", "AGENTS.md", "CONTRIBUTING.md",
+    "docs/repository/FILE_GUIDE.md", "docs/repository/FOLDER_GUIDE.md",
+    "docs/quality/COMPREHENSIVE_VALIDATION.md",
     "docs/README.md", "docs/product/PROJECT_CHARTER.md", "docs/architecture/ARCHITECTURE.md",
     "docs/product/FEATURE_REGISTRY.md", "docs/research/OPEN_SOURCE_STACK.md",
     "docs/product/ROADMAP.md", "docs/research/REUSE_FIRST.md", "docs/operations/GPU_COLAB.md",

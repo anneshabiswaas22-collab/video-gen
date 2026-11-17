@@ -42,6 +42,10 @@ responses. A bounded in-memory retry cache is cleared on restart/deletion/expiry
 Only explicit Save consent stores transcript JSON; saved sessions can resume
 and be deleted. Default metadata expires after 24 hours, saved sessions after
 7 days; expired records are purged at initialization and session operations.
+The confirmed **Delete all practice data** control also clears default-session
+metadata left after closing a page, releasing the owner's 10-session quota while
+preserving other owners. Cancelled/interrupted requests do not leave permanently
+pending slots or silently re-run an indeterminate request key.
 Deletion removes child rows and clears the local write-ahead log; external
 backups/filesystem snapshots remain outside this prototype's control.
 
@@ -52,4 +56,5 @@ is still a single-user local mock. Do not expose either service publicly.
 Next integrations: teacher evaluation, a measured real local-model run, consented
 speech recognition, interruption handling and measured voice/avatar latency.
 See [progress](../../docs/development/IMPLEMENTATION_PROGRESS.md) and
-[test evidence](../../docs/quality/IMPLEMENTATION_VALIDATION.md).
+[test evidence](../../docs/quality/COMPREHENSIVE_VALIDATION.md). The root
+[handoff](../../PROJECT_HANDOFF.md) details the remaining task dependencies and PR workflow.

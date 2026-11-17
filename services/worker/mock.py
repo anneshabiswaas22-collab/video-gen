@@ -1,5 +1,7 @@
 """Executable CPU-only local worker. Outputs are mock receipts, never AI-generated media."""
 import asyncio
+import logging
+import sqlite3
 
 from services.api import storage
 
@@ -33,7 +35,12 @@ async def execute_one(delay: float = 0.05) -> bool:
 
 async def worker_loop() -> None:
     while True:
-        worked = await execute_one()
+        try:
+            worked = await execute_one()
+        except (sqlite3.Error, OSError):
+            # A temporary storage fault must not permanently kill the local worker.
+            logging.getLogger(__name__).warning("Mock worker storage temporarily unavailable")
+            worked = False
         if not worked:
             await asyncio.sleep(0.1)
 

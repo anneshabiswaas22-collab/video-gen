@@ -53,3 +53,11 @@ A previously discussed American-English-learning 3D family video series needs 15
 ## Caveats: what cannot be restored
 
 This archive does **not** preserve all exact user/assistant messages, full model reasoning, expired external pages, or every unverified suggestion in earlier chats. It preserves decisions, substantive requirements, research sources, evidence, links and workflow. To add a full verbatim conversation export later, verify rights/privacy and explicitly mark provenance/date; never claim the missing text was recovered.
+# Latest continuation instruction — 2026-11-17
+
+The owner requested comprehensive testing/fixes, then deferred GitHub issue creation.
+No new issues were created. The current request is a root Markdown continuation
+manual explaining goals, implemented features, each source file/folder and detailed
+remaining tasks for other AI tools to work through PRs. See
+[PROJECT_HANDOFF.md](../../PROJECT_HANDOFF.md). Current review is on demand;
+continuous monitoring requires a separately configured service/workflow.

@@ -76,3 +76,11 @@ see final chat/git log for its SHA. No implementation directories remain pending
 for this preservation/reorganization scope. Product implementation, account
 security review, real hardware/teacher tests and environment publication remain
 separate next steps, not claims completed by recovery.
+LATEST QA / CONTINUATION UPDATE — 2026-11-17
+Root PROJECT_HANDOFF.md now provides implemented-versus-planned status and104
+local task IDs with dependency gates and acceptance evidence. FILE_GUIDE.md and
+FOLDER_GUIDE.md in docs/repository account for every source file/directory.
+COMPREHENSIVE_VALIDATION.md in docs/quality records actual checks and fixes.
+GitHub issue creation was cancelled before any new issues were created. Future
+tools should submit scoped branches/PRs; review is on demand, not unattended.
+Existing history below is preserved. Model/GPU/audio/human evaluation remains gated.

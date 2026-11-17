@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Check feature entry points and byte preservation of the reorganized import."""
-from collections import Counter
 import hashlib
 import json
-from pathlib import Path, PurePosixPath
+import re
+import subprocess
 import sys
+from collections import Counter
+from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "AnalyseFuture/repository-inventory/RELOCATION_MANIFEST.json"
@@ -28,6 +30,43 @@ def check():
     errors = []
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     placement = json.loads((ROOT / "docs/repository/FILE_PLACEMENT.json").read_text(encoding="utf-8"))
+    source_files = {
+        name for name in subprocess.check_output(
+            ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+            cwd=ROOT, text=True,
+        ).split("\0") if name and (ROOT / name).is_file()
+    }
+    placed = [row["current_path"] for row in placement["files"]]
+    if len(set(placed)) != len(placed) or placement["file_count"] != len(placed):
+        errors.append("Placement ledger contains duplicate paths or an incorrect count")
+    for label, missing in (
+        ("Source files absent from placement ledger", source_files - set(placed)),
+        ("Placement paths absent from source tree", set(placed) - source_files),
+    ):
+        if missing:
+            errors.append(label + ": " + ", ".join(sorted(missing)))
+    guide_paths = [
+        "docs/repository/FILE_GUIDE.md",
+        "docs/repository/files/INFERENCE_REFERENCE.md",
+        "docs/repository/files/WORKFLOW_REFERENCE.md",
+    ]
+    indexed = []
+    for name in guide_paths:
+        guide = ROOT / name
+        if guide.is_file():
+            indexed.extend(re.findall(r"^\| \[([^\]]+)\]\(", guide.read_text(), re.MULTILINE))
+    if len(indexed) != len(set(indexed)) or set(indexed) != source_files:
+        errors.append("Per-file responsibility guides must explain each source file exactly once")
+    folder_guide = ROOT / "docs/repository/FOLDER_GUIDE.md"
+    folders = {str(parent) for name in source_files for parent in Path(name).parents}
+    indexed_folders = set()
+    if folder_guide.is_file():
+        indexed_folders = {
+            value.rstrip("/")
+            for value in re.findall(r"^\| \[([^\]]+)\]\(", folder_guide.read_text(), re.MULTILINE)
+        }
+    if indexed_folders != folders:
+        errors.append("Folder guide must explain every source directory")
     current_paths = {
         row["source_path"]: row["current_path"]
         for row in placement["files"] if row["source_path"] is not None
@@ -62,7 +101,9 @@ def check():
         if blob != row["git_blob"] or row["git_mode"] != "100644":
             errors.append(f"Original Git identity mismatch: {row['preserved_path']}")
     required = [
-        "PROJECT_STRUCTURE.md", "docs/repository/FILE_PLACEMENT.json",
+        "PROJECT_STRUCTURE.md", "PROJECT_HANDOFF.md", "docs/repository/FILE_PLACEMENT.json",
+        "docs/quality/COMPREHENSIVE_VALIDATION.md", "docs/repository/FOLDER_GUIDE.md",
+        *guide_paths,
         "docs/repository/GALLERY_CONSOLIDATION.md",
         "features/README.md", "docs/product/PROJECT_IDEA.txt",
         "features/english-speaking-friend/PROJECT_IDEA.txt",
@@ -82,7 +123,7 @@ def check():
     if errors:
         print("Structure check FAILED:\n" + "\n".join(f"- {e}" for e in errors))
         return 1
-    print(f"Structure check PASSED: {len(FEATURES)} feature guides; {len(records)} original blobs preserved byte-for-byte.")
+    print(f"Structure check PASSED: {len(FEATURES)} feature guides; {len(records)} original blobs preserved byte-for-byte; {len(source_files)} files and {len(folders)} directories explained.")
     return 0
 
 

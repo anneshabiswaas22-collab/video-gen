@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { apiRequest, API_URL, isTerminal } from "../lib/api";
 import type {
@@ -10,6 +10,11 @@ import type {
 export default function Studio() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [projectId, setProjectId] = useState("");
+  const selectedProject = useRef("");
+  const selectProject = useCallback((id: string) => {
+    selectedProject.current = id;
+    setProjectId(id);
+  }, []);
   const [projectName, setProjectName] = useState("");
   const [models, setModels] = useState<ModelDefinition[]>([]);
   const [modelId, setModelId] = useState("");
@@ -35,17 +40,17 @@ export default function Studio() {
       setModels(m);
       setModelId(m[0]?.id || "");
       setProjects(p);
-      setProjectId(p[0]?.id || "");
+      selectProject(p[0]?.id || "");
     }).catch(() => {
       if (live) setError("Local API unavailable. Start the backend on port 8001.");
     });
     return () => { live = false; };
-  }, []);
+  }, [selectProject]);
 
   const refresh = useCallback(async (id: string) => {
     if (!id) { setHistory([]); return; }
     const list = await apiRequest<GenerationJob[]>(`/v1/projects/${id}/jobs`);
-    setHistory(list);
+    if (selectedProject.current === id) setHistory(list);
   }, []);
 
   useEffect(() => {
@@ -60,12 +65,17 @@ export default function Studio() {
   useEffect(() => {
     if (!activeId) return;
     let live = true;
+    let finished = false;
     const read = async () => {
+      if (finished) return;
       try {
         const job = await apiRequest<GenerationJob>(`/v1/jobs/${activeId}`);
         if (!live) return;
         setActiveJob(job);
-        if (isTerminal(job.state)) await refresh(job.project_id);
+        if (isTerminal(job.state)) {
+          finished = true;
+          await refresh(job.project_id);
+        }
       } catch (err) {
         if (live) setError((err as Error).message);
       }
@@ -105,7 +115,7 @@ export default function Studio() {
         method: "POST", body: JSON.stringify({ name: projectName.trim() }),
       });
       setProjects((list) => [created, ...list]);
-      setProjectId(created.id);
+      selectProject(created.id);
       setHistory([]);
       setActiveJob(null);
       setActiveId("");
@@ -129,6 +139,7 @@ export default function Studio() {
           idempotency_key: crypto.randomUUID(),
         }),
       });
+      if (selectedProject.current !== job.project_id) return;
       setArtifact(null);
       setArtifactText("");
       setActiveJob(job);
@@ -160,9 +171,9 @@ export default function Studio() {
         </form>
         <div className="project-list">
           {projects.map((p) => (
-            <button key={p.id} className={p.id === projectId ? "project selected" : "project"}
+            <button key={p.id} disabled={busy} className={p.id === projectId ? "project selected" : "project"}
               onClick={() => {
-                setProjectId(p.id); setHistory([]); setActiveId(""); setActiveJob(null);
+                selectProject(p.id); setHistory([]); setActiveId(""); setActiveJob(null);
                 setArtifact(null); setArtifactText("");
               }}><span>▣</span>{p.name}</button>
           ))}

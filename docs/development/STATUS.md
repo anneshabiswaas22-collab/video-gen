@@ -1,5 +1,11 @@
 # Current implementation status — 2026-11-17
 
+**Latest handoff and QA:** [PROJECT_HANDOFF.md](../../PROJECT_HANDOFF.md) contains
+implemented status, every-file/folder links and 104 detailed remaining tasks.
+Use [comprehensive validation](../quality/COMPREHENSIVE_VALIDATION.md) for the latest
+checks/fixes. No GitHub issues were created; future tools should submit scoped PRs.
+PR review is on demand, not a continuously running monitor.
+
 Owned code now exists: the historical M0 CPU studio was selectively recovered,
 then the English friend's typed practice feature was integrated in its own folder.
 The latest owner explicitly authorized implementation and tests; prior no-test

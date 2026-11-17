@@ -3,6 +3,7 @@ import asyncio
 import hashlib
 import re
 import secrets
+import sqlite3
 from weakref import WeakValueDictionary
 
 from fastapi import APIRouter, HTTPException, Request, Response
@@ -94,6 +95,12 @@ def list_sessions(request: Request):
     return {"sessions": storage.list_saved_sessions(_owner(request))}
 
 
+@router.delete("/sessions", status_code=204)
+def clear_sessions(request: Request):
+    storage.clear_owner_sessions(_owner(request))
+    return Response(status_code=204)
+
+
 @router.get("/sessions/{session_id}")
 def get_session(session_id: str, request: Request):
     try:
@@ -133,5 +140,18 @@ async def submit_turn(session_id: str, body: TurnCreate, request: Request):
                       "created_at": turn["created_at"], **reply}
             storage.finish_turn(turn, owner, result)
             return result
+        except asyncio.CancelledError:
+            try:
+                storage.interrupt_request(session_id, owner, body.idempotency_key)
+            except sqlite3.Error:
+                pass  # Startup recovers pending keys if storage cannot be reached.
+            raise
+        except sqlite3.Error:
+            try:
+                storage.interrupt_request(session_id, owner, body.idempotency_key)
+            except sqlite3.Error:
+                pass
+            raise HTTPException(503, detail={"code": "STORAGE_UNAVAILABLE",
+                "message": "Practice storage is temporarily unavailable. Try again later."}) from None
         except storage.StoreError as exc:
             raise _error(exc) from None

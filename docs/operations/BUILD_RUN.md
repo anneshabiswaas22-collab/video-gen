@@ -4,7 +4,7 @@ This implementation supersedes the earlier documentation-only setup notes below.
 It is a local CPU prototype; neither server is intended for public deployment.
 Use the existing checkout rather than creating a worktree.
 
-## Install (Linux / WSL, Python 3.11+, Node 22+)
+## Install (Linux / WSL, Python 3.11+, Node 22.12+, 24.x or 26+)
 
 From the repository root:
 
@@ -59,6 +59,37 @@ before selecting or downloading weights. No paid-service use is authorized here.
 
 ## Verification commands
 
+The combined entrypoint is `npm run verify`. It runs owned Python/frontend checks,
+dependency audits, wheel packaging, documentation/preservation checks, production
+build, live API client and browser smoke/regressions, plus the explicitly selected
+preserved FreeField CPU checks. It never starts a model or downloads weights.
+
+For the full run, install the optional Playwright dependency via
+`.venv/bin/python -m pip install -e '.[browser]'` and install Chromium through
+Playwright's supported installer, or provide an existing system Chromium using
+`VIDEOGEN_BROWSER_EXECUTABLE`. The verifier can also use system Python when that
+interpreter already has Playwright. The optional preserved-reference checks need
+the reference package's locked npm installation and its separate venv with the
+documented `aiohttp` dependency (see the historical reference instructions below).
+Review that package before intentionally executing its checks; it is not product code.
+
+```sh
+npm run verify
+# Explicitly reduced scope when browser/reference prerequisites are unavailable:
+npm run verify -- --without-browser --without-reference
+```
+
+Reduced checks are recorded as NOT RUN and the overall result is
+`PASSED_REDUCED_SCOPE`, never a full validation pass. Full results go into a unique
+ignored `.local/verification/<run-id>/` directory, with `summary.json`, test counts,
+logs and screenshots. Defaults are API port 8021 and web port 3021, overridable
+with `--api-port` and `--web-port`. It rejects occupied ports and uses a temporary
+data directory; never point browser scripts at private/shared application data.
+The production build bakes in its test API URL; run `npm run dev` to resume normal
+development, or rebuild with your intended `NEXT_PUBLIC_API_URL` before serving.
+
+Individual checks:
+
 ```sh
 .venv/bin/python -m pytest
 .venv/bin/ruff check services integrations tests features/english-speaking-friend/backend features/english-speaking-friend/tests scripts/development/smoke_mock.py
@@ -92,7 +123,7 @@ artifacts default to ignored `.local/browser/`. Test-generated projects use uniq
 names; the practice sessions they create are deleted. Audio playback availability
 is checked, but no claim is made that a voice was heard or recording works.
 
-[Current evidence](../quality/IMPLEMENTATION_VALIDATION.md) distinguishes real CPU
+[Current evidence](../quality/COMPREHENSIVE_VALIDATION.md) distinguishes real CPU
 execution, mocked provider protocol and unrun model/hardware checks.
 
 ## Historical setup records (preserved)
