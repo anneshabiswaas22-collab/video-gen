@@ -831,4 +831,3 @@ their package context. Their existence does not establish GPU/model readiness.
 | [AnalyseFuture/references/workflow-studio/freefield/web/js/viewer.js](../../../AnalyseFuture/references/workflow-studio/freefield/web/js/viewer.js) | Shared browser interaction, translation, font or style resource |
 | [AnalyseFuture/references/workflow-studio/freefield/web/js/views.js](../../../AnalyseFuture/references/workflow-studio/freefield/web/js/views.js) | Shared browser interaction, translation, font or style resource |
 | [AnalyseFuture/references/workflow-studio/freefield/web/js/workspace.js](../../../AnalyseFuture/references/workflow-studio/freefield/web/js/workspace.js) | Shared browser interaction, translation, font or style resource |
-

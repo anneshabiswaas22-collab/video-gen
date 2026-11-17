@@ -1312,4 +1312,3 @@ their package context. Their existence does not establish GPU/model readiness.
 | [AnalyseFuture/references/inference-engine/comfyui/utils/install_util.py](../../../AnalyseFuture/references/inference-engine/comfyui/utils/install_util.py) | Preserved engine module exposing get_missing_requirements_message, is_valid_version, get_required_packages_versions. |
 | [AnalyseFuture/references/inference-engine/comfyui/utils/json_util.py](../../../AnalyseFuture/references/inference-engine/comfyui/utils/json_util.py) | Preserved engine module exposing merge_json_recursive. |
 | [AnalyseFuture/references/inference-engine/comfyui/utils/mime_types.py](../../../AnalyseFuture/references/inference-engine/comfyui/utils/mime_types.py) | Centralized MIME type initialization. Call init_mime_types() once at startup to initialize the MIME type database and register all custom types used across ComfyUI. |
-
